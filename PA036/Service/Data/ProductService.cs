@@ -1,19 +1,16 @@
-﻿using DataAccess.AppContext;
+﻿using DataAccess.Data;
 using DataAccess.Model;
 using Service.DTO;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Service.DataAccess
+namespace Service.Data
 {
     public class ProductService
     {
-        public static List<ProductDTO> GetAllProducts()
+        public static IList<ProductDTO> GetAllProducts()
         {
-            using (var db = new AppContext())
-            {
-                return db.Products.Select(ToProductDTO).ToList();
-            }
+            return Products.GetAllProducts().Select(ToProductDTO).ToList();
         }
 
         private static ProductDTO ToProductDTO(Product product)

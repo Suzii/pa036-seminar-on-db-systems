@@ -86,7 +86,7 @@
     <Content Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataAccess\ProductService.cs" />
+    <Compile Include="Data\ProductService.cs" />
     <Compile Include="DTO\ProductDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
