@@ -2,7 +2,7 @@
 
 namespace DataAccess.Model
 {
-    public class Product
+    public class Product : IDataModel
     {
         [Key]
         public int Id { get; set; }
