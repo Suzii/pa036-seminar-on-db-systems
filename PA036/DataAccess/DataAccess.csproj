@@ -98,9 +98,13 @@
     <Compile Include="LinqExtension\IQueryableExtension.cs" />
     <Compile Include="Model\IDataModel.cs" />
     <Compile Include="Model\Product.cs" />
-    <Compile Include="Modifiers\BaseModifier.cs" />
-    <Compile Include="Modifiers\ProductModifier.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Shared\Shared.csproj">
+      <Project>{b069b722-00f7-4046-a43b-e8e8438c0db8}</Project>
+      <Name>Shared</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

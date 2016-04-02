@@ -1,6 +1,6 @@
 ﻿using DataAccess.LinqExtension;
 using DataAccess.Model;
-using DataAccess.Modifiers;
+using Shared.Modifiers;
 using System.Linq;
 
 namespace DataAccess.Data

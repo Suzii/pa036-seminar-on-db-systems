@@ -67,6 +67,10 @@
       <Project>{fdd25957-86d1-4432-9941-53d3d9fdee74}</Project>
       <Name>Service</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Shared\Shared.csproj">
+      <Project>{b069b722-00f7-4046-a43b-e8e8438c0db8}</Project>
+      <Name>Shared</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

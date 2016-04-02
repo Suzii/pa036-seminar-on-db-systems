@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace DataAccess.Modifiers
+namespace Shared.Modifiers
 {
     public abstract class BaseModifier
     {

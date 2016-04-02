@@ -95,6 +95,10 @@
       <Project>{e68c9b3f-5387-41f2-b2d4-df43c4b92ebb}</Project>
       <Name>DataAccess</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Shared\Shared.csproj">
+      <Project>{b069b722-00f7-4046-a43b-e8e8438c0db8}</Project>
+      <Name>Shared</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

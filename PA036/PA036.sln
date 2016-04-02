@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccess", "DataAccess\DataAccess.csproj", "{E68C9B3F-5387-41F2-B2D4-DF43C4B92EBB}"
 EndProject
@@ -10,6 +10,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{AB14F8DF-2779-4FEB-A3B5-87B39E7BBA11}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestApi", "RestApi\RestApi.csproj", "{3649CAD4-A997-4BC4-878C-9890457862CD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared", "Shared\Shared.csproj", "{B069B722-00F7-4046-A43B-E8E8438C0DB8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{3649CAD4-A997-4BC4-878C-9890457862CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3649CAD4-A997-4BC4-878C-9890457862CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3649CAD4-A997-4BC4-878C-9890457862CD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B069B722-00F7-4046-A43B-E8E8438C0DB8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B069B722-00F7-4046-A43B-E8E8438C0DB8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B069B722-00F7-4046-A43B-E8E8438C0DB8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B069B722-00F7-4046-A43B-E8E8438C0DB8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
