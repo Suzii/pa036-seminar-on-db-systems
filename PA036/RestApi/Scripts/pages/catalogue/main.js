@@ -5,7 +5,8 @@ myApp.config(['NgAdminConfigurationProvider', function (NgAdminConfigurationProv
         .baseApiUrl('http://localhost:50455/api/'); // main API endpoint
     
     
-    var products = nga.entity("Products");
+    var products = nga.entity("Products")
+        .identifier(nga.field('Id'));
     var name = nga.field('Name')
         .isDetailLink(true)
         .label('Name');
@@ -15,7 +16,7 @@ myApp.config(['NgAdminConfigurationProvider', function (NgAdminConfigurationProv
         .label('Cost per unit');
 
     products.listView().fields([
-        nga.field('id'),
+        nga.field('Id'),
         name,
         stockCount,
         unitCost,

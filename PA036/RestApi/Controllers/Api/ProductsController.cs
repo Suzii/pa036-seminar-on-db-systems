@@ -92,16 +92,10 @@ namespace RestApi.Controllers.Api
             {
                 return Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Could not read product from mssage body.");
             }
-
-            var existing = _productService.Get(id);
-            if (existing == null || existing.id != product.id)
-            {
-                return Request.CreateErrorResponse(HttpStatusCode.NotModified, $"Product with {id} does not exist");
-            }
             
             try
             {
-                product.id = id;
+                product.Id = id;
                 var updated = _productService.Update(product);
                 return Request.CreateResponse(HttpStatusCode.OK, updated);
             }

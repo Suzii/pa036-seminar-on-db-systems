@@ -8,17 +8,17 @@ namespace Service.DTO
 
         public ProductDTO(Product product)
         {
-            id = product.Id;
+            Id = product.Id;
             Name = product.Name;
             StockCount = product.StockCount;
             UnitCost = product.UnitCost;
         }
 
-        public int id { get; set; }
+        public int Id { get; set; }
 
         public string Name { get; set; }
 
-        public uint StockCount { get; set; }
+        public int StockCount { get; set; }
 
         public decimal UnitCost { get; set; }
     }

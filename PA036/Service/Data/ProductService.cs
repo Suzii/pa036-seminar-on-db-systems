@@ -66,7 +66,7 @@ namespace Service.Data
         {
             var result = new Product()
             {
-                Id = dto.id,
+                Id = dto.Id,
                 Name = dto.Name,
                 StockCount = dto.StockCount,
                 UnitCost = dto.UnitCost

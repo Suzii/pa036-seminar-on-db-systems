@@ -17,10 +17,8 @@ namespace RestApi
                       "~/Content/css/bootstrap/bootstrap.min.css.map",
                       "~/Content/css/site.css"));
 
-
-            // TODO add highcharts and all custom scripts for pages
             bundles.Add(new ScriptBundle("~/scripts/catalogue").Include(
-                "~/Scripts/pages/catalogue/test.js"));  
+                "~/Scripts/pages/catalogue/main.js"));  
         }
     }
 }

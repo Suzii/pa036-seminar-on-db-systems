@@ -10,7 +10,7 @@ namespace DataAccess.Model
         [Required]
         public string Name { get; set; }
 
-        public uint StockCount { get; set; }
+        public int StockCount { get; set; }
 
         public decimal UnitCost { get; set; }
     }
