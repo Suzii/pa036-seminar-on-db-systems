@@ -31,6 +31,14 @@ namespace DataAccess.Data
             }
         }
 
+        public Product Get(int id)
+        {
+            using (var db = new AppContext())
+            {
+                return db.Products.First(x => x.Id == id);
+            }
+        }
+
         public int Count()
         {
             using (var db = new AppContext())

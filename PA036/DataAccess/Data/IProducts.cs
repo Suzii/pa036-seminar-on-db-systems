@@ -8,6 +8,8 @@ namespace DataAccess.Data
     {
         IList<Product> Get(ProductModifier modifier);
 
+        Product Get(int id);
+
         int Count();
 
         void Create(Product product);
