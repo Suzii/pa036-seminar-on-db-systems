@@ -6,9 +6,9 @@ using System.Linq;
 
 namespace DataAccess.Data
 {
-    public class Products : BaseData
+    public class Products : BaseData, IProducts
     {
-        public static IList<Product> GetProducts(ProductModifier modifier = null)
+        public IList<Product> Get(ProductModifier modifier = null)
         {
             if (modifier == null)
                 modifier = new ProductModifier();
@@ -28,6 +28,45 @@ namespace DataAccess.Data
                 products = ApplyBaseModifiers(products, modifier);
 
                 return products.ToList();
+            }
+        }
+
+        public int Count()
+        {
+            using (var db = new AppContext())
+            {
+                return db.Products.Count();
+            }
+        }
+
+        public void Create(Product product)
+        {
+            using (var db = new AppContext())
+            {
+                db.Products.Add(product);
+                db.SaveChanges();
+            }
+        }
+
+        public void Delete(int id)
+        {
+            using (var db = new AppContext())
+            {
+                var product = db.Products.First(x => x.Id == id);
+                db.Products.Remove(product);
+                db.SaveChanges();
+            }
+        }
+
+        public void Update(Product product)
+        {
+            using (var db = new AppContext())
+            {
+                var toUpdate = db.Products.First(x => x.Id == product.Id);
+                toUpdate.Name = product.Name;
+                toUpdate.StockCount = product.StockCount;
+                toUpdate.UnitCost = product.UnitCost;
+                db.SaveChanges();
             }
         }
     }

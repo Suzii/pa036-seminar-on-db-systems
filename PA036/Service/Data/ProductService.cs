@@ -9,14 +9,21 @@ namespace Service.Data
 {
     public class ProductService: IProductService
     {
+        private IProducts _instance;
+
+        public ProductService()
+        {
+            _instance = new Products();
+        }
+
         public IList<ProductDTO> GetAll()
         {
-            return Products.GetProducts().Select(ToProductDto).ToList();
+            return Get(null);
         }
 
         public IList<ProductDTO> Get(ProductModifier modifier)
         {
-            return Products.GetProducts(modifier).Select(ToProductDto).ToList();
+            return _instance.Get(modifier).Select(ToProductDto).ToList();
         }
 
         public ProductDTO Create(ProductDTO product)
