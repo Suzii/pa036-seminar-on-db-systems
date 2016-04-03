@@ -22,7 +22,7 @@ namespace RestApi.Controllers.Api
         // GET: api/Products
         public IEnumerable<ProductDTO> Get(int page = 0, int pageSize = 10)
         {
-            var totalCount = 100;//query.Count();
+            var totalCount = _productService.TotalCount();
             var totalPages = (int)Math.Ceiling((double)totalCount / pageSize);
 
             var urlHelper = new UrlHelper(Request);
@@ -52,12 +52,7 @@ namespace RestApi.Controllers.Api
         // GET: api/Products/5
         public ProductDTO GetProduct(int id)
         {
-            var modifier = new ProductModifier()
-            {
-                Ids = new int[] {id}
-            };
-
-            var result = _productService.Get(modifier).SingleOrDefault();
+            var result = _productService.Get(id);
             return result;
         }
 
@@ -70,11 +65,13 @@ namespace RestApi.Controllers.Api
         // PUT: api/Products/5
         public void Put(int id, [FromBody]ProductDTO product)
         {
+            _productService.Update(id, product);
         }
 
         // DELETE: api/Products/5
         public void Delete(int id)
         {
+            _productService.Delete(id);
         }
     }
 }

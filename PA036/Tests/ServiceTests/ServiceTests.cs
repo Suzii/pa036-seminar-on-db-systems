@@ -30,5 +30,12 @@ namespace Tests.ServiceTests
             Debug.WriteLine("First execution: {0}", ticksCount1);
             Debug.WriteLine("Second execution: {0}", ticksCount2);
         }
+
+        [TestMethod]
+        public void TotalCount()
+        {
+            var count = _instance.TotalCount();
+            Debug.WriteLine("Total count: {0}", count);
+        }
     }
 }

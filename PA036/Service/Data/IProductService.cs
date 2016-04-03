@@ -7,6 +7,8 @@ namespace Service.Data
 {
     public interface IProductService
     {
+        ProductDTO Get(int id);
+
         IList<ProductDTO> GetAll();
 
         IList<ProductDTO> Get(ProductModifier modifier);
@@ -16,5 +18,7 @@ namespace Service.Data
         ProductDTO Update(int id, ProductDTO product);
 
         void Delete(int id);
+
+        int TotalCount();
     }
 }
