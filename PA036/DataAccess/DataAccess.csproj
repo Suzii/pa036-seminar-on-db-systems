@@ -94,6 +94,7 @@
     <Compile Include="Context\AppContext.cs" />
     <Compile Include="Config\Configuration.cs" />
     <Compile Include="Data\BaseData.cs" />
+    <Compile Include="Data\IProducts.cs" />
     <Compile Include="Data\Products.cs" />
     <Compile Include="LinqExtension\IQueryableExtension.cs" />
     <Compile Include="Model\IDataModel.cs" />
