@@ -7,19 +7,34 @@ using System.Linq;
 
 namespace Service.Data
 {
-    public class ProductService
+    public class ProductService: IProductService
     {
-        public static IList<ProductDTO> GetAllProducts()
+        public IList<ProductDTO> GetAll()
         {
-            return Products.GetProducts().Select(ToProductDTO).ToList();
+            return Products.GetProducts().Select(ToProductDto).ToList();
         }
 
-        public static IList<ProductDTO> GetProducts(ProductModifier modifier)
+        public IList<ProductDTO> Get(ProductModifier modifier)
         {
-            return Products.GetProducts(modifier).Select(ToProductDTO).ToList();
+            return Products.GetProducts(modifier).Select(ToProductDto).ToList();
         }
 
-        private static ProductDTO ToProductDTO(Product product)
+        public ProductDTO Create(ProductDTO product)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public ProductDTO Update(int id, ProductDTO product)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void Delete(int id)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        private static ProductDTO ToProductDto(Product product)
         {
             return new ProductDTO(product);
         }
