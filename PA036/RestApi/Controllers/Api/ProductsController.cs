@@ -26,10 +26,12 @@ namespace RestApi.Controllers.Api
         {
             var totalCount = _productService.TotalCount();
             var totalPages = (int)Math.Ceiling((double)totalCount / pageSize);
+            
 
             var urlHelper = new UrlHelper(Request);
-            var prevLink = page > 0 ? urlHelper.Link("Products", new { page = page - 1, pageSize = pageSize }) : "";
-            var nextLink = page < totalPages - 1 ? urlHelper.Link("Products", new { page = page + 1, pageSize = pageSize }) : "";
+            var prevLink = page > 0 ? urlHelper.Link("DefaultApi", new { controller = "Products", action="Get", page = page - 1, pageSize = pageSize }) : "";
+            var nextLink = page < totalPages - 1 ? urlHelper.Link("DefaultApi", new { controller = "Products", action = "Get", page = page + 1, pageSize = pageSize }) : "";
+            
 
             var paginationHeader = new
             {
