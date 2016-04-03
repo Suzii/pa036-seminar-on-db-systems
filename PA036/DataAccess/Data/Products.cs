@@ -35,7 +35,7 @@ namespace DataAccess.Data
         {
             using (var db = new AppContext())
             {
-                return db.Products.First(x => x.Id == id);
+                return db.Products.FirstOrDefault(x => x.Id == id);
             }
         }
 

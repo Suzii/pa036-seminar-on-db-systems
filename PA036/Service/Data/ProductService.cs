@@ -59,7 +59,7 @@ namespace Service.Data
 
         private static ProductDTO ToProductDto(Product product)
         {
-            return new ProductDTO(product);
+            return (product != null)? new ProductDTO(product) : null;
         }
 
         private static Product ToProduct(ProductDTO dto)

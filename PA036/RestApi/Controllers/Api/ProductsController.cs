@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Http;
 using System.Reflection;
 using System.Web.Http;
 using System.Web.Http.Routing;
@@ -50,29 +52,83 @@ namespace RestApi.Controllers.Api
         }
 
         // GET: api/Products/5
-        public ProductDTO GetProduct(int id)
+        public HttpResponseMessage GetProduct(int id)
         {
-            var result = _productService.Get(id);
-            return result;
+            try
+            {
+                var result = _productService.Get(id);
+                return Request.CreateResponse(HttpStatusCode.OK, result);
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateResponse(HttpStatusCode.BadRequest, ex);
+            }
         }
 
         // POST: api/Products
-        public void Post([FromBody]ProductDTO product)
+        public HttpResponseMessage Post([FromBody]ProductDTO product)
         {
-            _productService.Create(product);
+            if (product == null)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Could not read product from mssage body.");
+            }
+
+            try
+            {
+                var created = _productService.Create(product);
+                return Request.CreateResponse(HttpStatusCode.Created, created);
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateResponse(HttpStatusCode.BadRequest, ex);
+            }
+
         }
 
         // PUT: api/Products/5
-        public void Put(int id, [FromBody]ProductDTO product)
+        public HttpResponseMessage Put(int id, [FromBody]ProductDTO product)
         {
-            product.id = id;
-            _productService.Update(product);
+            if (product == null)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Could not read product from mssage body.");
+            }
+
+            var existing = _productService.Get(id);
+            if (existing == null || existing.id != product.id)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.NotModified, $"Product with {id} does not exist");
+            }
+            
+            try
+            {
+                product.id = id;
+                var updated = _productService.Update(product);
+                return Request.CreateResponse(HttpStatusCode.OK, updated);
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateResponse(HttpStatusCode.BadRequest, ex);
+            }
         }
 
         // DELETE: api/Products/5
-        public void Delete(int id)
+        public HttpResponseMessage Delete(int id)
         {
-            _productService.Delete(id);
+            var existing = _productService.Get(id);
+            if (existing == null)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.NotModified, $"Product with {id} does not exist");
+            }
+
+            try
+            {
+                _productService.Delete(id);
+                return Request.CreateResponse(HttpStatusCode.OK);
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ex);
+            }
         }
     }
 }
