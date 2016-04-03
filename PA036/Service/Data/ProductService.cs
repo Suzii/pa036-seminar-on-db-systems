@@ -39,11 +39,10 @@ namespace Service.Data
             return null; 
         }
 
-        // TODO ?? should return newly created product?
-        public ProductDTO Update(int id, ProductDTO productDto)
+        // TODO ?? should return updated product?
+        public ProductDTO Update(ProductDTO productDto)
         {
             var product = ToProduct(productDto);
-            product.Id = id;
             _instance.Update(product);
             return null; 
         }

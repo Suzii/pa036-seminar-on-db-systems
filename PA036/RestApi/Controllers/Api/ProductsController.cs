@@ -65,7 +65,8 @@ namespace RestApi.Controllers.Api
         // PUT: api/Products/5
         public void Put(int id, [FromBody]ProductDTO product)
         {
-            _productService.Update(id, product);
+            product.id = id;
+            _productService.Update(product);
         }
 
         // DELETE: api/Products/5

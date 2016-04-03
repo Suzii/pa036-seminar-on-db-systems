@@ -15,7 +15,7 @@ namespace Service.Data
 
         ProductDTO Create(ProductDTO product);
 
-        ProductDTO Update(int id, ProductDTO product);
+        ProductDTO Update(ProductDTO product);
 
         void Delete(int id);
 
