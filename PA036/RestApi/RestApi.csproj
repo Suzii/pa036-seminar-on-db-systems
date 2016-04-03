@@ -138,10 +138,14 @@
     <Content Include="Content\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.woff2" />
+    <None Include=".bin\bower.cmd" />
+    <None Include=".bin\git.cmd" />
+    <None Include=".bin\node.cmd" />
     <None Include="Scripts\libs\jquery\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\libs\jquery\jquery-1.10.2.js" />
     <Content Include="Scripts\libs\jquery\jquery-1.10.2.min.js" />
     <Content Include="Scripts\libs\modernizr-2.6.2.js" />
+    <Content Include="Scripts\pages\catalogue\main.js" />
     <Content Include="Scripts\pages\catalogue\test.js" />
     <Content Include="Web.config" />
     <Content Include="Views\Error\_404.cshtml" />
