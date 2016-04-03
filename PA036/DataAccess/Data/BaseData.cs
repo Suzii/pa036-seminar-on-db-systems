@@ -15,10 +15,10 @@ namespace DataAccess.Data
             if (!string.IsNullOrWhiteSpace(modifier.OrderProperty))
                 query = query.OrderByField(modifier.OrderProperty, modifier.OrderDesc);
 
-            if (modifier.Skip.HasValue && modifier.Skip.Value > 0)
+            if (modifier.Skip > 0)
                 query = query.Skip(modifier.Skip.Value);
 
-            if (modifier.Take.HasValue && modifier.Take.Value > 0)
+            if (modifier.Take > 0)
                 query = query.Take(modifier.Take.Value);
 
             return query;

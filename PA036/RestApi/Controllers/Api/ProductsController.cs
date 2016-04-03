@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Reflection;
 using System.Web.Http;
 using System.Web.Http.Routing;
 using Service.Data;
 using Service.DTO;
 using Shared.Modifiers;
+using Newtonsoft.Json;
 
 namespace RestApi.Controllers.Api
 {
@@ -22,7 +21,7 @@ namespace RestApi.Controllers.Api
         }
 
         // GET: api/Products
-        public IEnumerable<ProductDTO> Get(int page = 0, int pageSize = 10)
+        public string Get(int page = 0, int pageSize = 10)
         {
             var totalCount = _productService.TotalCount();
             var totalPages = (int)Math.Ceiling((double)totalCount / pageSize);
@@ -50,7 +49,7 @@ namespace RestApi.Controllers.Api
             };
 
             var result = _productService.Get(modifier);
-            return result;
+            return JsonConvert.SerializeObject(result);
         }
 
         // GET: api/Products/5
