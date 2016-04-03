@@ -2,6 +2,7 @@
 using Service.Data;
 using System;
 using System.Diagnostics;
+using System.Linq;
 
 namespace Tests.ServiceTests
 {
@@ -36,6 +37,13 @@ namespace Tests.ServiceTests
         {
             var count = _instance.TotalCount();
             Debug.WriteLine("Total count: {0}", count);
+        }
+        
+        [TestMethod]
+        public void DatabaseNotEmpty()
+        {
+            var product = _instance.GetAll().FirstOrDefault();
+            Assert.IsNotNull(product);
         }
     }
 }
