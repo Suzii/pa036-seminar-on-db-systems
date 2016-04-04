@@ -20,13 +20,19 @@ myApp.config(['NgAdminConfigurationProvider', function (NgAdminConfigurationProv
         name,
         stockCount,
         unitCost,
-    ]).listActions(['edit', 'show', 'delete'])
-    .filters([
+    ]).listActions(['edit', 'delete'])
+        .sortDir("ASC")
+        .filters([
         nga.field('Name')
             .label('This will be filter on name')
             .pinned(true),
     ]).perPage(50);
     products.editionView().fields([
+        name,
+        stockCount,
+        unitCost,
+    ])
+    products.creationView().fields([
         name,
         stockCount,
         unitCost,

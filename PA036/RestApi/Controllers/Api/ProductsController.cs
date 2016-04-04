@@ -20,15 +20,15 @@ namespace RestApi.Controllers.Api
         }
 
         // GET: api/Products
-        public IList<ProductDTO> Get(int page = 0, int pageSize = 10)
+        public IList<ProductDTO> Get(int _page = 1, int _perPage = 10, string _sortDir = "ASC", string _sortField = "Id")
         {
             var totalCount = _productService.TotalCount();
-            var totalPages = (int)Math.Ceiling((double)totalCount / pageSize);
+            var totalPages = (int)Math.Ceiling((double)totalCount / _perPage);
             
 
             var urlHelper = new UrlHelper(Request);
-            var prevLink = page > 0 ? urlHelper.Link("DefaultApi", new { controller = "Products", action="Get", page = page - 1, pageSize = pageSize }) : "";
-            var nextLink = page < totalPages - 1 ? urlHelper.Link("DefaultApi", new { controller = "Products", action = "Get", page = page + 1, pageSize = pageSize }) : "";
+            var prevLink = _page > 0 ? urlHelper.Link("DefaultApi", new { controller = "Products", action="Get", _page = _page - 1, _perPage = _perPage }) : "";
+            var nextLink = _page < totalPages - 1 ? urlHelper.Link("DefaultApi", new { controller = "Products", action = "Get", _page = _page + 1, _perPage = _perPage }) : "";
             
 
             var paginationHeader = new
@@ -40,11 +40,18 @@ namespace RestApi.Controllers.Api
             };
 
             System.Web.HttpContext.Current.Response.Headers.Add("X-Pagination", Newtonsoft.Json.JsonConvert.SerializeObject(paginationHeader));
+            System.Web.HttpContext.Current.Response.Headers.Add("X-Total-Count", totalCount.ToString());
+
+            int stockCount;
+            int? unitCost;
+            
 
             var modifier = new ProductModifier()
             {
-                Skip = page,
-                Take = pageSize
+                Skip = (_page-1) * _perPage,
+                Take = _perPage,
+                OrderDesc = _sortDir == "DESC",
+                OrderProperty = _sortField,
             };
 
             var result = _productService.Get(modifier);
