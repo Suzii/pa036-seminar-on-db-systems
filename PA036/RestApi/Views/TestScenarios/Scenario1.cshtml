@@ -1,0 +1,28 @@
+﻿@using System.Web.Optimization
+@model dynamic
+
+@{
+    ViewBag.Title = "ExampleScenario1";
+    Layout = "~/Views/Shared/_AppLayout.cshtml";
+}
+
+@section scripts{
+    @Scripts.Render("~/Scripts/pages/testScenarios/scenario1.js")
+}
+
+
+<h2>ExampleScenario1</h2>
+
+<p class="lead">Hey!!! This is the ExampleScenario1. To execute test and see the results, press the button:</p>
+
+<button
+    id="scenario1-execute"
+    class="btn btn-info"
+    data-url="@Url.RouteUrl("DefaultApi", new { controller = "Scenario1", httproute = true })">
+    Execute
+</button>
+
+
+
+
+<div id="tests-target"></div>

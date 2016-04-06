@@ -19,6 +19,14 @@ namespace RestApi
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
+
+            config.Routes.MapHttpRoute(
+                name: "TestScenarios",
+                routeTemplate: "api/testscenario/{controller}",
+                defaults: new { id = RouteParameter.Optional },
+                // TODO
+                constraints: new {}
+            );
         }
     }
 }

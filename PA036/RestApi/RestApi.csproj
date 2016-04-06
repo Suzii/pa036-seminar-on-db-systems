@@ -146,6 +146,7 @@
     <Content Include="Scripts\libs\jquery\jquery-1.10.2.min.js" />
     <Content Include="Scripts\libs\modernizr-2.6.2.js" />
     <Content Include="Scripts\pages\catalogue\main.js" />
+    <Content Include="Scripts\pages\testScenarios\scenario1.js" />
     <Content Include="Web.config" />
     <Content Include="Views\Error\_404.cshtml" />
   </ItemGroup>
@@ -153,11 +154,12 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Controllers\CatalogueController.cs" />
-    <Compile Include="Controllers\ErrorController.cs" />
-    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\Api\TestScenarios\Scenario1Controller.cs" />
+    <Compile Include="Controllers\Mvc\CatalogueController.cs" />
+    <Compile Include="Controllers\Mvc\ErrorController.cs" />
+    <Compile Include="Controllers\Mvc\HomeController.cs" />
     <Compile Include="Controllers\Api\ProductsController.cs" />
-    <Compile Include="Controllers\TestScenariosController.cs" />
+    <Compile Include="Controllers\Mvc\TestScenariosController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -172,6 +174,7 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\TestScenarios\Index.cshtml" />
     <Content Include="Scripts\libs\jquery\jquery-1.10.2.min.map" />
+    <Content Include="Views\TestScenarios\Scenario1.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

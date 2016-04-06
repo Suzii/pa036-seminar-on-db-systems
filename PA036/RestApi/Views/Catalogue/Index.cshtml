@@ -6,11 +6,14 @@
 
 @section scripts
 {
-    @Scripts.Render("~/scripts/catalogue")
+    @Scripts.Render("~/bower_components/ng-admin/build/ng-admin.min.js")
+    @Scripts.Render("~/Scripts/pages/catalogue/main.js")
+}
+
+@section styles {
+    @Styles.Render("~/bower_components/ng-admin/build/ng-admin.min.css")
 }
 <div ng-app="myApp">
     <div ui-view></div>
-    <script src="bower_components/ng-admin/build/ng-admin.min.js"></script>
-    <script src="~/Scripts/pages/catalogue/main.js"></script>
 </div>
 
