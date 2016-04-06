@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
-using System.Dynamic;
 using Service.DTO;
-using Shared.Modifiers;
+using Shared.Filters;
 
 namespace Service.Data
 {
@@ -11,7 +10,7 @@ namespace Service.Data
 
         IList<ProductDTO> GetAll();
 
-        IList<ProductDTO> Get(ProductModifier modifier);
+        IList<ProductDTO> Get(ProductFilter filter);
 
         ProductDTO Create(ProductDTO product);
 

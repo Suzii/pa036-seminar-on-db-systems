@@ -1,25 +1,25 @@
 ﻿using DataAccess.LinqExtension;
 using DataAccess.Model;
-using Shared.Modifiers;
+using Shared.Filters;
 using System.Linq;
 
 namespace DataAccess.Data
 {
     public abstract class BaseData
     {
-        public static IQueryable<T> ApplyBaseModifiers<T>(IQueryable<T> query, BaseModifier modifier) where T : IDataModel
+        public static IQueryable<T> ApplyBaseModifiers<T>(IQueryable<T> query, BaseFilter filter) where T : IDataModel
         {
-            if (modifier.Ids != null && modifier.Ids.Any())
-                query = query.Where(x => modifier.Ids.Contains(x.Id));
+            if (filter.Ids != null && filter.Ids.Any())
+                query = query.Where(x => filter.Ids.Contains(x.Id));
 
-            if (!string.IsNullOrWhiteSpace(modifier.OrderProperty))
-                query = query.OrderByField(modifier.OrderProperty, modifier.OrderDesc);
+            if (!string.IsNullOrWhiteSpace(filter.OrderProperty))
+                query = query.OrderByField(filter.OrderProperty, filter.OrderDesc);
 
-            if (modifier.Skip > 0)
-                query = query.Skip(modifier.Skip.Value);
+            if (filter.Skip > 0)
+                query = query.Skip(filter.Skip.Value);
 
-            if (modifier.Take > 0)
-                query = query.Take(modifier.Take.Value);
+            if (filter.Take > 0)
+                query = query.Take(filter.Take.Value);
 
             return query;
         }

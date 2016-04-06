@@ -1,7 +1,7 @@
 ﻿
-namespace Shared.Modifiers
+namespace Shared.Filters
 {
-    public class ProductModifier : BaseModifier
+    public class ProductFilter : BaseFilter
     {
         public string NameFilter { get; set; }
 

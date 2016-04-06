@@ -6,7 +6,7 @@ using System.Web.Http;
 using System.Web.Http.Routing;
 using Service.Data;
 using Service.DTO;
-using Shared.Modifiers;
+using Shared.Filters;
 
 namespace RestApi.Controllers.Api
 {
@@ -42,11 +42,7 @@ namespace RestApi.Controllers.Api
             System.Web.HttpContext.Current.Response.Headers.Add("X-Pagination", Newtonsoft.Json.JsonConvert.SerializeObject(paginationHeader));
             System.Web.HttpContext.Current.Response.Headers.Add("X-Total-Count", totalCount.ToString());
 
-            int stockCount;
-            int? unitCost;
-            
-
-            var modifier = new ProductModifier()
+            var modifier = new ProductFilter()
             {
                 Skip = (_page-1) * _perPage,
                 Take = _perPage,

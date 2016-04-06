@@ -1,6 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Service.Data;
-using Shared.Modifiers;
+using Shared.Filters;
 using System;
 using System.Diagnostics;
 using System.Linq;
@@ -50,7 +50,7 @@ namespace Tests.ServiceTests
         [TestMethod]
         public void Caching()
         {
-            var modifier = new ProductModifier();
+            var modifier = new ProductFilter();
             modifier.Take = 4;
             var all = _instance.Get(modifier);
 

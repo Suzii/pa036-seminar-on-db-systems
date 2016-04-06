@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 
-namespace Shared.Modifiers
+namespace Shared.Filters
 {
-    public abstract class BaseModifier
+    public abstract class BaseFilter
     {
         public IEnumerable<int> Ids { get; set; }
 

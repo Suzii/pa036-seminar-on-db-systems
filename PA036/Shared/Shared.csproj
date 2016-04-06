@@ -40,8 +40,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Modifiers\BaseModifier.cs" />
-    <Compile Include="Modifiers\ProductModifier.cs" />
+    <Compile Include="Filters\BaseFilter.cs" />
+    <Compile Include="Filters\ProductFilter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

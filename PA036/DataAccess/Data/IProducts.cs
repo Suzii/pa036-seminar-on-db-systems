@@ -1,12 +1,12 @@
 ﻿using DataAccess.Model;
-using Shared.Modifiers;
+using Shared.Filters;
 using System.Collections.Generic;
 
 namespace DataAccess.Data
 {
     public interface IProducts
     {
-        IList<Product> Get(ProductModifier modifier);
+        IList<Product> Get(ProductFilter filter);
 
         Product Get(int id);
 

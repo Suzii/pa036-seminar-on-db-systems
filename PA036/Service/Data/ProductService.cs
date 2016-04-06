@@ -1,7 +1,7 @@
 ﻿using DataAccess.Data;
 using DataAccess.Model;
 using Service.DTO;
-using Shared.Modifiers;
+using Shared.Filters;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -26,9 +26,9 @@ namespace Service.Data
             return Get(null);
         }
 
-        public IList<ProductDTO> Get(ProductModifier modifier)
+        public IList<ProductDTO> Get(ProductFilter filter)
         {
-            return _instance.Get(modifier).Select(ToProductDto).ToList();
+            return _instance.Get(filter).Select(ToProductDto).ToList();
         }
 
         // TODO ?? should return newly created product?
