@@ -2,6 +2,7 @@
 using DataAccess.Model;
 using Service.DTO;
 using Shared.Filters;
+using Shared.Settings;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -16,19 +17,19 @@ namespace Service.Data
             _instance = new Products();
         }
 
-        public ProductDTO Get(int id)
+        public ProductDTO Get(int id, DbSettings dbSettings = null)
         {
-            return ToProductDto(_instance.Get(id));
+            return ToProductDto(_instance.Get(id, dbSettings));
         }
 
         public IList<ProductDTO> GetAll()
         {
-            return Get(null);
+            return Get(null, null);
         }
 
-        public IList<ProductDTO> Get(ProductFilter filter)
+        public IList<ProductDTO> Get(ProductFilter filter, DbSettings dbSettings = null)
         {
-            return _instance.Get(filter).Select(ToProductDto).ToList();
+            return _instance.Get(filter, dbSettings).Select(ToProductDto).ToList();
         }
 
         // TODO ?? should return newly created product?

@@ -92,6 +92,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Context\AppContext.cs" />
+    <Compile Include="Context\AppContext2.cs" />
+    <Compile Include="Context\AppContext1.cs" />
     <Compile Include="Config\Configuration.cs" />
     <Compile Include="Data\BaseData.cs" />
     <Compile Include="Data\IProducts.cs" />

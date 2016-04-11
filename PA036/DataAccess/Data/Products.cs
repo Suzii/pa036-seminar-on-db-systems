@@ -1,6 +1,7 @@
 ﻿using DataAccess.Context;
 using DataAccess.Model;
 using Shared.Filters;
+using Shared.Settings;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -8,12 +9,12 @@ namespace DataAccess.Data
 {
     public class Products : BaseData, IProducts
     {
-        public IList<Product> Get(ProductFilter filter = null)
+        public IList<Product> Get(ProductFilter filter = null, DbSettings dbSettings = null)
         {
             if (filter == null)
                 filter = new ProductFilter();
 
-            using (var db = new AppContext())
+            using (var db = CreateAppContext(dbSettings))
             {
                 var products = db.Products.AsQueryable();
                 if (filter.NameFilter != null)
@@ -31,34 +32,34 @@ namespace DataAccess.Data
             }
         }
 
-        public Product Get(int id)
+        public Product Get(int id, DbSettings dbSettings = null)
         {
-            using (var db = new AppContext())
+            using (var db = CreateAppContext(dbSettings))
             {
                 return db.Products.First(x => x.Id == id);
             }
         }
 
-        public int Count()
+        public int Count(DbSettings dbSettings = null)
         {
-            using (var db = new AppContext())
+            using (var db = CreateAppContext(dbSettings))
             {
                 return db.Products.Count();
             }
         }
 
-        public void Create(Product product)
+        public void Create(Product product, DbSettings dbSettings = null)
         {
-            using (var db = new AppContext())
+            using (var db = CreateAppContext(dbSettings))
             {
                 db.Products.Add(product);
                 db.SaveChanges();
             }
         }
 
-        public void Delete(int id)
+        public void Delete(int id, DbSettings dbSettings = null)
         {
-            using (var db = new AppContext())
+            using (var db = CreateAppContext(dbSettings))
             {
                 var product = db.Products.First(x => x.Id == id);
                 db.Products.Remove(product);
@@ -66,9 +67,9 @@ namespace DataAccess.Data
             }
         }
 
-        public void Update(Product product)
+        public void Update(Product product, DbSettings dbSettings = null)
         {
-            using (var db = new AppContext())
+            using (var db = CreateAppContext(dbSettings))
             {
                 var toUpdate = db.Products.First(x => x.Id == product.Id);
                 toUpdate.Name = product.Name;
