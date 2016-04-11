@@ -7,6 +7,7 @@ using System.Web.Http.Routing;
 using Service.Data;
 using Service.DTO;
 using Shared.Filters;
+using System.Threading.Tasks;
 
 namespace RestApi.Controllers.Api
 {
@@ -20,9 +21,9 @@ namespace RestApi.Controllers.Api
         }
 
         // GET: api/Products
-        public IList<ProductDTO> Get(int _page = 1, int _perPage = 10, string _sortDir = "ASC", string _sortField = "Id")
+        public async Task<IList<ProductDTO>> Get(int _page = 1, int _perPage = 10, string _sortDir = "ASC", string _sortField = "Id")
         {
-            var totalCount = _productService.TotalCount();
+            var totalCount = await _productService.TotalCountAsync();
             var totalPages = (int)Math.Ceiling((double)totalCount / _perPage);
             
 
@@ -50,16 +51,16 @@ namespace RestApi.Controllers.Api
                 OrderProperty = _sortField,
             };
 
-            var result = _productService.Get(modifier);
+            var result = await _productService.GetAsync(modifier);
             return result;
         }
 
         // GET: api/Products/5
-        public HttpResponseMessage GetProduct(int id)
+        public async Task<HttpResponseMessage> GetProduct(int id)
         {
             try
             {
-                var result = _productService.Get(id);
+                var result = await _productService.GetAsync(id);
                 return Request.CreateResponse(HttpStatusCode.OK, result);
             }
             catch (Exception ex)
@@ -69,7 +70,7 @@ namespace RestApi.Controllers.Api
         }
 
         // POST: api/Products
-        public HttpResponseMessage Post([FromBody]ProductDTO product)
+        public async Task<HttpResponseMessage> Post([FromBody]ProductDTO product)
         {
             if (product == null)
             {
@@ -78,7 +79,7 @@ namespace RestApi.Controllers.Api
 
             try
             {
-                var created = _productService.Create(product);
+                var created = await _productService.CreateAsync(product);
                 return Request.CreateResponse(HttpStatusCode.Created, created);
             }
             catch (Exception ex)
@@ -89,7 +90,7 @@ namespace RestApi.Controllers.Api
         }
 
         // PUT: api/Products/5
-        public HttpResponseMessage Put(int id, [FromBody]ProductDTO product)
+        public async Task<HttpResponseMessage> Put(int id, [FromBody]ProductDTO product)
         {
             if (product == null)
             {
@@ -99,7 +100,7 @@ namespace RestApi.Controllers.Api
             try
             {
                 product.Id = id;
-                var updated = _productService.Update(product);
+                var updated = await _productService.UpdateAsync(product);
                 return Request.CreateResponse(HttpStatusCode.OK, updated);
             }
             catch (Exception ex)
@@ -109,9 +110,9 @@ namespace RestApi.Controllers.Api
         }
 
         // DELETE: api/Products/5
-        public HttpResponseMessage Delete(int id)
+        public async Task<HttpResponseMessage> Delete(int id)
         {
-            var existing = _productService.Get(id);
+            var existing = await _productService.GetAsync(id);
             if (existing == null)
             {
                 return Request.CreateErrorResponse(HttpStatusCode.NotModified, $"Product with {id} does not exist");
@@ -119,7 +120,7 @@ namespace RestApi.Controllers.Api
 
             try
             {
-                _productService.Delete(id);
+                await _productService.DeleteAsync(id);
                 return Request.CreateResponse(HttpStatusCode.OK);
             }
             catch (Exception ex)

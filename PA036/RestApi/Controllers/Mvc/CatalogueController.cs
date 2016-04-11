@@ -1,11 +1,12 @@
-﻿using System.Web.Mvc;
+﻿using System.Threading.Tasks;
+using System.Web.Mvc;
 
 namespace RestApi.Controllers.Mvc
 {
     public class CatalogueController : Controller
     {
         // GET: Catalogue
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
             return View();
         }

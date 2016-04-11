@@ -2,23 +2,24 @@
 using Service.DTO;
 using Shared.Filters;
 using Shared.Settings;
+using System.Threading.Tasks;
 
 namespace Service.Data
 {
     public interface IProductService
     {
-        ProductDTO Get(int id, DbSettings dbSettings = null);
+        Task<ProductDTO> GetAsync(int id, DbSettings dbSettings = null);
 
-        IList<ProductDTO> GetAll();
+        Task<IList<ProductDTO>> GetAllAsync();
 
-        IList<ProductDTO> Get(ProductFilter filter, DbSettings dbSettings = null);
+        Task<IList<ProductDTO>> GetAsync(ProductFilter filter, DbSettings dbSettings = null);
 
-        ProductDTO Create(ProductDTO product);
+        Task<ProductDTO> CreateAsync(ProductDTO product);
 
-        ProductDTO Update(ProductDTO product);
+        Task<ProductDTO> UpdateAsync(ProductDTO product);
 
-        void Delete(int id);
+        Task DeleteAsync(int id);
 
-        int TotalCount();
+        Task<int> TotalCountAsync();
     }
 }

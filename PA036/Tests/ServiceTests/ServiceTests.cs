@@ -23,11 +23,11 @@ namespace Tests.ServiceTests
         public void GetData()
         {
             var ticksCount1 = DateTime.Now.Ticks;
-            _instance.GetAll();
+            _instance.GetAllAsync().Wait();
             ticksCount1 = DateTime.Now.Ticks - ticksCount1;
 
             var ticksCount2 = DateTime.Now.Ticks;
-            _instance.GetAll();
+            _instance.GetAllAsync().Wait();
             ticksCount2 = DateTime.Now.Ticks - ticksCount2;
 
             Debug.WriteLine("First execution: {0}", ticksCount1);
@@ -37,14 +37,14 @@ namespace Tests.ServiceTests
         [TestMethod]
         public void TotalCount()
         {
-            var count = _instance.TotalCount();
+            var count = _instance.TotalCountAsync().Result;
             Debug.WriteLine("Total count: {0}", count);
         }
         
         [TestMethod]
         public void DatabaseNotEmpty()
         {
-            var product = _instance.GetAll().FirstOrDefault();
+            var product = _instance.GetAllAsync().Result.FirstOrDefault();
             Assert.IsNotNull(product);
         }
 
@@ -68,40 +68,40 @@ namespace Tests.ServiceTests
 
             var modifier = new ProductFilter();
             modifier.Take = 4;
-            var all = _instance.Get(modifier, settings);
+            var all = _instance.GetAsync(modifier, settings).Result;
 
             var ticksCount1 = DateTime.Now.Ticks;
-            _instance.Get(all.ElementAt(0).Id, settings);
+            _instance.GetAsync(all.ElementAt(0).Id, settings).Wait();
             ticksCount1 = DateTime.Now.Ticks - ticksCount1;
 
             var ticksCount2 = DateTime.Now.Ticks;
-            _instance.Get(all.ElementAt(1).Id, settings);
+            _instance.GetAsync(all.ElementAt(1).Id, settings).Wait();
             ticksCount2 = DateTime.Now.Ticks - ticksCount2;
 
             var ticksCount3 = DateTime.Now.Ticks;
-            _instance.Get(all.ElementAt(2).Id, settings);
+            _instance.GetAsync(all.ElementAt(2).Id, settings).Wait();
             ticksCount3 = DateTime.Now.Ticks - ticksCount3;
 
             var ticksCount4 = DateTime.Now.Ticks;
-            _instance.Get(all.ElementAt(3).Id, settings);
+            _instance.GetAsync(all.ElementAt(3).Id, settings).Wait();
             ticksCount4 = DateTime.Now.Ticks - ticksCount4;
 
             Debug.WriteLine("First execution: {0}, {1}, {2}, {3}", ticksCount1, ticksCount2, ticksCount3, ticksCount4);
 
             ticksCount1 = DateTime.Now.Ticks;
-            _instance.Get(all.ElementAt(0).Id, settings);
+            _instance.GetAsync(all.ElementAt(0).Id, settings).Wait();
             ticksCount1 = DateTime.Now.Ticks - ticksCount1;
 
             ticksCount2 = DateTime.Now.Ticks;
-            _instance.Get(all.ElementAt(1).Id, settings);
+            _instance.GetAsync(all.ElementAt(1).Id, settings).Wait();
             ticksCount2 = DateTime.Now.Ticks - ticksCount2;
 
             ticksCount3 = DateTime.Now.Ticks;
-            _instance.Get(all.ElementAt(2).Id, settings);
+            _instance.GetAsync(all.ElementAt(2).Id, settings).Wait();
             ticksCount3 = DateTime.Now.Ticks - ticksCount3;
 
             ticksCount4 = DateTime.Now.Ticks;
-            _instance.Get(all.ElementAt(3).Id, settings);
+            _instance.GetAsync(all.ElementAt(3).Id, settings).Wait();
             ticksCount4 = DateTime.Now.Ticks - ticksCount4;
 
             Debug.WriteLine("Second execution: {0}, {1}, {2}, {3}", ticksCount1, ticksCount2, ticksCount3, ticksCount4);

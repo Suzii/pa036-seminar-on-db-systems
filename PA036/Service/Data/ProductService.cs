@@ -5,6 +5,7 @@ using Shared.Filters;
 using Shared.Settings;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Service.Data
 {
@@ -17,45 +18,45 @@ namespace Service.Data
             _instance = new Products();
         }
 
-        public ProductDTO Get(int id, DbSettings dbSettings = null)
+        public async Task<ProductDTO> GetAsync(int id, DbSettings dbSettings = null)
         {
-            return ToProductDto(_instance.GetAsync(id, dbSettings).Result);
+            return ToProductDto(await _instance.GetAsync(id, dbSettings));
         }
 
-        public IList<ProductDTO> GetAll()
+        public async Task<IList<ProductDTO>> GetAllAsync()
         {
-            return Get(null, null);
+            return await GetAsync(null, null);
         }
 
-        public IList<ProductDTO> Get(ProductFilter filter, DbSettings dbSettings = null)
+        public async Task<IList<ProductDTO>> GetAsync(ProductFilter filter, DbSettings dbSettings = null)
         {
-            return _instance.GetAsync(filter, dbSettings).Result.Select(ToProductDto).ToList();
+            return (await _instance.GetAsync(filter, dbSettings)).Select(ToProductDto).ToList();
         }
 
         // TODO ?? should return newly created product?
-        public ProductDTO Create(ProductDTO productDto)
+        public async Task<ProductDTO> CreateAsync(ProductDTO productDto)
         {
             var product = ToProduct(productDto);
-            _instance.CreateAsync(product).Wait();
+            await _instance.CreateAsync(product);
             return null; 
         }
 
         // TODO ?? should return updated product?
-        public ProductDTO Update(ProductDTO productDto)
+        public async Task<ProductDTO> UpdateAsync(ProductDTO productDto)
         {
             var product = ToProduct(productDto);
-            _instance.UpdateAsync(product).Wait();
+            await _instance.UpdateAsync(product);
             return null; 
         }
 
-        public void Delete(int id)
+        public async Task DeleteAsync(int id)
         {
-            _instance.DeleteAsync(id).Wait();
+            await _instance.DeleteAsync(id);
         }
 
-        public int TotalCount()
+        public async Task<int> TotalCountAsync()
         {
-            return _instance.CountAsync().Result;
+            return await _instance.CountAsync();
         }
 
         private static ProductDTO ToProductDto(Product product)
