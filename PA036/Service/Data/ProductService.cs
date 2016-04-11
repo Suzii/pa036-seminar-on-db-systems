@@ -19,7 +19,7 @@ namespace Service.Data
 
         public ProductDTO Get(int id, DbSettings dbSettings = null)
         {
-            return ToProductDto(_instance.Get(id, dbSettings));
+            return ToProductDto(_instance.GetAsync(id, dbSettings).Result);
         }
 
         public IList<ProductDTO> GetAll()
@@ -29,14 +29,14 @@ namespace Service.Data
 
         public IList<ProductDTO> Get(ProductFilter filter, DbSettings dbSettings = null)
         {
-            return _instance.Get(filter, dbSettings).Select(ToProductDto).ToList();
+            return _instance.GetAsync(filter, dbSettings).Result.Select(ToProductDto).ToList();
         }
 
         // TODO ?? should return newly created product?
         public ProductDTO Create(ProductDTO productDto)
         {
             var product = ToProduct(productDto);
-            _instance.Create(product);
+            _instance.CreateAsync(product).Wait();
             return null; 
         }
 
@@ -44,18 +44,18 @@ namespace Service.Data
         public ProductDTO Update(ProductDTO productDto)
         {
             var product = ToProduct(productDto);
-            _instance.Update(product);
+            _instance.UpdateAsync(product).Wait();
             return null; 
         }
 
         public void Delete(int id)
         {
-            _instance.Delete(id);
+            _instance.DeleteAsync(id).Wait();
         }
 
         public int TotalCount()
         {
-            return _instance.Count();
+            return _instance.CountAsync().Result;
         }
 
         private static ProductDTO ToProductDto(Product product)

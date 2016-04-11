@@ -1,15 +1,16 @@
-﻿using DataAccess.Context;
-using DataAccess.Model;
+﻿using DataAccess.Model;
 using Shared.Filters;
 using Shared.Settings;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace DataAccess.Data
 {
     public class Products : BaseData, IProducts
     {
-        public IList<Product> Get(ProductFilter filter = null, DbSettings dbSettings = null)
+        public async Task<IList<Product>> GetAsync(ProductFilter filter = null, DbSettings dbSettings = null)
         {
             if (filter == null)
                 filter = new ProductFilter();
@@ -28,54 +29,54 @@ namespace DataAccess.Data
 
                 products = ApplyBaseModifiers(products, filter);
 
-                return products.ToList();
+                return await products.ToListAsync();
             }
         }
 
-        public Product Get(int id, DbSettings dbSettings = null)
+        public async Task<Product> GetAsync(int id, DbSettings dbSettings = null)
         {
             using (var db = CreateAppContext(dbSettings))
             {
-                return db.Products.First(x => x.Id == id);
+                return await db.Products.FirstAsync(x => x.Id == id);
             }
         }
 
-        public int Count(DbSettings dbSettings = null)
+        public async Task<int> CountAsync(DbSettings dbSettings = null)
         {
             using (var db = CreateAppContext(dbSettings))
             {
-                return db.Products.Count();
+                return await db.Products.CountAsync();
             }
         }
 
-        public void Create(Product product, DbSettings dbSettings = null)
+        public async Task CreateAsync(Product product, DbSettings dbSettings = null)
         {
             using (var db = CreateAppContext(dbSettings))
             {
                 db.Products.Add(product);
-                db.SaveChanges();
+                await db.SaveChangesAsync();
             }
         }
 
-        public void Delete(int id, DbSettings dbSettings = null)
+        public async Task DeleteAsync(int id, DbSettings dbSettings = null)
         {
             using (var db = CreateAppContext(dbSettings))
             {
-                var product = db.Products.First(x => x.Id == id);
+                var product = await db.Products.FirstAsync(x => x.Id == id);
                 db.Products.Remove(product);
-                db.SaveChanges();
+                await db.SaveChangesAsync();
             }
         }
 
-        public void Update(Product product, DbSettings dbSettings = null)
+        public async Task UpdateAsync(Product product, DbSettings dbSettings = null)
         {
             using (var db = CreateAppContext(dbSettings))
             {
-                var toUpdate = db.Products.First(x => x.Id == product.Id);
+                var toUpdate = await db.Products.FirstAsync(x => x.Id == product.Id);
                 toUpdate.Name = product.Name;
                 toUpdate.StockCount = product.StockCount;
                 toUpdate.UnitCost = product.UnitCost;
-                db.SaveChanges();
+                await db.SaveChangesAsync();
             }
         }
     }
