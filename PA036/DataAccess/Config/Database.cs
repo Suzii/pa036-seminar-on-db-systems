@@ -1,5 +1,7 @@
 ﻿using DataAccess.Context;
+using DataAccess.Model;
 using Shared.Settings;
+using System.Data.Entity.Migrations.History;
 
 namespace DataAccess.Config
 {
@@ -10,7 +12,7 @@ namespace DataAccess.Config
             if (Configuration.Cache == null)
                 return;
 
-            Configuration.Cache.InvalidateSets(new[] { nameof(Model.Product) });
+            Configuration.Cache.InvalidateSets(new[] { nameof(HistoryRow), nameof(Product) });
         }
 
         public int GetCacheItemsCount()

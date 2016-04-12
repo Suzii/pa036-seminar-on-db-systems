@@ -23,18 +23,13 @@ namespace Tests.ServiceTests
         [TestMethod]
         public async Task InvalidateCacheTest()
         {
-            _database.InvalidateCache();
-
             var modifier = new ProductFilter();
             modifier.Take = 4;
             await _products.GetAsync(modifier);
             await _products.GetAsync(modifier, new DbSettings() { UseSecondAppContext = true });
 
-            var count = _database.GetCacheItemsCount();
             _database.InvalidateCache();
-            var countAfterInvalidate = _database.GetCacheItemsCount();
-            // Depends on if we have 2 different databases or not
-            Assert.IsTrue(countAfterInvalidate == count - 1 || countAfterInvalidate == count - 2); 
+            Assert.AreEqual(0, _database.GetCacheItemsCount()); 
         }
     }
 }
