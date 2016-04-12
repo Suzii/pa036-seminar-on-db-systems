@@ -32,8 +32,8 @@ namespace Service.Data
 
         void Delete(int id);
 
-        Task<int> TotalCountAsync();
+        Task<int> TotalCountAsync(DbSettings dbSettings = null);
 
-        int TotalCount();
+        int TotalCount(DbSettings dbSettings = null);
     }
 }

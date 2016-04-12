@@ -90,14 +90,14 @@ namespace Service.Data
             _instance.Delete(id);
         }
 
-        public async Task<int> TotalCountAsync()
+        public async Task<int> TotalCountAsync(DbSettings dbSettings = null)
         {
-            return await _instance.CountAsync();
+            return await _instance.CountAsync(dbSettings);
         }
 
-        public int TotalCount()
+        public int TotalCount(DbSettings dbSettings = null)
         {
-            return _instance.Count();
+            return _instance.Count(dbSettings);
         }
 
         private ProductDTO ToProductDto(Product product)
