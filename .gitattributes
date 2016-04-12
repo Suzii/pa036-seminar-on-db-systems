@@ -1,0 +1,6 @@
+# Ignore external libraries from statistics
+PA036/RestApi/Content/fonts/* linguist-vendored
+PA036/RestApi/Content/css/bootstrap/* linguist-vendored
+PA036/RestApi/Scripts/libs/* linguist-vendored
+PA036/RestApi/bower_components/* linguist-vendored
+PA036/RestApi/.bin/* linguist-vendored
