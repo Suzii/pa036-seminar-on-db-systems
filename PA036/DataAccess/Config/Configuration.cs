@@ -6,9 +6,12 @@ namespace DataAccess.Config
 {
     public class Configuration : DbConfiguration
     {
+        public static InMemoryCache Cache { get; private set; }
+
         public Configuration()
         {
-            var transactionHandler = new CacheTransactionHandler(new InMemoryCache());
+            Cache = new InMemoryCache();
+            var transactionHandler = new CacheTransactionHandler(Cache);
 
             AddInterceptor(transactionHandler);
 

@@ -86,6 +86,8 @@
     <Content Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Config\DatabaseService.cs" />
+    <Compile Include="Config\IDatabaseService.cs" />
     <Compile Include="Data\ProductService.cs" />
     <Compile Include="DTO\ProductDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

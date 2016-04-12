@@ -5,6 +5,7 @@ using Shared.Settings;
 using System;
 using System.Diagnostics;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Tests.ServiceTests
 {
@@ -60,6 +61,20 @@ namespace Tests.ServiceTests
         {
             var settings = new DbSettings() { UseSecondAppContext = true };
             TestGet(settings);
+        }
+
+        [TestMethod]
+         
+        public async Task TestCycleAsync()
+        {
+            var modifier = new ProductFilter();
+            for (var i = 1; i <= 100; i++)
+            {
+                modifier.Take = i;
+                Debug.WriteLine("Async cycle iteration: {0}", i);
+                await _instance.GetAsync(modifier);
+                Debug.WriteLine("Async cycle done: {0}", i);
+            }
         }
 
         private void TestGet(DbSettings settings)
