@@ -1,17 +1,16 @@
-﻿using System.Threading.Tasks;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 
 namespace RestApi.Controllers.Mvc
 {
     public class TestScenariosController : Controller
     {
         // GET: TestScenarios
-        public async Task<ActionResult> Index()
+        public ActionResult Index()
         {
             return View();
         }
 
-        public async Task<ActionResult> Scenario1()
+        public ActionResult Scenario1()
         {
             return View("Scenario1");
         }

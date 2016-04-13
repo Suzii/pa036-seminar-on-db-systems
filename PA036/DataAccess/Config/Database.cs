@@ -1,6 +1,4 @@
-﻿using DataAccess.Context;
-using DataAccess.Model;
-using Shared.Settings;
+﻿using DataAccess.Model;
 using System.Data.Entity.Migrations.History;
 
 namespace DataAccess.Config
@@ -21,14 +19,6 @@ namespace DataAccess.Config
                 return 0;
 
             return Configuration.Cache.Count;
-        }
-
-        private AppContext CreateAppContext(DbSettings dbSettings)
-        {
-            if (dbSettings == null)
-                dbSettings = new DbSettings();
-
-            return dbSettings.UseSecondAppContext ? (AppContext)new AppContext2() : new AppContext1();
         }
     }
 }
