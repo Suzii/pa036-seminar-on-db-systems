@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 using System.Web.Http;
-using Service.DTO.TestResultDTOs;
+using Service.DTO.TestScenariosDTOs;
 using Service.TestScenarios;
 
 namespace RestApi.Controllers.Api.TestScenarios

@@ -3,7 +3,7 @@ using System.Diagnostics;
 using System.Threading.Tasks;
 using Service.Config;
 using Service.Data;
-using Service.DTO.TestResultDTOs;
+using Service.DTO.TestScenariosDTOs;
 using Shared.Filters;
 using Shared.Settings;
 

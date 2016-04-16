@@ -1,5 +1,5 @@
 ﻿using System.Threading.Tasks;
-using Service.DTO.TestResultDTOs;
+using Service.DTO.TestScenariosDTOs;
 
 namespace Service.TestScenarios
 {
