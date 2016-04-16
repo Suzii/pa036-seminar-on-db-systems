@@ -11,7 +11,7 @@
 <div class="">
     <p class="lead">Hey!!! This is the ExampleScenario1. To execute test and see the results, press the button:</p>
 
-    <button id="scenario1-execute" class="btn btn-info pull-right">
+    <button id="scenario1-execute" class="btn btn-info pull-right" data-url="@Url.RouteUrl("DefaultApi", new {controller = "Scenario1", httproute = true})">
         Run test
     </button>
 </div>
@@ -20,64 +20,4 @@
 
 @section scripts{
     @Scripts.Render("~/Scripts/pages/testScenarios/scenario1.js")
-    <script>
-        $(document).ready(function() {
-            var result = null;
-            $("#scenario1-execute").click(function() {
-                $("#scenario1-execute").attr('disabled', 'disabled');
-                $.ajax({
-                    url: "@Url.RouteUrl("DefaultApi", new {controller = "Scenario1", httproute = true})",
-                    success: function(result) {
-                        var data = [];
-                        data.push({ name: 'Not cached', data: result.notCached });
-                        data.push({ name: 'cached', data: result.cached });
-                        var xAxis = [];
-                        for (var i = result.xAxis[0]; i < result.xAxis[1]; i += result.xAxis[2]) {
-                            xAxis.push(i);
-                        }
-                        graph(data, xAxis);
-                        $("#scenario1-execute").removeAttr('disabled');
-                    }
-                });
-            });
-        });
-
-        function graph(data, xAxisSettings) {
-            new Highcharts.Chart({
-                chart: {
-                    type: 'line',
-                    renderTo: 'container'
-                },
-                title: {
-                    text: 'Result',
-                    x: -20 //center
-                },
-                xAxis: {
-                    title: {
-                        text: 'Number of Objects(°C)'
-                    },
-                    categories: xAxisSettings
-                },
-                yAxis: {
-                    title: {
-                        text: 'Seconds'
-                    },
-                    plotLines: [
-                        {
-                            value: 0,
-                            width: 1,
-                            color: '#808080'
-                        }
-                    ]
-                },
-                legend: {
-                    layout: 'vertical',
-                    align: 'right',
-                    verticalAlign: 'middle',
-                    borderWidth: 0
-                },
-                series: data
-            });
-        };
-    </script>
 }
