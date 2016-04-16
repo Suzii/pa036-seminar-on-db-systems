@@ -21,15 +21,15 @@ namespace RestApi.Controllers.Api
         }
 
         // GET: api/Products
-        public async Task<IList<ProductDTO>> Get(int _page = 1, int _perPage = 10, string _sortDir = "ASC", string _sortField = "Id")
+        public async Task<IList<ProductDTO>> Get(int page = 1, int perPage = 10, string sortDir = "ASC", string sortField = "Id", string name = null)
         {
+            // TODO if filters are applied, total count cannot be used
             var totalCount = await _productService.TotalCountAsync();
-            var totalPages = (int)Math.Ceiling((double)totalCount / _perPage);
-            
+            var totalPages = (int)Math.Ceiling((double)totalCount / perPage);
 
             var urlHelper = new UrlHelper(Request);
-            var prevLink = _page > 0 ? urlHelper.Link("DefaultApi", new { controller = "Products", action="Get", _page = _page - 1, _perPage = _perPage }) : "";
-            var nextLink = _page < totalPages - 1 ? urlHelper.Link("DefaultApi", new { controller = "Products", action = "Get", _page = _page + 1, _perPage = _perPage }) : "";
+            var prevLink = page > 0 ? urlHelper.Link("DefaultApi", new { controller = "Products", action="Get", _page = page - 1, _perPage = perPage }) : "";
+            var nextLink = page < totalPages - 1 ? urlHelper.Link("DefaultApi", new { controller = "Products", action = "Get", _page = page + 1, _perPage = perPage }) : "";
             
 
             var paginationHeader = new
@@ -45,10 +45,11 @@ namespace RestApi.Controllers.Api
 
             var modifier = new ProductFilter()
             {
-                Skip = (_page-1) * _perPage,
-                Take = _perPage,
-                OrderDesc = _sortDir == "DESC",
-                OrderProperty = _sortField,
+                Skip = (page-1) * perPage,
+                Take = perPage,
+                OrderDesc = sortDir == "DESC",
+                OrderProperty = sortField,
+                NameFilter = name
             };
 
             var result = await _productService.GetAsync(modifier);
