@@ -13,15 +13,20 @@ namespace RestApi.Controllers.Api.TestScenarios
 {
     public class Scenario2Controller : ApiController
     {
-        private readonly IProductService _instance = new ProductService();
-        private readonly IDatabaseService _dbInstance = new DatabaseService();
+        private readonly IProductService _instance;
+        private readonly IDatabaseService _databaseService;
+
+        public Scenario2Controller()
+        {
+            var dbSettings = new DbSettings() { UseSecondAppContext = true };
+            _instance = new ProductService(dbSettings);
+            _databaseService = new DatabaseService();
+        }
 
         public async Task<IDictionary<string, IList<double>>> Get()
         {
-
-            var dbSettings = new DbSettings() { UseSecondAppContext = true};
-            _dbInstance.InvalidateCache();
-            var totalCount = await _instance.TotalCountAsync(dbSettings);
+            _databaseService.InvalidateCache();
+            var totalCount = await _instance.TotalCountAsync();
             var modifier = new ProductFilter();
             var output = new Dictionary<string, IList<double>>();
             var withoutCache = new List<double>();
@@ -32,12 +37,12 @@ namespace RestApi.Controllers.Api.TestScenarios
             {
                 modifier.Take = i;
                 var watch = Stopwatch.StartNew();
-                await _instance.GetAsync(modifier, dbSettings);
+                await _instance.GetAsync(modifier);
                 watch.Stop();
                 withoutCache.Add(watch.ElapsedMilliseconds / 1000.0);
 
                 watch.Restart();
-                await _instance.GetAsync(modifier, dbSettings);
+                await _instance.GetAsync(modifier);
                 watch.Stop();
                 withCache.Add(watch.ElapsedMilliseconds / 1000.0);
             }

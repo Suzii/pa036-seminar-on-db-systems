@@ -11,13 +11,13 @@ namespace Tests.ServiceTests
     public class DbSettingsTests
     {
         private IDatabaseService _database;
-        private IProductService _products;
+        private IProductService _productsServiceWithContext2;
 
         [TestInitialize]
         public void BeforeMethod()
         {
             _database = new DatabaseService();
-            _products = new ProductService();
+            _productsServiceWithContext2 = new ProductService(new DbSettings() { UseSecondAppContext = true });
         }
 
         [TestMethod]
@@ -25,8 +25,8 @@ namespace Tests.ServiceTests
         {
             var modifier = new ProductFilter();
             modifier.Take = 4;
-            await _products.GetAsync(modifier);
-            await _products.GetAsync(modifier, new DbSettings() { UseSecondAppContext = true });
+            await _productsServiceWithContext2.GetAsync(modifier);
+            await _productsServiceWithContext2.GetAsync(modifier);
 
             _database.InvalidateCache();
             Assert.AreEqual(0, _database.GetCacheItemsCount()); 

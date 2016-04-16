@@ -8,6 +8,7 @@ using Service.Data;
 using Service.DTO;
 using Shared.Filters;
 using System.Threading.Tasks;
+using Shared.Settings;
 
 namespace RestApi.Controllers.Api
 {
@@ -17,7 +18,8 @@ namespace RestApi.Controllers.Api
 
         public ProductsController()
         {
-            _productService = new ProductService();
+            var dbSettings = new DbSettings() {UseSecondAppContext = false};
+            _productService = new ProductService(dbSettings);
         }
 
         // GET: api/Products

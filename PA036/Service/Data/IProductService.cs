@@ -8,17 +8,17 @@ namespace Service.Data
 {
     public interface IProductService
     {
-        Task<ProductDTO> GetAsync(int id, DbSettings dbSettings = null);
+        Task<ProductDTO> GetAsync(int id);
 
-        ProductDTO Get(int id, DbSettings dbSettings = null);
+        ProductDTO Get(int id);
 
         Task<IList<ProductDTO>> GetAllAsync();
 
         IList<ProductDTO> GetAll();
 
-        Task<IList<ProductDTO>> GetAsync(ProductFilter filter, DbSettings dbSettings = null);
+        Task<IList<ProductDTO>> GetAsync(ProductFilter filter);
 
-        IList<ProductDTO> Get(ProductFilter filter, DbSettings dbSettings = null);
+        IList<ProductDTO> Get(ProductFilter filter);
 
         Task<ProductDTO> CreateAsync(ProductDTO product);
 
@@ -32,8 +32,8 @@ namespace Service.Data
 
         void Delete(int id);
 
-        Task<int> TotalCountAsync(DbSettings dbSettings = null);
+        Task<int> TotalCountAsync();
 
-        int TotalCount(DbSettings dbSettings = null);
+        int TotalCount();
     }
 }
