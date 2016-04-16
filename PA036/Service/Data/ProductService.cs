@@ -12,22 +12,24 @@ namespace Service.Data
     public class ProductService: IProductService
     {
         private readonly IProducts _instance;
-        private readonly DbSettings _dbSettings;
+
+        public DbSettings DbSettings { get; set; }
 
         public ProductService(DbSettings dbSettings)
         {
-            this._instance = new Products();
-            this._dbSettings = dbSettings;
+            _instance = new Products();
+            DbSettings = dbSettings;
         }
+
 
         public async Task<ProductDTO> GetAsync(int id)
         {
-            return ToProductDto(await _instance.GetAsync(id, _dbSettings));
+            return ToProductDto(await _instance.GetAsync(id, DbSettings));
         }
 
         public ProductDTO Get(int id)
         {
-            return ToProductDto(_instance.Get(id, _dbSettings));
+            return ToProductDto(_instance.Get(id, DbSettings));
         }
 
         public async Task<IList<ProductDTO>> GetAllAsync()
@@ -42,19 +44,19 @@ namespace Service.Data
 
         public async Task<IList<ProductDTO>> GetAsync(ProductFilter filter)
         {
-            return (await _instance.GetAsync(filter, _dbSettings)).Select(ToProductDto).ToList();
+            return (await _instance.GetAsync(filter, DbSettings)).Select(ToProductDto).ToList();
         }
 
         public IList<ProductDTO> Get(ProductFilter filter)
         {
-            return _instance.Get(filter, _dbSettings).Select(ToProductDto).ToList();
+            return _instance.Get(filter, DbSettings).Select(ToProductDto).ToList();
         }
 
         // TODO ?? should return newly created product?
         public async Task<ProductDTO> CreateAsync(ProductDTO productDto)
         {
             var product = ToProduct(productDto);
-            await _instance.CreateAsync(product, _dbSettings);
+            await _instance.CreateAsync(product, DbSettings);
             return null; 
         }
 
@@ -62,7 +64,7 @@ namespace Service.Data
         public ProductDTO Create(ProductDTO productDto)
         {
             var product = ToProduct(productDto);
-            _instance.Create(product, _dbSettings);
+            _instance.Create(product, DbSettings);
             return null;
         }
 
@@ -70,7 +72,7 @@ namespace Service.Data
         public async Task<ProductDTO> UpdateAsync(ProductDTO productDto)
         {
             var product = ToProduct(productDto);
-            await _instance.UpdateAsync(product, _dbSettings);
+            await _instance.UpdateAsync(product, DbSettings);
             return null; 
         }
 
@@ -78,28 +80,28 @@ namespace Service.Data
         public ProductDTO Update(ProductDTO productDto)
         {
             var product = ToProduct(productDto);
-            _instance.Update(product, _dbSettings);
+            _instance.Update(product, DbSettings);
             return null;
         }
 
         public async Task DeleteAsync(int id)
         {
-            await _instance.DeleteAsync(id, _dbSettings);
+            await _instance.DeleteAsync(id, DbSettings);
         }
 
         public void Delete(int id)
         {
-            _instance.Delete(id, _dbSettings);
+            _instance.Delete(id, DbSettings);
         }
 
         public async Task<int> TotalCountAsync()
         {
-            return await _instance.CountAsync(_dbSettings);
+            return await _instance.CountAsync(DbSettings);
         }
 
         public int TotalCount()
         {
-            return _instance.Count(_dbSettings);
+            return _instance.Count(DbSettings);
         }
 
         private ProductDTO ToProductDto(Product product)

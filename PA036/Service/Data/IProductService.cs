@@ -8,6 +8,8 @@ namespace Service.Data
 {
     public interface IProductService
     {
+        DbSettings DbSettings { get; set; }
+
         Task<ProductDTO> GetAsync(int id);
 
         ProductDTO Get(int id);
