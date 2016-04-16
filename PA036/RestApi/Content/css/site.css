@@ -1,3 +1,11 @@
 ﻿/*Add custom styles*/
 body {
 }
+footer {
+    background: #222 !important;
+	color: #ccc !important;
+	font-weight: 300;
+    min-height: 60px;
+    text-align: center;
+    padding: 15px;
+}

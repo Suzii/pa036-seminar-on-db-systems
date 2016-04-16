@@ -26,7 +26,7 @@
             $("#scenario1-execute").click(function() {
                 $("#scenario1-execute").attr('disabled', 'disabled');
                 $.ajax({
-                    url: "@Url.RouteUrl("DefaultApi", new {controller = "Scenario1", httproute = true})",
+                    url: "@Url.RouteUrl("DefaultApi", new {controller = "Scenario2", httproute = true})",
                     success: function(result) {
                         var data = [];
                         data.push({ name: 'Not cached', data: result.notCached });

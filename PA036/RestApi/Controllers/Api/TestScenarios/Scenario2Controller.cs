@@ -25,7 +25,6 @@ namespace RestApi.Controllers.Api.TestScenarios
 
         public async Task<IDictionary<string, IList<double>>> Get()
         {
-            _databaseService.InvalidateCache();
             var totalCount = await _instance.TotalCountAsync();
             var modifier = new ProductFilter();
             var output = new Dictionary<string, IList<double>>();
@@ -35,6 +34,8 @@ namespace RestApi.Controllers.Api.TestScenarios
 
             for (var i = step; i <= totalCount; i += step)
             {
+                _databaseService.InvalidateCache();
+
                 modifier.Take = i;
                 var watch = Stopwatch.StartNew();
                 await _instance.GetAsync(modifier);

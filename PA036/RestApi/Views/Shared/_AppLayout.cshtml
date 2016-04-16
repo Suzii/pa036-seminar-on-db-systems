@@ -11,39 +11,44 @@
     @RenderSection("styles", required: false)
 </head>
 <body class="">
-<div class="navbar navbar-default navbar-static-top">
-        <div class="container">
-            <div class="navbar-header">
-                <a class="navbar-brand" href="@Url.Action("Index", "Home")">
-                    PA036
-                </a>
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Products catalogue", "Index", "Catalogue")</li>
-                    <li>@Html.ActionLink("Test scenarios", "Index", "TestScenarios")</li>
-                    
-                </ul>
+    <header>
+        <div class="navbar navbar-default navbar-static-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="@Url.Action("Index", "Home")">
+                        PA036
+                    </a>
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li>@Html.ActionLink("Products catalogue", "Index", "Catalogue")</li>
+                        <li>@Html.ActionLink("Test scenarios", "Index", "TestScenarios")</li>
+
+                    </ul>
+                </div>
             </div>
         </div>
-    </div>
-    
-    <div class="container body-content">
+    </header>
+
+    <div class="container body-content" id="wrap">
         @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; PA036 - @DateTime.Now.Year</p>
-        </footer>
     </div>
+
+    <footer class="footer">
+        <div class="container-fluid">
+            <p>&copy; PA036 - @DateTime.Now.Year</p>
+        </div>
+    </footer>
 
     @Scripts.Render("https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js")
     @Scripts.Render("https://code.highcharts.com/highcharts.js")
     @Scripts.Render("https://code.highcharts.com/modules/exporting.js")
+    @Scripts.Render("~/Scripts/pages/shared/footer.js")
     @RenderSection("scripts", required: false)
 </body>
 </html>
