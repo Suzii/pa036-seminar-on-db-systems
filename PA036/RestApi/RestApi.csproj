@@ -148,6 +148,7 @@
     <Content Include="Scripts\pages\catalogue\main.js" />
     <Content Include="Scripts\pages\shared\footer.js" />
     <Content Include="Scripts\pages\testScenarios\scenario1.js" />
+    <Content Include="Scripts\pages\testScenarios\scenario3.js" />
     <Content Include="Scripts\pages\testScenarios\scenario2.js" />
     <Content Include="Web.config" />
     <Content Include="Views\Error\_404.cshtml" />
@@ -157,6 +158,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\Api\TestScenarios\Scenario2Controller.cs" />
+    <Compile Include="Controllers\Api\TestScenarios\Scenario3Controller.cs" />
     <Compile Include="Controllers\Api\TestScenarios\Scenario1Controller.cs" />
     <Compile Include="Controllers\Mvc\CatalogueController.cs" />
     <Compile Include="Controllers\Mvc\ErrorController.cs" />
@@ -178,6 +180,7 @@
     <Content Include="Scripts\libs\jquery\jquery-1.10.2.min.map" />
     <Content Include="Views\TestScenarios\Scenario1.cshtml" />
     <Content Include="Views\TestScenarios\Scenario2.cshtml" />
+    <Content Include="Views\TestScenarios\Scenario3.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
