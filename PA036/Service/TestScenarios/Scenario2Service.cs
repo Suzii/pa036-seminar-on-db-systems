@@ -59,8 +59,8 @@ namespace Service.TestScenarios
 
             var result = new Scenario2Results()
             {
-                cached = withCache,
-                notCached = withoutCache,
+                CachedQueriesTimes = withCache,
+                NotCachedQueriesTimes = withoutCache,
                 xAxis = new List<double>() { 0, totalCount + step, step }
             };
 

@@ -7,9 +7,10 @@
         $.ajax({
             url: url,
             success: function (result) {
+                console.log(result);
                 var data = [];
-                data.push({ name: 'Not cached', data: result.notCached });
-                data.push({ name: 'cached', data: result.cached });
+                data.push({ name: 'Not cached', data: result.notCachedQueriesTimes });
+                data.push({ name: 'cached', data: result.cachedQueriesTimes });
                 var xAxis = [];
                 for (var i = result.xAxis[0]; i < result.xAxis[1]; i += result.xAxis[2]) {
                     xAxis.push(i);
