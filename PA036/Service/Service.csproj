@@ -90,7 +90,9 @@
     <Compile Include="Config\IDatabaseService.cs" />
     <Compile Include="Data\ProductService.cs" />
     <Compile Include="DTO\ProductDTO.cs" />
+    <Compile Include="DTO\TestScenariosConfigs\Scenario2Config.cs" />
     <Compile Include="DTO\TestScenariosDTOs\ITestResult.cs" />
+    <Compile Include="DTO\TestScenariosConfigs\ITestScenarioConfig.cs" />
     <Compile Include="DTO\TestScenariosDTOs\Scenario3Results.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Data\IProductService.cs" />

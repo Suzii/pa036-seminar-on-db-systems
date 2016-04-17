@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using System.Web.Http;
+using Service.DTO.TestScenariosConfigs;
 using Service.DTO.TestScenariosDTOs;
 using Service.TestScenarios;
 
@@ -7,16 +8,16 @@ namespace RestApi.Controllers.Api.TestScenarios
 {
     public class Scenario2Controller : ApiController
     {
-        private readonly ITestScenarioService _instance;
-        
-        public Scenario2Controller()
+        public async Task<ITestResult> Get(bool useCloudDatabase = false, bool invalidateCache = false)
         {
-            _instance = new Scenario2Service();
-        }
+            var config = new Scenario2Config()
+            {
+                UseRemoteDb = useCloudDatabase,
+                InvalidateCacheAfterIteration = invalidateCache
+            };
 
-        public async Task<ITestResult> Get()
-        {
-            return await _instance.ExecuteTest();
+            var instance = new Scenario2Service(config);
+            return await instance.ExecuteTest();
         }
     }
 }

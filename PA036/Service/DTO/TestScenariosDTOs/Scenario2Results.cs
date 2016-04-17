@@ -6,9 +6,9 @@ namespace Service.DTO.TestScenariosDTOs
     {
         public List<double> CachedQueriesTimes { get; set; }
         public List<double> NotCachedQueriesTimes { get; set; }
-        public List<double> xAxis { get; set; }
+        public List<double> XAxis { get; set; }
 
-        public CacheSizeComparison CacheSizeComparison { get; set; }
+        public List<CacheSizeComparison> CacheSizeComparison { get; set; }
     }
 
 
