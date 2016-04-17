@@ -7,24 +7,24 @@ myApp.config(['NgAdminConfigurationProvider', function (NgAdminConfigurationProv
     
     
     var products = nga.entity("Products")
-        .identifier(nga.field('Id'));
-    var name = nga.field('Name')
+        .identifier(nga.field('id'));
+    var name = nga.field('name')
         .isDetailLink(true)
         .label('Name');
-    var stockCount = nga.field('StockCount', 'number')
+    var stockCount = nga.field('stockCount', 'number')
         .label('Count in stock');
-    var unitCost = nga.field('UnitCost', 'float')
+    var unitCost = nga.field('unitCost', 'float')
         .label('Cost per unit');
 
     products.listView().fields([
-        nga.field('Id'),
+        nga.field('id'),
         name,
         stockCount,
         unitCost
     ]).listActions(['edit', 'delete'])
         .sortDir("ASC")
         .filters([
-        nga.field('Name')
+        nga.field('name')
             .label('This will be filter on name')
             .pinned(true)
     ]).perPage(50);
