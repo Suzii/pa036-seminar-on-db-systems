@@ -57,7 +57,7 @@ namespace Service.TestScenarios
             }
 
             var countInCache = _databaseService.GetCacheItemsCount();
-            if (migrationsInCache == 0)
+            if (migrationsInCache == 2)
             {
                 countInCache -= migrationsInCache;
             }
