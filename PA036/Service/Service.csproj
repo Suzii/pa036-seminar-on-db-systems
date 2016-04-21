@@ -99,6 +99,8 @@
     <Compile Include="TestScenarios\ITestScenarioService.cs" />
     <Compile Include="DTO\TestScenariosDTOs\Scenario2Results.cs" />
     <Compile Include="TestScenarios\Scenario3Service.cs" />
+    <Compile Include="TestScenarios\Scenario3ServiceDelete.cs" />
+    <Compile Include="TestScenarios\Scenario3ServiceUpdate.cs" />
     <Compile Include="TestScenarios\Scenario2Service.cs" />
   </ItemGroup>
   <ItemGroup>

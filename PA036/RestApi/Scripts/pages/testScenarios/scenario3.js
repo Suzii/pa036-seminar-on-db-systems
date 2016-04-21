@@ -1,33 +1,63 @@
 ﻿$(document).ready(function() {
     var firstExecution = true;
-    $("#execute").click(function() {
-        var url = $('button#execute').data('url');
-        $("#execute").attr('disabled', 'disabled');
+    var firstExecutionDelete = true;
+    $("#executeUpdate").click(function() {
+        var url = $('button#executeUpdate').data('url');
+        disableButtons();
 
-        addNewEmptyRow(firstExecution);
+        var before = '.beforeUpdate';
+        var after = '.afterUpdate';
+        addNewEmptyRow(firstExecution, 'placeholderUpdate', before, after);
 
         $.ajax({
             url: url,
             success: function(result) {
-                $('.before:last').append(result.beforeUpdate);
-                $('.after:last').append(result.afterUpdate);
-                $("#execute").removeAttr('disabled');
+                successFunction(result, before, after);
                 firstExecution = false;
+                return;
+            }
+        });
+    });
+    $("#executeDelete").click(function () {
+        var url = $('button#executeDelete').data('url');
+        disableButtons();
+
+        var before = '.beforeDelete';
+        var after = '.afterDelete';
+        addNewEmptyRow(firstExecutionDelete, 'placeholderDelete', before, after);
+
+        $.ajax({
+            url: url,
+            success: function (result) {
+                successFunction(result, before, after);
+                firstExecutionDelete = false;
                 return;
             }
         });
     });
 });
 
-var addNewEmptyRow = function(isFirstExecution) {
-    var placeholderRows = $('.placeholder-row');
+var addNewEmptyRow = function(isFirstExecution, placeholder, beforeRow, afterRow) {
+    var placeholderRows = $('#' + placeholder);
     if (placeholderRows.length > 0 && !isFirstExecution) {
         console.log('Appending line for next test execution');
         var row = placeholderRows.first();
         var tableBody = row.parent();
         var newRow = row.clone();
-        newRow.find('.before').empty();
-        newRow.find('.after').empty();
+        newRow.find(beforeRow).empty();
+        newRow.find(afterRow).empty();
         tableBody.append(newRow);
     }
 };
+
+function successFunction(result, before, after) {
+    $(before + ':last').append(result.beforeAction);
+    $(after + ':last').append(result.afterAction);
+    $("#executeDelete").removeAttr('disabled');
+    $("#executeUpdate").removeAttr('disabled');
+}
+
+function disableButtons() {
+    $("#executeDelete").attr('disabled', 'disabled');
+    $("#executeUpdate").attr('disabled', 'disabled');
+}
