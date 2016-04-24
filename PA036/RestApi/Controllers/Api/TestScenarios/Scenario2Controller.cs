@@ -8,12 +8,13 @@ namespace RestApi.Controllers.Api.TestScenarios
 {
     public class Scenario2Controller : ApiController
     {
-        public async Task<ITestResult> Get(bool useCloudDatabase = false, bool invalidateCache = false)
+        public async Task<ITestResult> Get(bool useCloudDatabase = false, bool invalidateCache = false, bool doNotCacheItems = false)
         {
             var config = new Scenario2Config()
             {
                 UseRemoteDb = useCloudDatabase,
-                InvalidateCacheAfterIteration = invalidateCache
+                InvalidateCacheAfterIteration = invalidateCache,
+                DoNotCacheItems = doNotCacheItems
             };
 
             var instance = new Scenario2Service(config);

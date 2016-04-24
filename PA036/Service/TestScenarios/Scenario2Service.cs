@@ -51,7 +51,7 @@ namespace Service.TestScenarios
 
             for (var i = step; i <= totalCount; i += step)
             {
-                if (_config.InvalidateCacheAfterIteration)
+                if (_config.InvalidateCacheAfterIteration || _config.DoNotCacheItems)
                 {
                     _databaseService.InvalidateCache();
                 }
@@ -66,6 +66,10 @@ namespace Service.TestScenarios
                 await _instance.GetAsync(modifier);
                 watch.Stop();
 
+                if (_config.DoNotCacheItems)
+                {
+                    _databaseService.InvalidateCache();
+                }
                 withoutCache.Add(watch.ElapsedMilliseconds / 1000.0);
                 cacheSize.AfterQueryExecution = _databaseService.GetCacheItemsCount();
 
