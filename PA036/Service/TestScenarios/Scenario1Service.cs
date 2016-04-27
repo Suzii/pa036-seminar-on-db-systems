@@ -14,9 +14,9 @@ namespace Service.TestScenarios
     {
         private readonly IProductService _instance;
         private readonly IDatabaseService _databaseService;
-        private readonly Scenario2Config _config;
+        private readonly Scenario1Config _config;
 
-        public Scenario1Service(Scenario2Config config)
+        public Scenario1Service(Scenario1Config config)
         {
             _config = config;
             var dbSettings = new DbSettings() { UseSecondAppContext = config.UseRemoteDb };
