@@ -6,6 +6,7 @@ using Service.DTO.TestScenariosDTOs;
 using Shared.Filters;
 using Shared.Settings;
 using Service.DTO;
+using Service.DTO.TestScenariosConfigs;
 
 namespace Service.TestScenarios
 {
@@ -14,10 +15,12 @@ namespace Service.TestScenarios
         protected readonly IProductService _instance;
         protected readonly IDatabaseService _databaseService;
         protected ProductFilter productFilter;
+        protected readonly Scenario1Config _config;
 
-        public Scenario3Service()
+        public Scenario3Service(Scenario1Config config)
         {
-            var dbSettings = new DbSettings() { UseSecondAppContext = true };
+            _config = config;
+            var dbSettings = new DbSettings() { UseSecondAppContext = config.UseRemoteDb };
             _instance = new ProductService(dbSettings);
             _databaseService = new DatabaseService();
             productFilter = new ProductFilter();

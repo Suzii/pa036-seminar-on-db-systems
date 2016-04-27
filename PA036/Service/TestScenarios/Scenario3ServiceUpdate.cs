@@ -1,16 +1,13 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using Service.Config;
-using Service.Data;
+﻿using System.Threading.Tasks;
 using Service.DTO.TestScenariosDTOs;
-using Shared.Filters;
-using Shared.Settings;
-using Service.DTO;
+using Service.DTO.TestScenariosConfigs;
 
 namespace Service.TestScenarios
 {
     public class Scenario3ServiceUpdate : Scenario3Service, ITestScenarioService
     {
+
+        public Scenario3ServiceUpdate(Scenario1Config config) : base(config) { }
 
         public async Task<ITestResult> ExecuteTest()
         {
@@ -26,18 +23,12 @@ namespace Service.TestScenarios
             _databaseService.InvalidateCache();
             var data = (await init_cache());
             var cached = _databaseService.GetCacheItemsCount();
-            for (var i = 0; i < data.Count/5; i++)
-            {
-                data[i].StockCount += 1;
-                await _instance.UpdateAsync(data[i]);
-            }
+            data[0].StockCount += 1;
+            await _instance.UpdateAsync(data[0]);
             var countInCache = _databaseService.GetCacheItemsCount();
 
-            for (var i = 0; i < data.Count/5; i++)
-            {
-                data[i].StockCount -= 1;
-                await _instance.UpdateAsync(data[i]);
-            }
+            data[0].StockCount -= 1;
+            await _instance.UpdateAsync(data[0]);
             return new Scenario3Results()
             {
                 beforeAction = cached,
