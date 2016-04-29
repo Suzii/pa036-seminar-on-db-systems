@@ -11,22 +11,35 @@
     <h4>Test Description:</h4>
     <p class="lead">Simple GET query and updating data:</p>
     <ol>
-        <li> 2 <b>GET request</b> on 1000 products. </li>
+        <li> 2 <b>GET request</b> on 100 products. </li>
         <li> Checking if data are cached. </li>
         <li> Get number of elements in cache. </li>
-        <li> 30 different <b>PUT request</b> of these data. </li>
+        <ol type="a">
+            <li> <b>PUT request</b> on first element of these data. </li>
+            <li> <b>DELETE request</b> on first element of these data. </li>
+        </ol>
+        <li> Rollback changes</li>
         <li> Get numberof element is cache. </li>
     </ol>
 
     <p>Blah, blah, blah.. some other shit...</p>
 
+    <form id="options">
+        <div class="form-group">
+            <input type="checkbox" id="useCloudDatabase" name="useCloudDatabase" value="true" />
+            <label for="useCloudDatabase">Use remote database located in USA (otherwise local database will be used)</label>
+        </div>
 
-    <button id="execute" class="btn btn-info pull-right" data-url="@Url.RouteUrl("DefaultApi", new {controller = "Scenario3", httproute = true})">
-        Run test
-    </button>
+        <button id="executeUpdate" class="btn btn-info pull-right" data-url="@Url.RouteUrl("DefaultApi", new {controller = "Scenario3", httproute = true})">
+            Run test (UPDATE)
+        </button>
+    </form>
+
 </div>
-
-<div id="container" class="container">
+@section scripts{
+    @Scripts.Render("~/Scripts/pages/testScenarios/scenario3.js")
+}
+<div id="containerUpdate" class="container">
     <h2>Number of elements in Cache</h2>
     <table class="table">
         <thead>
@@ -36,14 +49,38 @@
             </tr>
         </thead>
         <tbody>
-            <tr class="placeholder-row">
-                <td class="before"></td>
-                <td class="after"></td>
+            <tr id="placeholderUpdate" class="placeholder-row">
+                <td class="beforeUpdate"></td>
+                <td class="afterUpdate"></td>
             </tr>
         </tbody>
     </table>
 </div>
 
-@section scripts{
-    @Scripts.Render("~/Scripts/pages/testScenarios/scenario3.js")
-}
+<form id="options">
+    <div class="form-group">
+        <input type="checkbox" id="useCloudDatabase" name="useCloudDatabase" value="true" />
+        <label for="useCloudDatabase">Use remote database located in USA (otherwise local database will be used)</label>
+    </div>
+    <button id="executeDelete" class="btn btn-info pull-right" data-url="@Url.Action("Delete", "api/scenario3")">
+        Run test (DELETE)
+    </button>
+</form>
+
+<div id="containerDelete" class="container">
+    <h2>Number of elements in Cache</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Before DELETE</th>
+                <th>After DELETE</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr id="placeholderDelete" class="placeholder-row">
+                <td class="beforeDelete"></td>
+                <td class="afterDelete"></td>
+            </tr>
+        </tbody>
+    </table>
+</div>

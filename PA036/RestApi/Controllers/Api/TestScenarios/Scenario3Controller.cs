@@ -2,21 +2,32 @@
 using System.Web.Http;
 using Service.DTO.TestScenariosDTOs;
 using Service.TestScenarios;
+using Service.DTO.TestScenariosConfigs;
 
 namespace RestApi.Controllers.Api.TestScenarios
 {
     public class Scenario3Controller : ApiController
     {
-        private readonly ITestScenarioService _instance;
+        private ITestScenarioService _instance;
+        private ITestScenarioService _instance2;
 
-        public Scenario3Controller()
+        public async Task<ITestResult> Get(bool useCloudDatabase = false)
         {
-            _instance = new Scenario3Service();
-        }
-
-        public async Task<ITestResult> Get()
-        {
+            var config = new Scenario1Config()
+            {
+                UseRemoteDb = useCloudDatabase,
+            };
+            _instance = new Scenario3ServiceUpdate(config);
             return await _instance.ExecuteTest();
+        }
+        public async Task<ITestResult> Delete(bool useCloudDatabase = false)
+        {
+            var config = new Scenario1Config()
+            {
+                UseRemoteDb = useCloudDatabase,
+            };
+            _instance2 = new Scenario3ServiceDelete(config);
+            return await _instance2.ExecuteTest();
         }
     }
 }

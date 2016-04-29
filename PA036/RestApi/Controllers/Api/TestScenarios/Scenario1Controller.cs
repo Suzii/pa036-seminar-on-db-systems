@@ -1,56 +1,22 @@
 ﻿using System.Threading.Tasks;
-using Service.Data;
-using System;
-using System.Diagnostics;
 using System.Web.Http;
-using System.Collections;
-using System.Collections.Generic;
-using Shared.Settings;
-using Shared.Filters;
-using Service.Config;
+using Service.DTO.TestScenariosConfigs;
+using Service.DTO.TestScenariosDTOs;
+using Service.TestScenarios;
 
 namespace RestApi.Controllers.Api.TestScenarios
 {
     public class Scenario1Controller : ApiController
     {
-        private readonly IProductService _instance;
-        private readonly IDatabaseService _databaseService;
-
-        public Scenario1Controller()
+        public async Task<ITestResult> Get(bool useCloudDatabase = false)
         {
-            var dbSettings = new DbSettings() { UseSecondAppContext = true };
-            _instance = new ProductService(dbSettings);
-            _databaseService = new DatabaseService();
-        }
-
-        public async Task<IDictionary<string, IList<double>>> Get()
-        {
-            _databaseService.InvalidateCache();
-            var totalCount = await _instance.TotalCountAsync();
-            var modifier = new ProductFilter();
-            var output = new Dictionary<string, IList<double>>();
-            var withoutCache = new List<double>();
-            var withCache = new List<double>();
-            const int step = 1000;
-
-            for (var i = step; i <= totalCount; i += step)
+            var config = new Scenario1Config()
             {
-                modifier.Take = i;
-                var watch = Stopwatch.StartNew();
-                await _instance.GetAsync(modifier);
-                watch.Stop();
-                withoutCache.Add(watch.ElapsedMilliseconds / 1000.0);
+                UseRemoteDb = useCloudDatabase,
+            };
 
-                watch.Restart();
-                await _instance.GetAsync(modifier);
-                watch.Stop();
-                withCache.Add(watch.ElapsedMilliseconds / 1000.0);
-            }
-            output.Add("notCached", withoutCache);
-            output.Add("cached", withCache);
-            output.Add("xAxis", new List<double>() { 0, totalCount + step, step });
-            return output;
+            var instance = new Scenario1Service(config);
+            return await instance.ExecuteTest();
         }
-
     }
 }

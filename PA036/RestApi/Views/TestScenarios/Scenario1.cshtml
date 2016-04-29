@@ -5,19 +5,35 @@
     ViewBag.Title = "ExampleScenario1";
     Layout = "~/Views/Shared/_AppLayout.cshtml";
 }
+<div>
+    <h2>Scenario 1</h2>
 
-<h2>ExampleScenario1</h2>
+    <h4>Test Description:</h4>
+    <p class="lead">Simple GET query executed by 100 users simultaneously:</p>
+    <ol>
+        <li> Parallel GET request on 100 same products by 100 users:</li>
+    </ol>
 
-<div class="">
-    <p class="lead">Hey!!! This is the ExampleScenario1. To execute test and see the results, press the button:</p>
+    <form id="options">
+        <div class="form-group">
+            <input type="checkbox" id="useCloudDatabase" name="useCloudDatabase" value="true" />
+            <label for="useCloudDatabase">Use remote database located in USA (otherwise local database will be used)</label>
+        </div>
 
-    <button id="scenario1-execute" class="btn btn-info pull-right" data-url="@Url.RouteUrl("DefaultApi", new {controller = "Scenario1", httproute = true})">
-        Run test
-    </button>
+        <button id="execute" class="btn btn-primary pull-right" data-url="@Url.RouteUrl("DefaultApi", new {controller = "Scenario1", httproute = true})">
+            Run test
+        </button>
+    </form>
 </div>
 
-<div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+<div>
+    <div id="execution-times" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+</div>
+<div>
+    <div id="cache-sizes" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+</div>
+
 
 @section scripts{
-    @Scripts.Render("~/Scripts/pages/testScenarios/scenario1.js")
+    @Scripts.Render("~/Scripts/pages/testScenarios/scenario2.js")
 }

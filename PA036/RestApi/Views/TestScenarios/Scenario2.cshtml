@@ -9,26 +9,36 @@
     <h2>Scenario 2</h2>
 
     <h4>Test Description:</h4>
-    <p class="lead">Simple GET query executed by two users:</p>
+    <p class="lead">Simple GET queries for k products executed by two users:</p>
     <ol>
         <li> User A executes <b>GET request</b> for <i>k</i> products. </li>
-        <li> User B executes <b>same GET request</b> for <i>k</i> products, which are already cached. </li>
-        <li> Number <i>k</i> is incremented in every iteration by <i>1000</i>.</li>
-        <li> Cache is invalidated before every call of user A.</li>
+        <li> User B executes <b>same GET request</b> for <i>k</i> products, which may be already cached (depending on configuration). </li>
+        <li> Number <i>k</i> is incremented/decrementded in every iteration by <i>1000</i> (depending on configuration).</li>
+        <li> Cache may be invalidated before every call of user A or not used at all (depending on configuration).</li>
     </ol>
 
-    <p>Unlike in the first case, this time cache is invalidate before every get call.</p>
-    <p>Once DB connection is stable, we can see, that for the first user, time is linear function of number of products requested. </p>
-    <p>Blah, blah, blah.. some other shit...</p>
+    <p>We can see, that for the first user, time is linear function of number of products requested. </p>
+    <p>Our cache is somewhat stupid, as it is clearly visible that when we first time request products with IDs 1 to 11000 the result is not used at all for subsequent queries for products whose IDs are subsets of already requested and cached products.</p>
 
     <form id="options">
         <div class="form-group">
-            <input type="checkbox" id="useCloudDatabase" name="useCloudDatabase" value="true"/> 
+            <input type="checkbox" id="useCloudDatabase" name="useCloudDatabase" value="true"/>
             <label for="useCloudDatabase">Use remote database located in USA (otherwise local database will be used)</label>
         </div>
+
+        <div class="form-group">
+            <input type="checkbox" id="getsSizeIncreasing" name="getsSizeIncreasing" value="true" checked="checked" />
+            <label for="getsSizeIncreasing">Icrease size of requested range of products in every request (otherwise decrease)</label>
+        </div>
+
         <div class="form-group">
             <input type="checkbox" id="invalidateCache" name="invalidateCache" vlaue="true"/> 
             <label for="invalidateCache">Invalidate cache after every iteration</label>
+        </div>
+
+        <div class="form-group">
+            <input type="checkbox" id="doNotCacheItems" name="doNotCacheItems" value="true" />
+            <label for="doNotCacheItems">Do not cache items</label>
         </div>
 
         <button id="execute" class="btn btn-primary pull-right" data-url="@Url.RouteUrl("DefaultApi", new {controller = "Scenario2", httproute = true})">
