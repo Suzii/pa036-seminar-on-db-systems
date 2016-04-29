@@ -11,7 +11,7 @@ namespace Service.Data
 {
     public class ProductService: IProductService
     {
-        private readonly IProducts _instance;
+        private readonly IProducts<Product> _instance;
 
         public DbSettings DbSettings { get; set; }
 

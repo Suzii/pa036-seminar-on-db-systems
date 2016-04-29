@@ -1,21 +1,21 @@
-﻿using System.Data.Entity;
-using DataAccess.Context;
+﻿using DataAccess.Context;
 using DataAccess.Model;
-using System.Threading.Tasks;
-using Shared.Settings;
-using System.Linq;
 using Shared.Filters;
+using Shared.Settings;
+using System.Data.Entity;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace DataAccess.Data
 {
-    public class Products : ProductsBase<Product>
+    public class Products2 : ProductsBase<Product2>
     {
-        protected override DbSet<Product> GetDbSet(AppContext appContext)
+        protected override DbSet<Product2> GetDbSet(AppContext appContext)
         {
-            return appContext.Products;
+            return appContext.Products2;
         }
 
-        public override async Task UpdateAsync(Product product, DbSettings dbSettings = null)
+        public override async Task UpdateAsync(Product2 product, DbSettings dbSettings = null)
         {
             using (var db = CreateAppContext(dbSettings))
             {
@@ -27,7 +27,7 @@ namespace DataAccess.Data
             }
         }
 
-        public override void Update(Product product, DbSettings dbSettings = null)
+        public override void Update(Product2 product, DbSettings dbSettings = null)
         {
             using (var db = CreateAppContext(dbSettings))
             {
@@ -39,12 +39,12 @@ namespace DataAccess.Data
             }
         }
 
-        protected override IQueryable<Product> GetQuery(AppContext db, ProductFilter filter)
+        protected override IQueryable<Product2> GetQuery(AppContext db, ProductFilter filter)
         {
             if (filter == null)
                 filter = new ProductFilter();
 
-            var products = db.Products.AsQueryable();
+            var products = db.Products2.AsQueryable();
             if (filter.NameFilter != null)
                 products = products.Where(x => x.Name.Contains(filter.NameFilter));
 
