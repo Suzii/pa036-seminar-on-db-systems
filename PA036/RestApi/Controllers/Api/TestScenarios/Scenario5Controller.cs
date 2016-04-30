@@ -6,10 +6,9 @@ using Service.DTO.TestScenariosConfigs;
 
 namespace RestApi.Controllers.Api.TestScenarios
 {
-    public class Scenario3Controller : ApiController
+    public class Scenario5Controller : ApiController
     {
         private ITestScenarioService _instance;
-        private ITestScenarioService _instance2;
 
         public async Task<ITestResult> Get(bool useCloudDatabase = false)
         {
@@ -17,18 +16,8 @@ namespace RestApi.Controllers.Api.TestScenarios
             {
                 UseRemoteDb = useCloudDatabase,
             };
-            _instance = new Scenario3ServiceUpdate(config);
+            _instance = new Scenario5Service(config);
             return await _instance.ExecuteTest();
-        }
-
-        public async Task<ITestResult> Delete(bool useCloudDatabase = false)
-        {
-            var config = new Scenario1Config()
-            {
-                UseRemoteDb = useCloudDatabase,
-            };
-            _instance2 = new Scenario3ServiceDelete(config);
-            return await _instance2.ExecuteTest();
         }
     }
 }

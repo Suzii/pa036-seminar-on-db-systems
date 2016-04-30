@@ -1,0 +1,47 @@
+﻿@using System.Web.Optimization
+@model dynamic
+
+@{
+    ViewBag.Title = "ExampleScenario5";
+    Layout = "~/Views/Shared/_AppLayout.cshtml";
+}
+
+<h2>ExampleScenario5</h2>
+<div>
+    <h4>Test Description:</h4>
+    <p class="lead">Simple GET query and updating data:</p>
+    <ol>
+        <li> <b>GET request</b> on 200 products. </li>
+        <li> Second Type of <b>GET request</b> on x %  of theese data and 100% - x % on different</li>
+        <li> 3x Second Type of <b>GET request</b> with x values:</li>
+        <ol type="a">
+            <li> 30 </li>
+            <li> 60 </li>
+            <li> 90 </li>
+        </ol>
+    </ol>
+
+    <p>Blah, blah, blah.. some other shit...</p>
+
+    <form id="options">
+        <div class="form-group">
+            <input type="checkbox" id="useCloudDatabase" name="useCloudDatabase" value="true" />
+            <label for="useCloudDatabase">Use remote database located in USA (otherwise local database will be used)</label>
+        </div>
+
+        <button id="execute" class="btn btn-info pull-right" data-url="@Url.RouteUrl("DefaultApi", new {controller = "Scenario5", httproute = true})">
+            Run test
+        </button>
+    </form>
+
+</div>
+@section scripts{
+    @Scripts.Render("~/Scripts/pages/testScenarios/scenario5.js")
+}
+<div>
+    <div id="execution-times" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+</div>
+
+<div>
+    <div id="data-and-cache" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+</div>
