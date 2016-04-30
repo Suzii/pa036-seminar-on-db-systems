@@ -18,6 +18,8 @@
             data: formData,
             success: function (result) {
                 renderExecutionTimesGraph(result);
+                renderRequestedDataGraph(result);
+                renderCacheSizeGraph(result);
                 $("#execute").removeAttr('disabled');
             }
         });
@@ -74,37 +76,92 @@ function executionTimesGraph(data, xAxisSettings) {
     });
 };
 
-function renderCacheSizeGraph(result) {
-    var data = [];
-    data['before'] = {
-        label: 'Before first query',
-        data: result.cacheSizeComparison.map(function (item) { return item.beforeQueryExecution; })
+function renderRequestedDataGraph(result){
+    var rangeData = [];
+    for (var i = 0; i < result.skipped.length; i++) {
+        rangeData.push([result.skipped[i][1], result.skipped[i][1] + result.cacheSizeComparison[i].noOfObjectsReturnedInQuery]);
+    }
+
+    data['overlapped'] = {
+        label: 'No. of items requested in second query',
+        data: rangeData
     };
 
-    data['after'] = {
-        label: 'After first query',
-        data: result.cacheSizeComparison.map(function (item) { return item.afterQueryExecution; })
-    };
+    rangeData = [];
+    for (var i = 0; i < result.skipped.length; i++) {
+        rangeData.push([0, result.cacheSizeComparison[i].noOfObjectsReturnedInQuery]);
+    }
 
-    data['number'] = {
-        label: 'No. of items requested',
-        data: result.cacheSizeComparison.map(function (item) { return item.noOfObjectsReturnedInQuery; })
+    data['first'] = {
+        label: 'No. of items requested in first query',
+        data: rangeData
     };
 
     var xAxis = [];
-    for (var i = result.xAxis[0]; i < result.xAxis[1]; i += result.xAxis[2]) {
-        var iteration = i / result.xAxis[0];
-        xAxis.push((iteration).toString());
+    for (var i = 0; i < result.skipped.length; i += 1) {
+        xAxis.push(result.skipped[i][0]);
     }
+    dataRequestedGraph(data, xAxis);
+}
 
-    console.log('renderCacheSizeGraph data ok', data);
+function renderCacheSizeGraph(result) {
+    var data = [];
 
+    data['first'] = {
+        label: 'Cache after first query',
+        data: result.cacheSizeComparison.map(function (item) { return item.beforeQueryExecution; })
+    };
 
+    data['overlapped'] = {
+        label: 'Cache after overlapped query',
+        data: result.cacheSizeComparison.map(function (item) { return item.afterQueryExecution; })
+    };
+    xAxis = [];
+    for (var i = 0; i < result.skipped.length; i += 1) {
+        xAxis.push(i);
+    }
     cacheSizeGraph(data, xAxis);
 }
 
+function dataRequestedGraph(data, xAxisSettings) {
+    $('#data').highcharts({
+        chart: {
+            type: 'columnrange',
+        },
+        title: {
+            text: 'Number of requested data'
+        },
+        xAxis: {
+            categories: 
+                xAxisSettings
+            ,
+            title: {
+                text: '% of overlapped data'
+            },
+            crosshair: true
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: 'Number of items'
+            }
+        },
+        series: [
+            {
+                name: data.first.label,
+                data: data.first.data
+
+            }, {
+                name: data.overlapped.label,
+                data: data.overlapped.data
+
+            }
+        ]
+    });
+};
+
 function cacheSizeGraph(data, xAxisSettings) {
-    $('#data-and-cache').highcharts({
+    $('#cache').highcharts({
         chart: {
             type: 'column'
         },
@@ -112,9 +169,8 @@ function cacheSizeGraph(data, xAxisSettings) {
             text: 'Cache size comparison'
         },
         xAxis: {
-            categories: [
-                xAxisSettings
-            ],
+            categories: 
+                xAxisSettings,
             title: {
                 text: 'Iteration'
             },
@@ -128,16 +184,12 @@ function cacheSizeGraph(data, xAxisSettings) {
         },
         series: [
             {
-                name: data.before.label,
-                data: data.before.data
+                name: data.first.label,
+                data: data.first.data
 
             }, {
-                name: data.after.label,
-                data: data.after.data
-
-            }, {
-                name: data.number.label,
-                data: data.number.data
+                name: data.overlapped.label,
+                data: data.overlapped.data
 
             }
         ]

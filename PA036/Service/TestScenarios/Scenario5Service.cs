@@ -63,6 +63,7 @@ namespace Service.TestScenarios
                 dataIteration.Add(100 - (int)(i * 100));
 
                 var cacheSize = new CacheSizeComparison();
+                cacheSize.NoOfObjectsReturnedInQuery = amountOfData;
                 modifier.Take = amountOfData;
                 modifier.Skip = 0;
 

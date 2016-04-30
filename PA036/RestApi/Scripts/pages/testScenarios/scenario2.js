@@ -122,9 +122,8 @@ function cacheSizeGraph(data, xAxisSettings) {
             text: 'Cache size comparison'
         },
         xAxis: {
-            categories: [
-                xAxisSettings
-            ],
+            categories: 
+                xAxisSettings,
             title: {
                 text: 'Iteration'
             },
