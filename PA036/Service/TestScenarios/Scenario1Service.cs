@@ -30,42 +30,38 @@ namespace Service.TestScenarios
         }
 
         /// <summary> 
-        /// Simple GET query for k products executed by two users.
-        /// 
-        /// Number k is increased in every iteration
-        /// Cache is invalidated before every get request of user A. 
+        /// test for parallel GET query from multiple users
         /// </summary>
-        /// <returns>Measured data of both users</returns>
+        /// <returns>Measured data of all users</returns>
         private async Task<Scenario1Results> GetFromMoreUsers()
         {
             var modifier = new ProductFilter();
             var step = 1;
-            var totalCount = 100;
+            var maxUsers = 100;
 
-            var withoutCache = new List<double>();
-            var withCache = new List<double>();
+            var cacheQTime = new List<double>();
             var cacheSizes = new List<CacheSizeComparison>();
 
             _databaseService.InvalidateCache();
             modifier.Take = 100;
 
-            // GET 1
             List<Task> tasks = new List<Task>();
-            for (var i = 0; i < totalCount; i++)
+            for (var i = 0; i < maxUsers; i += step)
             {
 
                 Task task = Task.Run(async () =>
                 {
                     var cacheSize = new CacheSizeComparison();
                     cacheSize.BeforeQueryExecution = _databaseService.GetCacheItemsCount();
+
                     var watch = Stopwatch.StartNew();
-                    
                     await _instance.GetAsync(modifier);
                     watch.Stop();
+
                     cacheSize.NoOfObjectsReturnedInQuery = 100;
                     cacheSize.AfterQueryExecution = _databaseService.GetCacheItemsCount();
-                    lock (withCache) 
-                    withCache.Add(watch.ElapsedMilliseconds / 1000.0);
+                    lock (cacheQTime) 
+                    cacheQTime.Add(watch.ElapsedMilliseconds / 1000.0);
                     lock (cacheSizes) 
                     cacheSizes.Add(cacheSize);
                 });
@@ -76,9 +72,9 @@ namespace Service.TestScenarios
 
             var result = new Scenario1Results()
             {
-                CachedQueriesTimes = withCache,
+                CachedQueriesTimes = cacheQTime,
                 CacheSizeComparison = cacheSizes,
-                XAxis = new List<double>() { step, totalCount, step },
+                XAxis = new List<double>() { step, maxUsers, step },
             };
 
             return result;
