@@ -6,48 +6,48 @@ using Shared.Settings;
 
 namespace Service.Data
 {
-    public class ProductService: BaseService<ProductDTO, Product, ProductFilter>, IProductService
+    public class StoreService: BaseService<StoreDTO, Store, StoreFilter>, IStoreService
     {
         public sealed override DbSettings DbSettings { get; set; }
-        protected sealed override ICrud<Product, ProductFilter> DalInstance { get; set; }
+        protected sealed override ICrud<Store, StoreFilter> DalInstance { get; set; }
 
-        public ProductService(DbSettings dbSettings)
+        public StoreService(DbSettings dbSettings)
         {
-            DalInstance = new Products();
+            DalInstance = new Stores();
             DbSettings = dbSettings;
         }
         
-        protected override Product ToEntity(ProductDTO dto)
+        protected override Store ToEntity(StoreDTO dto)
         {
             if (dto == null)
             {
                 return null;
             }
 
-            var result = new Product()
+            var result = new Store()
             {
                 Id = dto.Id,
                 Name = dto.Name,
-                StockCount = dto.StockCount,
-                UnitCost = dto.UnitCost
+                City = dto.City,
+                State = dto.State
             };
 
             return result;
         }
 
-        protected override ProductDTO ToDto(Product entity)
+        protected override StoreDTO ToDto(Store entity)
         {
             if (entity == null)
             {
                 return null;
             }
 
-            var result = new ProductDTO()
+            var result = new StoreDTO()
             {
                 Id = entity.Id,
                 Name = entity.Name,
-                StockCount = entity.StockCount,
-                UnitCost = entity.UnitCost
+                City = entity.City,
+                State = entity.State
             };
 
             return result;

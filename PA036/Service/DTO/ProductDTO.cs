@@ -2,7 +2,7 @@
 
 namespace Service.DTO
 {
-    public class ProductDTO
+    public class ProductDTO: IDTO
     {
         public ProductDTO() { }
 

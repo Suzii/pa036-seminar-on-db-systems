@@ -3,7 +3,8 @@ using Shared.Filters;
 
 namespace Service.Data
 {
-    public interface IProductService: IService<ProductDTO, ProductFilter>
+    public interface IStoreService: IService<StoreDTO, StoreFilter>
     {
     }
 }
+

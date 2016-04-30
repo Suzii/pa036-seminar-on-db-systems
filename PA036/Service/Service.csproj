@@ -88,8 +88,14 @@
   <ItemGroup>
     <Compile Include="Config\DatabaseService.cs" />
     <Compile Include="Config\IDatabaseService.cs" />
+    <Compile Include="Data\BaseService.cs" />
+    <Compile Include="Data\IStoreService.cs" />
+    <Compile Include="Data\IService.cs" />
+    <Compile Include="Data\StoreService.cs" />
     <Compile Include="Data\ProductService.cs" />
+    <Compile Include="DTO\IDTO.cs" />
     <Compile Include="DTO\ProductDTO.cs" />
+    <Compile Include="DTO\StoreDTO.cs" />
     <Compile Include="DTO\TestScenariosConfigs\Scenario1Config.cs" />
     <Compile Include="DTO\TestScenariosConfigs\Scenario2Config.cs" />
     <Compile Include="DTO\TestScenariosDTOs\ITestResult.cs" />
