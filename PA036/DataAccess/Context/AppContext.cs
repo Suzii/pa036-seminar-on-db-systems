@@ -6,5 +6,7 @@ namespace DataAccess.Context
     public abstract class AppContext : DbContext
     {
         public DbSet<Product> Products { get; set; }
+
+        public DbSet<Store> Stores { get; set; }
     }
 }

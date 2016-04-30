@@ -10,7 +10,7 @@ namespace DataAccess.Config
             if (Configuration.Cache == null)
                 return;
 
-            Configuration.Cache.InvalidateSets(new[] { nameof(HistoryRow), nameof(Product) });
+            Configuration.Cache.InvalidateSets(new[] { nameof(HistoryRow), nameof(Product), nameof(Store) });
         }
 
         public int GetCacheItemsCount()

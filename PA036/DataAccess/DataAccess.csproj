@@ -101,16 +101,8 @@
     <Compile Include="Data\IProducts.cs" />
     <Compile Include="Data\Products.cs" />
     <Compile Include="LinqExtension\IQueryableExtension.cs" />
-    <Compile Include="Migrations\201604021341509_InitialCreate.cs" />
-    <Compile Include="Migrations\201604021341509_InitialCreate.Designer.cs">
-      <DependentUpon>201604021341509_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201604032050291_migration_1.cs" />
-    <Compile Include="Migrations\201604032050291_migration_1.Designer.cs">
-      <DependentUpon>201604032050291_migration_1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\IDataModel.cs" />
+    <Compile Include="Model\Store.cs" />
     <Compile Include="Model\Product.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -119,14 +111,6 @@
       <Project>{b069b722-00f7-4046-a43b-e8e8438c0db8}</Project>
       <Name>Shared</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201604021341509_InitialCreate.resx">
-      <DependentUpon>201604021341509_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201604032050291_migration_1.resx">
-      <DependentUpon>201604032050291_migration_1.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
