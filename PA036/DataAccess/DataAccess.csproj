@@ -98,7 +98,10 @@
     <Compile Include="Config\Configuration.cs" />
     <Compile Include="Data\BaseData.cs" />
     <Compile Include="Config\Database.cs" />
+    <Compile Include="Data\ICrud.cs" />
+    <Compile Include="Data\IStores.cs" />
     <Compile Include="Data\IProducts.cs" />
+    <Compile Include="Data\Stores.cs" />
     <Compile Include="Data\Products.cs" />
     <Compile Include="LinqExtension\IQueryableExtension.cs" />
     <Compile Include="Model\IDataModel.cs" />
