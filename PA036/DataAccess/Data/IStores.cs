@@ -3,7 +3,7 @@ using Shared.Filters;
 
 namespace DataAccess.Data
 {
-    public interface IProducts : ICrud<Product, ProductFilter>
+    public interface IStores : ICrud<Store, StoreFilter>
     {
     }
 }
