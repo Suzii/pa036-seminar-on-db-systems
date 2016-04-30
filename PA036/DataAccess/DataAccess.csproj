@@ -100,8 +100,6 @@
     <Compile Include="Config\Database.cs" />
     <Compile Include="Data\IProducts.cs" />
     <Compile Include="Data\Products.cs" />
-    <Compile Include="Data\Products2.cs" />
-    <Compile Include="Data\ProductsBase.cs" />
     <Compile Include="LinqExtension\IQueryableExtension.cs" />
     <Compile Include="Migrations\201604021341509_InitialCreate.cs" />
     <Compile Include="Migrations\201604021341509_InitialCreate.Designer.cs">
@@ -111,13 +109,8 @@
     <Compile Include="Migrations\201604032050291_migration_1.Designer.cs">
       <DependentUpon>201604032050291_migration_1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201604292029541_migration_2.cs" />
-    <Compile Include="Migrations\201604292029541_migration_2.Designer.cs">
-      <DependentUpon>201604292029541_migration_2.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\IDataModel.cs" />
-    <Compile Include="Model\Product2.cs" />
     <Compile Include="Model\Product.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -133,9 +126,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201604032050291_migration_1.resx">
       <DependentUpon>201604032050291_migration_1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201604292029541_migration_2.resx">
-      <DependentUpon>201604292029541_migration_2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
