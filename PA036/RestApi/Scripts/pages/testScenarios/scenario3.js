@@ -1,6 +1,7 @@
 ﻿$(document).ready(function() {
     var firstExecution = true;
     var firstExecutionDelete = true;
+    var firstExecutionPost = true;
     $("#executeUpdate").click(function() {
         var url = $('button#executeUpdate').data('url');
         disableButtons();
@@ -18,6 +19,25 @@
             }
         });
     });
+
+    $("#executePost").click(function() {
+        var url = $('button#executePost').data('url');
+        disableButtons();
+
+        var before = '.beforePost';
+        var after = '.afterPost';
+        addNewEmptyRow(firstExecutionPost, 'placeholderPost', before, after);
+
+        $.ajax({
+            url: url,
+            success: function(result) {
+                successFunction(result, before, after);
+                firstExecutionPost = false;
+                return;
+            }
+        });
+    });
+
     $("#executeDelete").click(function () {
         var url = $('button#executeDelete').data('url');
         disableButtons();
@@ -55,9 +75,11 @@ function successFunction(result, before, after) {
     $(after + ':last').append(result.afterAction);
     $("#executeDelete").removeAttr('disabled');
     $("#executeUpdate").removeAttr('disabled');
+    $("#executePost").removeAttr('disabled');
 }
 
 function disableButtons() {
     $("#executeDelete").attr('disabled', 'disabled');
     $("#executeUpdate").attr('disabled', 'disabled');
+    $("#executePost").attr('disabled', 'disabled');
 }

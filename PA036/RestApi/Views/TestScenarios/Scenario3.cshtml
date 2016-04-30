@@ -17,6 +17,7 @@
         <ol type="a">
             <li> <b>PUT request</b> on first element of these data. </li>
             <li> <b>DELETE request</b> on first element of these data. </li>
+            <li> <b>POST request</b></li>
         </ol>
         <li> Rollback changes</li>
         <li> Get numberof element is cache. </li>
@@ -80,6 +81,34 @@
             <tr id="placeholderDelete" class="placeholder-row">
                 <td class="beforeDelete"></td>
                 <td class="afterDelete"></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<form id="options">
+    <div class="form-group">
+        <input type="checkbox" id="useCloudDatabase" name="useCloudDatabase" value="true" />
+        <label for="useCloudDatabase">Use remote database located in USA (otherwise local database will be used)</label>
+    </div>
+    <button id="executePost" class="btn btn-info pull-right" data-url="@Url.Action("Post", "api/scenario3")">
+        Run test (POST)
+    </button>
+</form>
+
+<div id="containerPost" class="container">
+    <h2>Number of elements in Cache</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Before POST</th>
+                <th>After POST</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr id="placeholderPost" class="placeholder-row">
+                <td class="beforePost"></td>
+                <td class="afterPost"></td>
             </tr>
         </tbody>
     </table>

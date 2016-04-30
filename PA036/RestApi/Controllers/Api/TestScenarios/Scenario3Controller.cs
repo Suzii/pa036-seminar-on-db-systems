@@ -10,6 +10,7 @@ namespace RestApi.Controllers.Api.TestScenarios
     {
         private ITestScenarioService _instance;
         private ITestScenarioService _instance2;
+        private ITestScenarioService _instance3;
 
         public async Task<ITestResult> Get(bool useCloudDatabase = false)
         {
@@ -28,6 +29,16 @@ namespace RestApi.Controllers.Api.TestScenarios
                 UseRemoteDb = useCloudDatabase,
             };
             _instance2 = new Scenario3ServiceDelete(config);
+            return await _instance2.ExecuteTest();
+        }
+
+        public async Task<ITestResult> Post(bool useCloudDatabase = false)
+        {
+            var config = new Scenario1Config()
+            {
+                UseRemoteDb = useCloudDatabase,
+            };
+            _instance3 = new Scenario3ServicePost(config);
             return await _instance2.ExecuteTest();
         }
     }
