@@ -158,6 +158,7 @@
     <Compile Include="App_Start\JsonConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\Api\ProductsController.cs" />
     <Compile Include="Controllers\Api\TestScenarios\Scenario2Controller.cs" />
     <Compile Include="Controllers\Api\TestScenarios\Scenario5Controller.cs" />
     <Compile Include="Controllers\Api\TestScenarios\Scenario3Controller.cs" />
@@ -165,7 +166,6 @@
     <Compile Include="Controllers\Mvc\CatalogueController.cs" />
     <Compile Include="Controllers\Mvc\ErrorController.cs" />
     <Compile Include="Controllers\Mvc\HomeController.cs" />
-    <Compile Include="Controllers\Api\TestScenarios\ProductsController.cs" />
     <Compile Include="Controllers\Mvc\TestScenariosController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
