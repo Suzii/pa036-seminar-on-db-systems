@@ -15,6 +15,7 @@
         var url = $('button#execute').data('url');
         var formData = $('form#options').serialize();
         $("#execute").attr('disabled', 'disabled');
+        $("#execute-adjusted").attr('disabled', 'disabled');
         $.ajax({
             url: url,
             data: formData,
@@ -25,6 +26,29 @@
                 renderCacheSizeGraph(result);
 
                 $("#execute").removeAttr('disabled');
+                $("#execute-adjusted").removeAttr('disabled');
+            }
+        });
+    });
+
+    $("#execute-adjusted").click(function (event) {
+        event.preventDefault();
+
+        var url = $('button#execute-adjusted').data('url');
+        var formData = $('form#options').serialize();
+        $("#execute").attr('disabled', 'disabled');
+        $("#execute-adjusted").attr('disabled', 'disabled');
+        $.ajax({
+            url: url,
+            data: formData,
+            success: function (result) {
+
+                renderExecutionTimesGraph(result);
+
+                renderCacheSizeGraph(result);
+
+                $("#execute").removeAttr('disabled');
+                $("#execute-adjusted").removeAttr('disabled');
             }
         });
     });
@@ -38,8 +62,6 @@ function renderExecutionTimesGraph(result) {
     for (var i = result.xAxis[0]; i < result.xAxis[1]; i += result.xAxis[2]) {
         xAxis.push(i);
     }
-
-    //console.log('renderExecutionTimesGraph : So far so good');
 
     executionTimesGraph(data, xAxis);
 }
@@ -84,7 +106,6 @@ function executionTimesGraph(data, xAxisSettings) {
 
 
 function renderCacheSizeGraph(result) {
-    //console.log('renderCacheSizeGraph start', result);
     var data = [];
     data['before'] = {
         label: 'Before first query',
@@ -139,15 +160,12 @@ function cacheSizeGraph(data, xAxisSettings) {
             {
                 name: data.before.label,
                 data: data.before.data
-
             }, {
                 name: data.after.label,
                 data: data.after.data
-
             }, {
                 name: data.number.label,
                 data: data.number.data
-
             }
         ]
     });

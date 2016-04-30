@@ -59,6 +59,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="LinqExtensions\LinqCustomExtensionsTests.cs" />
     <Compile Include="ServiceTests\DbSettingsTests.cs" />
     <Compile Include="ServiceTests\ServiceTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
