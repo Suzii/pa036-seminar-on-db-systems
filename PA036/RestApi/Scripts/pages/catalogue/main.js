@@ -5,44 +5,22 @@ myApp.config(['NgAdminConfigurationProvider', function (NgAdminConfigurationProv
     var admin = nga.application('Catalogue')
         .baseApiUrl('http://localhost:50455/api/'); // main API endpoint
     
-    
     var products = nga.entity("Products")
         .identifier(nga.field('id'));
-    var name = nga.field('name')
-        .isDetailLink(true)
-        .label('Name');
-    var stockCount = nga.field('stockCount', 'number')
-        .label('Count in stock');
-    var unitCost = nga.field('unitCost', 'float')
-        .label('Cost per unit');
 
-    products.listView().fields([
-        nga.field('id'),
-        name,
-        stockCount,
-        unitCost
-    ]).listActions(['edit', 'delete'])
-        .sortDir("ASC")
-        .filters([
-        nga.field('name')
-            .label('This will be filter on name')
-            .pinned(true)
-    ]).perPage(50);
+    var store = nga.entity('Stores')
+        .identifier(nga.field('id'));
 
-    products.editionView().fields([
-        name,
-        stockCount,
-        unitCost
-    ]);
 
-    products.creationView().fields([
-        name,
-        stockCount,
-        unitCost
-    ]);
+    storeSettings(store, nga);
+    admin.addEntity(store);
+
+    productsSettings(products, nga, admin);
 
     admin.addEntity(products);
+
     nga.configure(admin);
+
 }]);
 
 // override default api mapping
@@ -83,4 +61,82 @@ function firstLetterToLower(string) {
     }
 
     return string.charAt(0).toLowerCase() + string.slice(1);
+}
+
+function productsSettings(products, nga, admin) {
+    var name = nga.field('name')
+    .isDetailLink(true)
+    .label('Name');
+    var stockCount = nga.field('stockCount', 'number')
+        .label('Count in stock');
+    var unitCost = nga.field('unitCost', 'float')
+        .label('Cost per unit');
+    var storeReference = nga.field('storeId', 'reference')
+        .targetEntity(admin.getEntity('Stores'))
+        .targetField(
+            nga.field('name')
+        )
+        .isDetailLink(true)
+        .label('Store');
+    products.listView().fields([
+        nga.field('id'),
+        name,
+        stockCount,
+        unitCost,
+        storeReference
+    ]).listActions(['edit', 'delete'])
+        .sortDir("ASC")
+        .filters([
+        nga.field('name')
+            .label('Name')
+            .pinned(true)
+        ]).perPage(50);
+
+    products.editionView().fields([
+        name,
+        stockCount,
+        unitCost,
+        storeReference
+    ]);
+
+    products.creationView().fields([
+        name,
+        stockCount,
+        unitCost,
+        storeReference
+    ]);
+}
+function storeSettings(store, nga) {
+    var name = nga.field('name')
+        .isDetailLink(true)
+        .label('Name');
+    var city = nga.field('city')
+        .label('City');
+    var state = nga.field('state')
+        .label('State');
+
+    store.listView().fields([
+        nga.field('id'),
+        name,
+        city,
+        state
+    ]).listActions(['edit', 'delete'])
+        .sortDir("ASC")
+        .filters([
+        nga.field('name')
+            .label('Name')
+            .pinned(true)
+        ]).perPage(50);
+
+    store.editionView().fields([
+        name,
+        city,
+        state
+    ]);
+
+    store.creationView().fields([
+        name,
+        city,
+        state
+    ]);
 }
