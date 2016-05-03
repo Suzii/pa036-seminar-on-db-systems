@@ -31,7 +31,7 @@
             <label for="useCloudDatabase">Use remote database located in USA (otherwise local database will be used)</label>
         </div>
 
-        <button id="executeUpdate" class="btn btn-info pull-right" data-url="@Url.RouteUrl("DefaultApi", new {controller = "Scenario3", httproute = true})">
+        <button id="executeUpdate" class="btn btn-info pull-right" data-url="@Url.RouteUrl("DefaultApi", new {controller = "Scenario3", action="Get", httproute = true})">
             Run test (UPDATE)
         </button>
     </form>
@@ -63,7 +63,7 @@
         <input type="checkbox" id="useCloudDatabase" name="useCloudDatabase" value="true" />
         <label for="useCloudDatabase">Use remote database located in USA (otherwise local database will be used)</label>
     </div>
-    <button id="executeDelete" class="btn btn-info pull-right" data-url="@Url.Action("Delete", "api/scenario3")">
+    <button id="executeDelete" class="btn btn-info pull-right" data-url="@Url.RouteUrl("DefaultApi", new {controller = "Scenario3", action="Delete", httproute = true})">
         Run test (DELETE)
     </button>
 </form>
@@ -91,7 +91,7 @@
         <input type="checkbox" id="useCloudDatabase" name="useCloudDatabase" value="true" />
         <label for="useCloudDatabase">Use remote database located in USA (otherwise local database will be used)</label>
     </div>
-    <button id="executePost" class="btn btn-info pull-right" data-url="@Url.Action("Post", "api/scenario3")">
+    <button id="executePost" class="btn btn-info pull-right" data-url="@Url.RouteUrl("DefaultApi", new {controller = "Scenario3", action="Post", httproute = true})">
         Run test (POST)
     </button>
 </form>
