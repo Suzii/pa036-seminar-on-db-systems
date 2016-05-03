@@ -39,7 +39,7 @@ namespace RestApi.Controllers.Api.TestScenarios
                 UseRemoteDb = useCloudDatabase,
             };
             _instance3 = new Scenario3ServicePost(config);
-            return await _instance2.ExecuteTest();
+            return await _instance3.ExecuteTest();
         }
     }
 }
