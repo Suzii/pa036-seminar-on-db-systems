@@ -12,7 +12,8 @@
 
         $.ajax({
             url: url,
-            success: function(result) {
+            type: 'GET',
+            success: function (result) {
                 successFunction(result, before, after);
                 firstExecution = false;
                 return;
@@ -30,6 +31,7 @@
 
         $.ajax({
             url: url,
+            type: 'POST',
             success: function(result) {
                 successFunction(result, before, after);
                 firstExecutionPost = false;
@@ -48,6 +50,7 @@
 
         $.ajax({
             url: url,
+            type: 'DELETE',
             success: function (result) {
                 successFunction(result, before, after);
                 firstExecutionDelete = false;
