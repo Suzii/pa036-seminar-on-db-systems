@@ -27,13 +27,22 @@ namespace Service.TestScenarios
             productFilter.OrderProperty = "id";
             var data = (await init_cache());
             var cached = _databaseService.GetCacheItemsCount();
-            ProductDTO product = new ProductDTO() {Name="test", StockCount=666, UnitCost=666};
+            ProductDTO product = new ProductDTO() { Name = "test", StockCount = 666, UnitCost = 666 };
 
 
-            await _instance.CreateAsync( product );
+            await _instance.CreateAsync(product);
             var countInCache = _databaseService.GetCacheItemsCount();
-
-            await _instance.DeleteAsync(product.Id);
+            productFilter.Take = 1;
+            productFilter.OrderDesc = true;
+            productFilter.OrderProperty = "id";
+            productFilter.Skip = 0;
+            productFilter.UnitCostFilter = 666;
+            productFilter.NameFilter = "test";
+            productFilter.UnitCostFilter = 666;
+            var last = await _instance.GetAsync(productFilter);
+            if (last.Count != 0) { 
+                await _instance.DeleteAsync(last[0].Id);
+            }
             return new Scenario3Results()
             {
                 beforeAction = cached,
