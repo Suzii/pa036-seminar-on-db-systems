@@ -1,0 +1,85 @@
+﻿@using System.Web.Optimization
+@model dynamic
+
+@{
+    ViewBag.Title = "ExampleScenario4";
+    Layout = "~/Views/Shared/_AppLayout.cshtml";
+}
+
+<h2>ExampleScenario4</h2>
+<div>
+    <h4>Test Description:</h4>
+    <p class="lead">Simple GET query and updating data:</p>
+    <ol>
+        <li> 2 <b>GET request</b> on products table. </li>
+        <li> 1 <b>GET request</b> on stores table. </li>
+        <li> Checking if data are cached. </li>
+        <li> Get number of elements in cache. </li>
+        <ol type="a">
+            <li> <b>PUT request</b> on table of products. </li>
+            <li> <b>PUT request</b> on table of stores. </li>
+        </ol>
+        <li> Rollback changes</li>
+        <li> Get numberof element is cache. </li>
+    </ol>
+
+    <form id="options">
+        <div class="form-group">
+            <input type="checkbox" id="useCloudDatabase" name="useCloudDatabase" value="true" />
+            <label for="useCloudDatabase">Use remote database located in USA (otherwise local database will be used)</label>
+        </div>
+
+        <button id="executeStores" class="btn btn-info pull-right" data-url="@Url.RouteUrl("DefaultApi", new {controller = "Scenario4", action="Get", httproute = true})">
+            Run test (Store UPDATE)
+        </button>
+</form>
+
+</div>
+@section scripts{
+    @Scripts.Render("~/Scripts/pages/testScenarios/scenario4.js")
+}
+<div id="containerStores" class="container">
+    <h2>Number of elements in Cache</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Before UPDATE</th>
+                <th>After UPDATE</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr id="placeholderStores" class="placeholder-row">
+                <td class="beforeStores"></td>
+                <td class="afterStores"></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<form id="options">
+    <div class="form-group">
+        <input type="checkbox" id="useCloudDatabase" name="useCloudDatabase" value="true" />
+        <label for="useCloudDatabase">Use remote database located in USA (otherwise local database will be used)</label>
+    </div>
+    <button id="executeProducts" class="btn btn-info pull-right" data-url="@Url.RouteUrl("DefaultApi", new {controller = "Scenario4", action="Post", httproute = true})">
+            Run test (Products UPDATE)
+        </button>
+</form>
+
+<div id="containerProducts" class="container">
+    <h2>Number of elements in Cache</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Before UPDATE</th>
+                <th>After UPDATE</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr id="placeholderProducts" class="placeholder-row">
+                <td class="beforeProducts"></td>
+                <td class="afterProducts"></td>
+            </tr>
+        </tbody>
+    </table>
+</div>

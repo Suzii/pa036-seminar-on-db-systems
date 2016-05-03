@@ -110,6 +110,9 @@
     <Compile Include="TestScenarios\Scenario1Service.cs" />
     <Compile Include="TestScenarios\Scenario2AdjustedService.cs" />
     <Compile Include="TestScenarios\Scenario3ServicePost.cs" />
+    <Compile Include="TestScenarios\Scenario4ServiceProducts.cs" />
+    <Compile Include="TestScenarios\Scenario4ServiceStores.cs" />
+    <Compile Include="TestScenarios\Scenario4Service.cs" />
     <Compile Include="TestScenarios\Scenario5Service.cs" />
     <Compile Include="TestScenarios\Scenario3Service.cs" />
     <Compile Include="TestScenarios\Scenario3ServiceDelete.cs" />
