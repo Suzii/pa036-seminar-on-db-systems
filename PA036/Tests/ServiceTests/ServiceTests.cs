@@ -1,5 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Service.Config;
 using Service.Data;
+using Service.DTO;
 using Shared.Enums;
 using Shared.Filters;
 using Shared.Settings;
@@ -15,12 +17,19 @@ namespace Tests.ServiceTests
     {
         private IProductService _instanceWithContext1;
         private IProductService _instanceWithContext2;
+        private IStoreService _storeInstanceWithContext2;
+        private IStoreService _storeInstanceWithContext3;
+        private IDatabaseService _database;
 
         [TestInitialize]
         public void BeforeMethod()
         {
+            _database = new DatabaseService();
             _instanceWithContext1 = new ProductService(new DbSettings() { AppContext = AppContexts.Local });
             _instanceWithContext2 = new ProductService(new DbSettings() { AppContext = AppContexts.Azure });
+
+            _storeInstanceWithContext2 = new StoreService(new DbSettings() { AppContext = AppContexts.Azure });
+            _storeInstanceWithContext3 = new StoreService(new DbSettings() { AppContext = AppContexts.LocalNamedAsAzure });
         }
 
         [TestMethod]
@@ -118,6 +127,47 @@ namespace Tests.ServiceTests
 
             Debug.WriteLine("Second execution: {0}, {1}, {2}, {3}", ticksCount1, ticksCount2, ticksCount3, ticksCount4);
             Debug.WriteLine("");
+        }
+
+        [TestMethod]
+        public async Task TestAzureVersusLocalWithSameName()
+        {
+            // Prevent to run this on automaded build service or db that is not supposed to here
+            if ((await _storeInstanceWithContext2.TotalCountAsync()) == 0)
+                return;
+
+            var storeFilter = new StoreFilter() { NameFilter = "Amazing test" };
+            var storeResultCleanUp1 = (await _storeInstanceWithContext2.GetAsync(storeFilter));
+            _database.InvalidateCache();
+            var storeResultCleanUp2 = (await _storeInstanceWithContext3.GetAsync(storeFilter));
+
+            foreach (var item in storeResultCleanUp1)
+                await _storeInstanceWithContext2.DeleteAsync(item.Id);
+
+            _database.InvalidateCache();
+            foreach (var item in storeResultCleanUp2)
+                await _storeInstanceWithContext3.DeleteAsync(item.Id);
+
+            var store1 = new StoreDTO() { Name = "Amazing test",  City = "Brno", State = "Czech Republic" };
+            var store2 = new StoreDTO() { Name = "Amazing test", City = "Zilina", State = "Slovakia" };
+
+            await _storeInstanceWithContext2.CreateAsync(store1);
+            await _storeInstanceWithContext3.CreateAsync(store2);
+
+            var storeResult1 =  (await _storeInstanceWithContext2.GetAsync(storeFilter)).Single();
+            var storeResult2 = (await _storeInstanceWithContext3.GetAsync(storeFilter)).Single();
+
+            Assert.AreEqual("Amazing test", storeResult1.Name);
+            Assert.AreEqual("Amazing test", storeResult2.Name);
+
+            Assert.AreEqual("Brno", storeResult1.City);
+            Assert.AreEqual("Brno", storeResult2.City);
+
+            // cleanup
+            await _storeInstanceWithContext2.DeleteAsync(storeResult1.Id);
+            _database.InvalidateCache();
+            storeResult2 = (await _storeInstanceWithContext3.GetAsync(storeFilter)).Single();
+            await _storeInstanceWithContext3.DeleteAsync(storeResult2.Id);
         }
     }
 }
