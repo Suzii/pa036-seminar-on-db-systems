@@ -1,6 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Service.Config;
 using Service.Data;
+using Shared.Enums;
 using Shared.Filters;
 using Shared.Settings;
 using System.Threading.Tasks;
@@ -17,7 +18,7 @@ namespace Tests.ServiceTests
         public void BeforeMethod()
         {
             _database = new DatabaseService();
-            _productsServiceWithContext2 = new ProductService(new DbSettings() { UseSecondAppContext = true });
+            _productsServiceWithContext2 = new ProductService(new DbSettings() { AppContext = AppContexts.Azure });
         }
 
         [TestMethod]

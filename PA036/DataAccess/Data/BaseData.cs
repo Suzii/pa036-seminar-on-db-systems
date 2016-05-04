@@ -1,6 +1,7 @@
 ﻿using DataAccess.Context;
 using DataAccess.LinqExtension;
 using DataAccess.Model;
+using Shared.Enums;
 using Shared.Filters;
 using Shared.Settings;
 using System.Collections.Generic;
@@ -17,7 +18,17 @@ namespace DataAccess.Data
             if (dbSettings == null)
                 dbSettings = new DbSettings();
 
-            return dbSettings.UseSecondAppContext ? (AppContext)new AppContext2() : new AppContext1();
+            switch(dbSettings.AppContext)
+            {
+                case AppContexts.Local:
+                    return new AppContext1();
+                case AppContexts.Azure:
+                    return new AppContext2();
+                case AppContexts.LocalNamedAsAzure:
+                    return new AppContext3();
+                default:
+                    return new AppContext1();
+            }
         }
 
         protected abstract DbSet<T1> GetDbSet(AppContext context);

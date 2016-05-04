@@ -1,13 +1,12 @@
 ﻿using System.Threading.Tasks;
-using Service.DTO.TestScenariosDTOs;
 using Service.DTO.TestScenariosConfigs;
-using DataAccess.Model;
 using Service.DTO;
 using Service.Data;
 using Service.Config;
 using Shared.Filters;
 using Shared.Settings;
 using System.Collections.Generic;
+using Shared.Enums;
 
 namespace Service.TestScenarios
 {
@@ -22,7 +21,7 @@ namespace Service.TestScenarios
         public Scenario4Service(Scenario1Config config)
         {
             _config = config;
-            var dbSettings = new DbSettings() { UseSecondAppContext = config.UseRemoteDb };
+            var dbSettings = new DbSettings() { AppContext = config.UseRemoteDb ? AppContexts.Azure : AppContexts.Local };
             _instanceProducts = new ProductService(dbSettings);
             _instanceStores = new StoreService(dbSettings);
             _databaseService = new DatabaseService();

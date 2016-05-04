@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Enums\AppContexts.cs" />
     <Compile Include="Extensions\LinqCustomExtensions.cs" />
     <Compile Include="Filters\BaseFilter.cs" />
     <Compile Include="Filters\StoreFilter.cs" />

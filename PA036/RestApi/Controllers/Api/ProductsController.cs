@@ -9,6 +9,7 @@ using Service.DTO;
 using Shared.Filters;
 using System.Threading.Tasks;
 using Shared.Settings;
+using Shared.Enums;
 
 namespace RestApi.Controllers.Api
 {
@@ -18,7 +19,7 @@ namespace RestApi.Controllers.Api
 
         public ProductsController()
         {
-            var dbSettings = new DbSettings() {UseSecondAppContext = false};
+            var dbSettings = new DbSettings() { AppContext = AppContexts.Local };
             _productService = new ProductService(dbSettings);
         }
 
