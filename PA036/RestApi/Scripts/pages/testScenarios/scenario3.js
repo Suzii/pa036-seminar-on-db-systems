@@ -10,9 +10,12 @@
         var after = '.afterUpdate';
         addNewEmptyRow(firstExecution, 'placeholderUpdate', before, after);
 
+        var formData = $('form#options-update').serialize();
+
         $.ajax({
             url: url,
             type: 'GET',
+            data: formData,
             success: function (result) {
                 successFunction(result, before, after);
                 firstExecution = false;
@@ -29,10 +32,13 @@
         var after = '.afterPost';
         addNewEmptyRow(firstExecutionPost, 'placeholderPost', before, after);
 
+        var formData = $('form#options-post').serialize();
+
         $.ajax({
             url: url,
             type: 'POST',
-            success: function(result) {
+            data: formData,
+            success: function (result) {
                 successFunction(result, before, after);
                 firstExecutionPost = false;
                 return;
@@ -48,9 +54,12 @@
         var after = '.afterDelete';
         addNewEmptyRow(firstExecutionDelete, 'placeholderDelete', before, after);
 
+        var formData = $('form#options-delete').serialize();
+
         $.ajax({
             url: url,
             type: 'DELETE',
+            data: formData,
             success: function (result) {
                 successFunction(result, before, after);
                 firstExecutionDelete = false;

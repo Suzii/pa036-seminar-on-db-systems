@@ -10,7 +10,7 @@ namespace Service.TestScenarios
 
         public async Task<ITestResult> ExecuteTest()
         {
-            return await testUpdateProductsTable();
+            return await TestUpdateProductsTable();
         }
 
         /// <summary> 
@@ -18,24 +18,26 @@ namespace Service.TestScenarios
         /// to cache results and then updating 
         /// some of them.
         /// Testing if change of data in database will invalidate cache
-        private async Task<Scenario3Results> testUpdateProductsTable()
+        /// </summary>
+        private async Task<Scenario3Results> TestUpdateProductsTable()
         {
-            _databaseService.InvalidateCache();
+            DatabaseService.InvalidateCache();
 
-            productFilter.OrderDesc = true;
-            productFilter.OrderProperty = "id";
+            ProductFilter.OrderDesc = true;
+            ProductFilter.OrderProperty = "id";
 
-            _databaseService.InvalidateCache();
-            var data = (await init_product_cache());
-            var dataStore = (await init_store_cache());
-            var cached = _databaseService.GetCacheItemsCount();
+            DatabaseService.InvalidateCache();
+            var data = (await InitProductCache());
+            var dataStore = (await InitStoreCache());
+            var cached = DatabaseService.GetCacheItemsCount();
 
             data[0].StockCount += 1;
-            await _instanceProducts.UpdateAsync(data[0]);
-            var countInCache = _databaseService.GetCacheItemsCount();
+            await InstanceProducts.UpdateAsync(data[0]);
+            var countInCache = DatabaseService.GetCacheItemsCount();
 
             data[0].StockCount -= 1;
-            await _instanceProducts.UpdateAsync(data[0]);
+            await InstanceProducts.UpdateAsync(data[0]);
+
             return new Scenario3Results()
             {
                 BeforeAction = cached,

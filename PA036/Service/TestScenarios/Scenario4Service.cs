@@ -12,51 +12,55 @@ namespace Service.TestScenarios
 {
     public class Scenario4Service
     {
-        protected readonly IProductService _instanceProducts;
-        protected readonly IStoreService _instanceStores;
-        protected readonly IDatabaseService _databaseService;
-        protected ProductFilter productFilter;
-        protected StoreFilter storeFilter;
-        protected readonly ScenarioConfig _config;
+        protected readonly IProductService InstanceProducts;
+        protected readonly IStoreService InstanceStores;
+        protected readonly IDatabaseService DatabaseService;
+        protected ProductFilter ProductFilter;
+        protected StoreFilter StoreFilter;
+        protected readonly ScenarioConfig Config;
+
         public Scenario4Service(ScenarioConfig config)
         {
-            _config = config;
+            Config = config;
             var dbSettings = new DbSettings() { AppContext = config.UseRemoteDb ? AppContexts.Azure : AppContexts.Local };
-            _instanceProducts = new ProductService(dbSettings);
-            _instanceStores = new StoreService(dbSettings);
-            _databaseService = new DatabaseService();
-            productFilter = new ProductFilter();
-            storeFilter = new StoreFilter();
-            productFilter.Take = 1;
-            storeFilter.Take = 1;
-            _instanceProducts.Get(productFilter);
-            _instanceProducts.Get(productFilter);
-            _instanceStores.Get(storeFilter);
-            _instanceStores.Get(storeFilter);
-            _databaseService.InvalidateCache();
-            productFilter.Take = 0;
-            storeFilter.Take = 0;
+            InstanceProducts = new ProductService(dbSettings);
+            InstanceStores = new StoreService(dbSettings);
+            DatabaseService = new DatabaseService();
+            ProductFilter = new ProductFilter();
+            StoreFilter = new StoreFilter();
+
+            ProductFilter.Take = 1;
+            StoreFilter.Take = 1;
+
+            InstanceProducts.Get(ProductFilter);
+            InstanceProducts.Get(ProductFilter);
+            InstanceStores.Get(StoreFilter);
+            InstanceStores.Get(StoreFilter);
+            DatabaseService.InvalidateCache();
+
+            ProductFilter.Take = 0;
+            StoreFilter.Take = 0;
         }
 
-        protected async Task<IList<ProductDTO>> init_product_cache()
+        protected async Task<IList<ProductDTO>> InitProductCache()
         {
-            productFilter.Take = 100;
+            ProductFilter.Take = 100;
 
-            var data = (await _instanceProducts.GetAsync(productFilter));
-            await _instanceProducts.GetAsync(productFilter);
-            productFilter.Take = 50;
+            var data = (await InstanceProducts.GetAsync(ProductFilter));
+            await InstanceProducts.GetAsync(ProductFilter);
+            ProductFilter.Take = 50;
 
-            data = (await _instanceProducts.GetAsync(productFilter));
-            await _instanceProducts.GetAsync(productFilter);
+            data = (await InstanceProducts.GetAsync(ProductFilter));
+            await InstanceProducts.GetAsync(ProductFilter);
             return data;
         }
 
-        protected async Task<IList<StoreDTO>> init_store_cache()
+        protected async Task<IList<StoreDTO>> InitStoreCache()
         {
-            storeFilter.Take = 100;
+            StoreFilter.Take = 100;
 
-            var data = (await _instanceStores.GetAsync(storeFilter));
-            await _instanceStores.GetAsync(storeFilter);
+            var data = (await InstanceStores.GetAsync(StoreFilter));
+            await InstanceStores.GetAsync(StoreFilter);
             return data;
         }
     }

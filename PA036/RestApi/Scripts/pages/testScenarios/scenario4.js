@@ -1,6 +1,7 @@
 ﻿$(document).ready(function() {
     var firstExecution = true;
     var firstExecutionStores = true;
+
     $("#executeProducts").click(function() {
         var url = $('button#executeProducts').data('url');
         disableButtons();
@@ -9,10 +10,13 @@
         var after = '.afterProducts';
         addNewEmptyRow(firstExecution, 'placeholderProducts', before, after);
 
+        var formData = $('form#options-products').serialize();
+
         $.ajax({
             url: url,
             type: 'POST',
-            success: function(result) {
+            data: formData,
+            success: function (result) {
                 successFunction(result, before, after);
                 firstExecution = false;
                 return;
@@ -28,9 +32,12 @@
         var after = '.afterStores';
         addNewEmptyRow(firstExecutionStores, 'placeholderStores', before, after);
 
+        var formData = $('form#options-stores').serialize();
+
         $.ajax({
             url: url,
             type: 'GET',
+            data: formData,
             success: function (result) {
                 successFunction(result, before, after);
                 firstExecutionStores = false;
