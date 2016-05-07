@@ -11,7 +11,7 @@ namespace RestApi.Controllers.Api.TestScenarios
     {
         public async Task<ITestResult> Get(bool useCloudDatabase = false, bool invalidateCache = false, bool doNotCacheItems = false, bool getsSizeIncreasing = false)
         {
-            var config = new Scenario2Config()
+            var config = new Scenario2Config
             {
                 UseRemoteDb = useCloudDatabase,
                 InvalidateCacheAfterIteration = invalidateCache,
