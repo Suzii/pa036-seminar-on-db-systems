@@ -10,13 +10,9 @@ namespace RestApi.Controllers.Api.TestScenarios
     {
         private ITestScenarioService _instance;
 
-        public async Task<ITestResult> Get(bool useCloudDatabase = false)
+        public async Task<ITestResult> Get()
         {
-            var config = new ScenarioConfig()
-            {
-                UseRemoteDb = useCloudDatabase,
-            };
-            _instance = new Scenario7Service(config);
+            _instance = new Scenario7Service();
             return await _instance.ExecuteTest();
         }
     }

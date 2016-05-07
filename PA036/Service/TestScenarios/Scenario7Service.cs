@@ -16,16 +16,12 @@ namespace Service.TestScenarios
         private readonly IStoreService _storeInstanceWithContextAzure;
         private readonly IStoreService _storeInstanceWithContextLocal;
         private readonly IDatabaseService _databaseService;
-        private readonly ScenarioConfig _config;
 
-        public Scenario7Service(ScenarioConfig config)
+        public Scenario7Service()
         {
-            _config = config;
-            _storeInstanceWithContextAzure = new StoreService(new DbSettings() { AppContext = AppContexts.Azure });
-            _storeInstanceWithContextLocal = new StoreService(new DbSettings() { AppContext = AppContexts.LocalNamedAsAzure });
-            var dbSettings = new DbSettings() { AppContext = config.UseRemoteDb ? AppContexts.Azure : AppContexts.Local };
+            _storeInstanceWithContextAzure = new StoreService(new DbSettings { AppContext = AppContexts.Azure });
+            _storeInstanceWithContextLocal = new StoreService(new DbSettings { AppContext = AppContexts.LocalNamedAsAzure });
             _databaseService = new DatabaseService();
-            var productFilter = new ProductFilter();
         }
 
         public async Task<ITestResult> ExecuteTest()
@@ -41,7 +37,7 @@ namespace Service.TestScenarios
         /// <returns>Returned objects from both databases</returns>
         public async Task<Scenario7Results> TestAzureVersusLocalWithSameName()
         {
-            var storeFilter = new StoreFilter() { NameFilter = "Amazing test" };
+            var storeFilter = new StoreFilter { NameFilter = "Amazing test" };
             var storeResultCleanUp1 = (await _storeInstanceWithContextAzure.GetAsync(storeFilter));
             _databaseService.InvalidateCache();
             var storeResultCleanUp2 = (await _storeInstanceWithContextLocal.GetAsync(storeFilter));
