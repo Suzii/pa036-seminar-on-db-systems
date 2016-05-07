@@ -34,12 +34,13 @@ namespace Service.TestScenarios
         }
 
         /// <summary> 
-        /// Maximazing number of elements in cache
+        /// Test of behavior when two databases are named equally
+        /// Simple GET requests from cache on two diffent object
+        /// each from another database
         /// </summary>
-        /// <returns>Number of elements in cache</returns>
+        /// <returns>Returned objects from both databases</returns>
         public async Task<Scenario7Results> TestAzureVersusLocalWithSameName()
         {
-            // Prevent to run this on automaded build service or db that is not supposed to here
             var storeFilter = new StoreFilter() { NameFilter = "Amazing test" };
             var storeResultCleanUp1 = (await _storeInstanceWithContextAzure.GetAsync(storeFilter));
             _databaseService.InvalidateCache();
