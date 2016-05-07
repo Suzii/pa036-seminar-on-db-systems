@@ -8,7 +8,6 @@
 
 <h2>ExampleScenario4</h2>
 <div>
-    <h4>Test Description:</h4>
     <p class="lead">Simple GET query and updating data:</p>
     <ol>
         <li> 2 different <b>GET requests</b> on products table. </li>
@@ -26,10 +25,10 @@
     <p>In Scenario3 we found out, that cache is deleted after some operations. In this test we can see, that cache of whole table is deleted.</p>
 
     <form id="options-stores">
-        <div class="form-group">
+        @*<div class="form-group">
             <input type="checkbox" id="useCloudDatabase" name="useCloudDatabase" value="true" />
             <label for="useCloudDatabase">Use remote database located in USA (otherwise local database will be used)</label>
-        </div>
+        </div>*@
 
         <button id="executeStores" class="btn btn-info pull-right" data-url="@Url.RouteUrl("DefaultApi", new {controller = "Scenario4", action="Get", httproute = true})">
             Run test (Store UPDATE)
@@ -59,10 +58,10 @@
 </div>
 
 <form id="options-products">
-    <div class="form-group">
+    @*<div class="form-group">
         <input type="checkbox" id="useCloudDatabase" name="useCloudDatabase" value="true" />
         <label for="useCloudDatabase">Use remote database located in USA (otherwise local database will be used)</label>
-    </div>
+    </div>*@
     <button id="executeProducts" class="btn btn-info pull-right" data-url="@Url.RouteUrl("DefaultApi", new {controller = "Scenario4", action="Post", httproute = true})">
             Run test (Products UPDATE)
         </button>
