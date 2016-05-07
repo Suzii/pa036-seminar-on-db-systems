@@ -45,8 +45,8 @@ namespace Service.TestScenarios
             }
             return new Scenario3Results()
             {
-                beforeAction = cached,
-                afterAction = countInCache
+                BeforeAction = cached,
+                AfterAction = countInCache
             };
         }
 

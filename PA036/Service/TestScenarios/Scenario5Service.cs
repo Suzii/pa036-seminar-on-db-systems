@@ -91,9 +91,9 @@ namespace Service.TestScenarios
 
             var result = new Scenario5Results()
             {
-                originalCache = originalCache,
-                overlappedCache = overlappedCache,
-                skipped = overlapping,
+                OriginalCache = originalCache,
+                OverlappedCache = overlappedCache,
+                Skipped = overlapping,
                 CacheSizeComparison = cacheSizes
             };
 

@@ -62,8 +62,8 @@ namespace Service.TestScenarios
             var storeResult2 = (await _storeInstanceWithContextLocal.GetAsync(storeFilter)).Single();
 
             var result = new Scenario7Results() {
-                objectFromAzure = storeResult1,
-                objectFromLocal = storeResult2
+                ObjectFromAzure = storeResult1,
+                ObjectFromLocal = storeResult2
             };
 
             // cleanup
