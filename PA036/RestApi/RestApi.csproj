@@ -147,6 +147,7 @@
     <Content Include="Scripts\libs\modernizr-2.6.2.js" />
     <Content Include="Scripts\pages\catalogue\main.js" />
     <Content Include="Scripts\pages\shared\footer.js" />
+    <Content Include="Scripts\pages\testScenarios\scenario1.js" />
     <Content Include="Scripts\pages\testScenarios\scenario4.js" />
     <Content Include="Scripts\pages\testScenarios\scenario7.js" />
     <Content Include="Scripts\pages\testScenarios\scenario6.js" />
