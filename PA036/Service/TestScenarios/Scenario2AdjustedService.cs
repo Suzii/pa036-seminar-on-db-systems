@@ -17,7 +17,7 @@ namespace Service.TestScenarios
         /// Executes TestScenario2 5 times, computes average values and returns them
         /// </summary>
         /// <param name="config"></param>
-        public Scenario2AdjustedService(Scenario2Config config)
+        public Scenario2AdjustedService(AdjustedScenario2Config config)
         {
             _service = new Scenario2Service(config);
         }

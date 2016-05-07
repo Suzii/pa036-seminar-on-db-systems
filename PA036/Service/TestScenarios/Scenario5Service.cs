@@ -15,16 +15,14 @@ namespace Service.TestScenarios
     {
         private readonly IProductService _instance;
         private readonly IDatabaseService _databaseService;
-        private readonly ScenarioConfig _config;
 
         public Scenario5Service(ScenarioConfig config)
         {
-            _config = config;
             var dbSettings = new DbSettings() { AppContext = config.UseRemoteDb ? AppContexts.Azure : AppContexts.Local };
             _instance = new ProductService(dbSettings);
             _databaseService = new DatabaseService();
-            var productFilter = new ProductFilter();
-            productFilter.Take = 1;
+
+            var productFilter = new ProductFilter {Take = 1};
             _instance.Get(productFilter);
             _instance.Get(productFilter);
             _databaseService.InvalidateCache();
@@ -32,7 +30,7 @@ namespace Service.TestScenarios
 
         public async Task<ITestResult> ExecuteTest()
         {
-            return  await getOverlappedData();
+            return  await GetOverlappedData();
         }
 
         /// <summary> 
@@ -41,11 +39,14 @@ namespace Service.TestScenarios
         /// Anmount of overlaping items is increasing
         /// </summary>
         /// <returns>Measured data of test</returns>
-        private async Task<Scenario5Results> getOverlappedData()
+        private async Task<Scenario5Results> GetOverlappedData()
         {
-            var modifier = new ProductFilter();
-            modifier.OrderDesc = true;
-            modifier.OrderProperty = "id";
+            var modifier = new ProductFilter
+            {
+                OrderDesc = true,
+                OrderProperty = "id"
+            };
+
             var amountOfData = 200;
             var originalCache = new List<double>();
             var overlappedCache = new List<double>();
@@ -59,11 +60,9 @@ namespace Service.TestScenarios
             for (var i = percentage; i >= 0; i -= 0.3)
             {
                 _databaseService.InvalidateCache();
-                var dataIteration = new List<int>();
-                dataIteration.Add(100 - (int)(i * 100));
+                var dataIteration = new List<int> {100 - (int) (i*100)};
 
-                var cacheSize = new CacheSizeComparison();
-                cacheSize.NoOfObjectsReturnedInQuery = amountOfData;
+                var cacheSize = new CacheSizeComparison {NoOfObjectsReturnedInQuery = amountOfData};
                 modifier.Take = amountOfData;
                 modifier.Skip = 0;
 
@@ -89,7 +88,7 @@ namespace Service.TestScenarios
                 overlapping.Add(dataIteration);
             }
 
-            var result = new Scenario5Results()
+            var result = new Scenario5Results
             {
                 OriginalCache = originalCache,
                 OverlappedCache = overlappedCache,

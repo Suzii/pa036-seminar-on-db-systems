@@ -164,6 +164,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\Api\StoresController.cs" />
     <Compile Include="Controllers\Api\ProductsController.cs" />
+    <Compile Include="Controllers\Api\TestScenarios\Scenario5AdjustedController.cs" />
     <Compile Include="Controllers\Api\TestScenarios\Scenario2AdjustedController.cs" />
     <Compile Include="Controllers\Api\TestScenarios\Scenario2Controller.cs" />
     <Compile Include="Controllers\Api\TestScenarios\Scenario4Controller.cs" />

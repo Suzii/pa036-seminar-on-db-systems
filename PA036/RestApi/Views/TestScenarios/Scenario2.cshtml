@@ -38,8 +38,13 @@
         </div>
 
         <div class="form-group">
-            <input type="checkbox" id="doNotCacheItems" name="doNotCacheItems" value="true" />
+            <input type="checkbox" id="doNotCacheItems" name="doNotCacheItems" value="true"/>
             <label for="doNotCacheItems">Do not cache items</label>
+        </div>
+
+        <div class="form-group">
+            <label for="numberOfExecutions">Number test executions to compute average from</label>
+            <input type="text" id="numberOfExecutions" name="numberOfExecutions" value="10" class="form-control" />
         </div>
 
         <button id="execute" class="btn btn-primary pull-right" data-url="@Url.RouteUrl("DefaultApi", new {controller = "Scenario2", httproute = true})">
@@ -47,7 +52,7 @@
         </button>
 
         <button id="execute-adjusted" class="btn btn-primary pull-right" data-url="@Url.RouteUrl("DefaultApi", new {controller = "Scenario2Adjusted", httproute = true})">
-            Run 5 times and get average
+            Run and get average
         </button>
     </form>
 </div>

@@ -96,6 +96,8 @@
     <Compile Include="DTO\IDTO.cs" />
     <Compile Include="DTO\ProductDTO.cs" />
     <Compile Include="DTO\StoreDTO.cs" />
+    <Compile Include="DTO\TestScenariosConfigs\AdjustedScenarioConfig.cs" />
+    <Compile Include="DTO\TestScenariosConfigs\AdjustedScenario2Config.cs" />
     <Compile Include="DTO\TestScenariosConfigs\ScenarioConfig.cs" />
     <Compile Include="DTO\TestScenariosConfigs\Scenario2Config.cs" />
     <Compile Include="DTO\TestScenariosDTOs\CacheSizeComparison.cs" />
@@ -111,6 +113,7 @@
     <Compile Include="TestScenarios\ITestScenarioService.cs" />
     <Compile Include="DTO\TestScenariosDTOs\Scenario2Results.cs" />
     <Compile Include="TestScenarios\Scenario1Service.cs" />
+    <Compile Include="TestScenarios\Scenario5AdjustedService.cs" />
     <Compile Include="TestScenarios\Scenario2AdjustedService.cs" />
     <Compile Include="TestScenarios\Scenario3ServicePost.cs" />
     <Compile Include="TestScenarios\Scenario4ServiceProducts.cs" />

@@ -9,10 +9,11 @@ namespace RestApi.Controllers.Api.TestScenarios
 {
     public class Scenario2AdjustedController : ApiController
     {
-        public async Task<ITestResult> Get(bool useCloudDatabase = false, bool invalidateCache = false, bool doNotCacheItems = false, bool getsSizeIncreasing = false)
+        public async Task<ITestResult> Get(int numberOfExecutions, bool useCloudDatabase = false, bool invalidateCache = false, bool doNotCacheItems = false, bool getsSizeIncreasing = false)
         {
-            var config = new Scenario2Config()
+            var config = new AdjustedScenario2Config()
             {
+                NumberOfExecutions = numberOfExecutions,
                 UseRemoteDb = useCloudDatabase,
                 InvalidateCacheAfterIteration = invalidateCache,
                 DoNotCacheItems = doNotCacheItems,

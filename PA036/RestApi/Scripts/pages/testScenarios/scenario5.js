@@ -1,18 +1,12 @@
 ﻿$(document).ready(function () {
 
-    $('form#options input#doNotCacheItems').change(function (event) {
-        var doNotCacheItems = event.target.checked;
-        var disableInvalidateCache = (doNotCacheItems) ? 'disabled' : null;
-
-        $('form#options input#invalidateCache').attr('disabled', disableInvalidateCache);
-    });
-
     $("#execute").click(function (event) {
         event.preventDefault();
 
         var url = $('button#execute').data('url');
         var formData = $('form#options').serialize();
         $("#execute").attr('disabled', 'disabled');
+        $("#execute-adjusted").attr('disabled', 'disabled');
         $.ajax({
             url: url,
             data: formData,
@@ -20,7 +14,30 @@
                 renderExecutionTimesGraph(result);
                 renderRequestedDataGraph(result);
                 renderCacheSizeGraph(result);
+
+                $("#execute-adjusted").removeAttr('disabled');
                 $("#execute").removeAttr('disabled');
+            }
+        });
+    });
+
+    $("#execute-adjusted").click(function (event) {
+        event.preventDefault();
+
+        var url = $('button#execute-adjusted').data('url');
+        var formData = $('form#options').serialize();
+        $("#execute").attr('disabled', 'disabled');
+        $("#execute-adjusted").attr('disabled', 'disabled');
+        $.ajax({
+            url: url,
+            data: formData,
+            success: function (result) {
+                renderExecutionTimesGraph(result);
+                renderRequestedDataGraph(result);
+                renderCacheSizeGraph(result);
+
+                $("#execute").removeAttr('disabled');
+                $("#execute-adjusted").removeAttr('disabled');
             }
         });
     });
@@ -126,7 +143,7 @@ function renderCacheSizeGraph(result) {
 function dataRequestedGraph(data, xAxisSettings) {
     $('#data').highcharts({
         chart: {
-            type: 'columnrange',
+            type: 'columnrange'
         },
         title: {
             text: 'Number of requested data'

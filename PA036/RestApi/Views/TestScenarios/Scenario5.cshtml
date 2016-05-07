@@ -25,9 +25,18 @@
 
     <form id="options">
         <div class="form-group">
-            <input type="checkbox" id="useCloudDatabase" name="useCloudDatabase" value="true" />
+            <input type="checkbox" id="useCloudDatabase" name="useCloudDatabase" value="true"/>
             <label for="useCloudDatabase">Use remote database located in USA (otherwise local database will be used)</label>
         </div>
+
+        <div class="form-group">
+            <label for="numberOfExecutions">Number test executions to compute average from</label>
+            <input type="text" id="numberOfExecutions" name="numberOfExecutions" value="10" class="form-control" />
+        </div>
+
+        <button id="execute-adjusted" class="btn btn-primary pull-right" data-url="@Url.RouteUrl("DefaultApi", new {controller = "Scenario5Adjusted", httproute = true})">
+            Run and get average
+        </button>
 
         <button id="execute" class="btn btn-info pull-right" data-url="@Url.RouteUrl("DefaultApi", new {controller = "Scenario5", httproute = true})">
             Run test
