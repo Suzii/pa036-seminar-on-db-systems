@@ -6,7 +6,7 @@ namespace Service.TestScenarios
 {
     public class Scenario4ServiceProducts : Scenario4Service, ITestScenarioService
     {
-        public Scenario4ServiceProducts(Scenario1Config config) : base(config) { }
+        public Scenario4ServiceProducts(ScenarioConfig config) : base(config) { }
 
         public async Task<ITestResult> ExecuteTest()
         {

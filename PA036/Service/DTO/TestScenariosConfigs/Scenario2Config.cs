@@ -2,10 +2,8 @@
 
 namespace Service.DTO.TestScenariosConfigs
 {
-    public class Scenario2Config: ITestScenarioConfig
+    public class Scenario2Config: ScenarioConfig
     {
-        public bool UseRemoteDb { get; set; }
-
         public bool InvalidateCacheAfterIteration { get; set; }
 
         public bool DoNotCacheItems { get; set; }

@@ -17,8 +17,8 @@ namespace Service.TestScenarios
         protected readonly IDatabaseService _databaseService;
         protected ProductFilter productFilter;
         protected StoreFilter storeFilter;
-        protected readonly Scenario1Config _config;
-        public Scenario4Service(Scenario1Config config)
+        protected readonly ScenarioConfig _config;
+        public Scenario4Service(ScenarioConfig config)
         {
             _config = config;
             var dbSettings = new DbSettings() { AppContext = config.UseRemoteDb ? AppContexts.Azure : AppContexts.Local };

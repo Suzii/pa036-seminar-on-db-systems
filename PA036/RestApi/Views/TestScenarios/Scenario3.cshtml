@@ -5,13 +5,16 @@
     ViewBag.Title = "ExampleScenario3";
     Layout = "~/Views/Shared/_AppLayout.cshtml";
 }
+@section scripts{
+    @Scripts.Render("~/Scripts/pages/testScenarios/scenario3.js")
+}
 
 <h2>ExampleScenario3</h2>
 <div>
-    <h4>Test Description:</h4>
+    
     <p class="lead">Simple GET query and updating data:</p>
     <ol>
-        <li> 2 <b>GET request</b> on 100 products. </li>
+        <li> <b>GET request</b> on 100 products. </li>
         <li> Checking if data are cached. </li>
         <li> Get number of elements in cache. </li>
         <ol type="a">
@@ -25,21 +28,19 @@
 
     <p>Blah, blah, blah.. some other shit...</p>
 
-    <form id="options">
+    <form id="options-update">
         <div class="form-group">
-            <input type="checkbox" id="useCloudDatabase" name="useCloudDatabase" value="true" />
+            <input type="checkbox" id="useCloudDatabase" name="useCloudDatabase" value="true"/>
             <label for="useCloudDatabase">Use remote database located in USA (otherwise local database will be used)</label>
         </div>
 
-        <button id="executeUpdate" class="btn btn-info pull-right" data-url="@Url.RouteUrl("DefaultApi", new {controller = "Scenario3", action="Get", httproute = true})">
+        <button id="executeUpdate" class="btn btn-info pull-right" data-url="@Url.RouteUrl("DefaultApi", new {controller = "Scenario3", action = "Get", httproute = true})">
             Run test (UPDATE)
         </button>
     </form>
 
 </div>
-@section scripts{
-    @Scripts.Render("~/Scripts/pages/testScenarios/scenario3.js")
-}
+
 <div id="containerUpdate" class="container">
     <h2>Number of elements in Cache</h2>
     <table class="table">
@@ -58,7 +59,7 @@
     </table>
 </div>
 
-<form id="options">
+<form id="options-delete">
     <div class="form-group">
         <input type="checkbox" id="useCloudDatabase" name="useCloudDatabase" value="true" />
         <label for="useCloudDatabase">Use remote database located in USA (otherwise local database will be used)</label>
@@ -86,7 +87,7 @@
     </table>
 </div>
 
-<form id="options">
+<form id="options-post">
     <div class="form-group">
         <input type="checkbox" id="useCloudDatabase" name="useCloudDatabase" value="true" />
         <label for="useCloudDatabase">Use remote database located in USA (otherwise local database will be used)</label>

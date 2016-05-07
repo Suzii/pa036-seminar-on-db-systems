@@ -12,33 +12,33 @@ namespace Service.TestScenarios
 {
     public class Scenario3Service
     {
-        protected readonly IProductService _instance;
-        protected readonly IDatabaseService _databaseService;
-        protected ProductFilter productFilter;
-        protected readonly Scenario1Config _config;
+        protected readonly IProductService Instance;
+        protected readonly IDatabaseService DatabaseService;
+        protected ProductFilter ProductFilter;
+        protected readonly ScenarioConfig Config;
 
-        public Scenario3Service(Scenario1Config config)
+        public Scenario3Service(ScenarioConfig config)
         {
-            _config = config;
+            Config = config;
             var dbSettings = new DbSettings() { AppContext = config.UseRemoteDb ? AppContexts.Azure : AppContexts.Local };
-            _instance = new ProductService(dbSettings);
-            _databaseService = new DatabaseService();
-            productFilter = new ProductFilter();
-            productFilter.Take = 1;
-            _instance.Get(productFilter);
-            _instance.Get(productFilter);
-            _databaseService.InvalidateCache();
-            productFilter.Take = 0;
+            Instance = new ProductService(dbSettings);
+            DatabaseService = new DatabaseService();
+            ProductFilter = new ProductFilter {Take = 1};
+
+            Instance.Get(ProductFilter);
+            Instance.Get(ProductFilter);
+            DatabaseService.InvalidateCache();
+            ProductFilter.Take = 0;
         }
 
-        protected async Task<IList<ProductDTO>> init_cache()
+        protected async Task<IList<ProductDTO>> InitCache()
         {
-            _databaseService.InvalidateCache();
+            DatabaseService.InvalidateCache();
 
-            productFilter.Take = 100;
+            ProductFilter.Take = 100;
             
-            var data = (await _instance.GetAsync(productFilter));
-            await _instance.GetAsync(productFilter);
+            var data = (await Instance.GetAsync(ProductFilter));
+            await Instance.GetAsync(ProductFilter);
             return data;
         }
     }

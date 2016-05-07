@@ -6,27 +6,29 @@ namespace Service.TestScenarios
 {
     public class Scenario3ServiceDelete : Scenario3Service, ITestScenarioService 
     {
-        public Scenario3ServiceDelete(Scenario1Config config) : base(config) { }
+        public Scenario3ServiceDelete(ScenarioConfig config) : base(config) { }
 
         public async Task<ITestResult> ExecuteTest()
         {
-            return await testDeleteData();
+            return await TestDeleteData();
         }
 
         /// <summary> 
         /// Simple Get query to cache results and then delete some of them
-        /// some of them.
         /// Testing if change of data in database will invalidate cache
-        private async Task<Scenario3Results> testDeleteData()
+        /// </summary>
+        private async Task<Scenario3Results> TestDeleteData()
         {
-            _databaseService.InvalidateCache();
-            var data = await init_cache();
-            var cached = _databaseService.GetCacheItemsCount();
+            DatabaseService.InvalidateCache();
+            var data = await InitCache();
+            var cached = DatabaseService.GetCacheItemsCount();
 
-            await _instance.DeleteAsync(data[0].Id);
-            var countInCache = _databaseService.GetCacheItemsCount();
+            await Instance.DeleteAsync(data[0].Id);
+            var countInCache = DatabaseService.GetCacheItemsCount();
 
-            await _instance.CreateAsync(data[0]);
+            var deleted = data[0];
+            deleted.Id = 0;
+            await Instance.CreateAsync(deleted);
 
             return new Scenario3Results()
             {

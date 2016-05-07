@@ -15,9 +15,9 @@ namespace Service.TestScenarios
     {
         private readonly IProductService _instance;
         private readonly IDatabaseService _databaseService;
-        private readonly Scenario1Config _config;
+        private readonly ScenarioConfig _config;
 
-        public Scenario6Service(Scenario1Config config)
+        public Scenario6Service(ScenarioConfig config)
         {
             _config = config;
             var dbSettings = new DbSettings() { AppContext = config.UseRemoteDb ? AppContexts.Azure : AppContexts.Local };

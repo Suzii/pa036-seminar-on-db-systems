@@ -16,9 +16,9 @@ namespace Service.TestScenarios
         private readonly IStoreService _storeInstanceWithContextAzure;
         private readonly IStoreService _storeInstanceWithContextLocal;
         private readonly IDatabaseService _databaseService;
-        private readonly Scenario1Config _config;
+        private readonly ScenarioConfig _config;
 
-        public Scenario7Service(Scenario1Config config)
+        public Scenario7Service(ScenarioConfig config)
         {
             _config = config;
             _storeInstanceWithContextAzure = new StoreService(new DbSettings() { AppContext = AppContexts.Azure });

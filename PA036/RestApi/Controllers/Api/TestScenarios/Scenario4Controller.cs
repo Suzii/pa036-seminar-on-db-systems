@@ -14,7 +14,7 @@ namespace RestApi.Controllers.Api.TestScenarios
         //store
         public async Task<ITestResult> Get(bool useCloudDatabase = false)
         {
-            var config = new Scenario1Config()
+            var config = new ScenarioConfig()
             {
                 UseRemoteDb = useCloudDatabase,
             };
@@ -25,7 +25,7 @@ namespace RestApi.Controllers.Api.TestScenarios
         //products
         public async Task<ITestResult> Post(bool useCloudDatabase = false)
         {
-            var config = new Scenario1Config()
+            var config = new ScenarioConfig()
             {
                 UseRemoteDb = useCloudDatabase,
             };

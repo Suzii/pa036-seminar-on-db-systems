@@ -9,39 +9,40 @@ namespace Service.TestScenarios
     public class Scenario3ServicePost : Scenario3Service, ITestScenarioService
     {
 
-        public Scenario3ServicePost(Scenario1Config config) : base(config) { }
+        public Scenario3ServicePost(ScenarioConfig config) : base(config) { }
 
         public async Task<ITestResult> ExecuteTest()
         {
-            return await testPostData();
+            return await TestPostData();
         }
 
         /// <summary> 
         /// Simple Get query to cache results and then updating 
         /// some of them.
         /// Testing if change of data in database will invalidate cache
-        private async Task<Scenario3Results> testPostData()
+        /// </summary>
+        private async Task<Scenario3Results> TestPostData()
         {
-            _databaseService.InvalidateCache();
-            productFilter.OrderDesc = true;
-            productFilter.OrderProperty = "id";
-            var data = (await init_cache());
-            var cached = _databaseService.GetCacheItemsCount();
+            DatabaseService.InvalidateCache();
+            ProductFilter.OrderDesc = true;
+            ProductFilter.OrderProperty = "id";
+            var data = (await InitCache());
+            var cached = DatabaseService.GetCacheItemsCount();
             ProductDTO product = new ProductDTO() { Name = "test", StockCount = 666, UnitCost = 666 };
 
 
-            await _instance.CreateAsync(product);
-            var countInCache = _databaseService.GetCacheItemsCount();
-            productFilter.Take = 1;
-            productFilter.OrderDesc = true;
-            productFilter.OrderProperty = "id";
-            productFilter.Skip = 0;
-            productFilter.UnitCostFilter = 666;
-            productFilter.NameFilter = "test";
-            productFilter.UnitCostFilter = 666;
-            var last = await _instance.GetAsync(productFilter);
+            await Instance.CreateAsync(product);
+            var countInCache = DatabaseService.GetCacheItemsCount();
+            ProductFilter.Take = 1;
+            ProductFilter.OrderDesc = true;
+            ProductFilter.OrderProperty = "id";
+            ProductFilter.Skip = 0;
+            ProductFilter.UnitCostFilter = 666;
+            ProductFilter.NameFilter = "test";
+            ProductFilter.UnitCostFilter = 666;
+            var last = await Instance.GetAsync(ProductFilter);
             if (last.Count != 0) { 
-                await _instance.DeleteAsync(last[0].Id);
+                await Instance.DeleteAsync(last[0].Id);
             }
             return new Scenario3Results()
             {

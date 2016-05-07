@@ -12,7 +12,7 @@ namespace RestApi.Controllers.Api.TestScenarios
 
         public async Task<ITestResult> Get(bool useCloudDatabase = false)
         {
-            var config = new Scenario1Config()
+            var config = new ScenarioConfig()
             {
                 UseRemoteDb = useCloudDatabase,
             };

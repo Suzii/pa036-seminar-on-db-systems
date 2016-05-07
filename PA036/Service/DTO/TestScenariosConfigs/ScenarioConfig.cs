@@ -2,7 +2,7 @@
 
 namespace Service.DTO.TestScenariosConfigs
 {
-    public class Scenario1Config: ITestScenarioConfig
+    public class ScenarioConfig: ITestScenarioConfig
     {
         public bool UseRemoteDb { get; set; }
     }
