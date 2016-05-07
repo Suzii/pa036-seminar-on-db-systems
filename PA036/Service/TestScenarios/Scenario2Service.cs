@@ -35,8 +35,10 @@ namespace Service.TestScenarios
         /// 
         /// Number k is increased in every iteration
         /// Cache is invalidated before every get request of user A. 
+        /// 
+        /// Depending on configuration, cache may be invalidated after every iteration or not used at all.
         /// </summary>
-        /// <returns>Measured data of both users</returns>
+        /// <returns>Measured data of both users as well as cache sizes</returns>
         private async Task<Scenario2Results> GetsIncreasingCount()
         {
             var totalCount = await _instance.TotalCountAsync();
@@ -83,11 +85,11 @@ namespace Service.TestScenarios
                 cacheSizes.Add(cacheSize);
             }
 
-            var result = new Scenario2Results()
+            var result = new Scenario2Results
             {
                 CachedQueriesTimes = withCache,
                 NotCachedQueriesTimes = withoutCache,
-                XAxis = new List<double>() { step, totalCount, step },
+                XAxis = new List<double> { step, totalCount, step },
                 CacheSizeComparison = cacheSizes
             };
 
@@ -98,10 +100,12 @@ namespace Service.TestScenarios
         /// <summary> 
         /// Simple GET query for k products executed by two users.
         /// 
-        /// Number k is decreasing in every iteration
+        /// Number k is decreased in every iteration
         /// Cache is invalidated before every get request of user A. 
+        /// 
+        /// Depending on configuration, cache may be invalidated after every iteration or not used at all.
         /// </summary>
-        /// <returns>Measured data of both users</returns>
+        /// <returns>Measured data of both users as well as cache sizes</returns>
         private async Task<Scenario2Results> GetsDecreasingCount()
         {
             var totalCount = await _instance.TotalCountAsync();
@@ -148,11 +152,11 @@ namespace Service.TestScenarios
                 cacheSizes.Add(cacheSize);
             }
 
-            var result = new Scenario2Results()
+            var result = new Scenario2Results
             {
                 CachedQueriesTimes = withCache,
                 NotCachedQueriesTimes = withoutCache,
-                XAxis = new List<double>() { step, totalCount, step },
+                XAxis = new List<double> { step, totalCount, step },
                 CacheSizeComparison = cacheSizes
             };
 

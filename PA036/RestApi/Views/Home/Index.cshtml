@@ -3,9 +3,16 @@
     Layout = "~/Views/Shared/_AppLayout.cshtml";
 }
 
-<h2>Home</h2>
-<h2>What do you wanna do?</h2>
+<h1 class="text-center"> Application framework and DB caching</h1>
+<p class="lead text-center">Functionality, performance and possibilities of EF second level cache.</p>
 
+<h4>What do you want to do?</h4>
 
-@Html.ActionLink("Products catalogue", "Index", "Catalogue")
-@Html.ActionLink("Test scenarios", "Index", "TestScenarios")
+<ul>
+    <li>
+        @Html.ActionLink("Products catalogue", "Index", "Catalogue")
+    </li>
+    <li>
+        @Html.ActionLink("Test scenarios", "Index", "TestScenarios")
+    </li>
+</ul>

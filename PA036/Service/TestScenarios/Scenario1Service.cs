@@ -20,7 +20,7 @@ namespace Service.TestScenarios
         public Scenario1Service(Scenario1Config config)
         {
             _config = config;
-            var dbSettings = new DbSettings() { AppContext = config.UseRemoteDb ? AppContexts.Azure : AppContexts.Local };
+            var dbSettings = new DbSettings { AppContext = config.UseRemoteDb ? AppContexts.Azure : AppContexts.Local };
             _instance = new ProductService(dbSettings);
             _databaseService = new DatabaseService();
         }
@@ -31,12 +31,18 @@ namespace Service.TestScenarios
         }
 
         /// <summary> 
-        /// test for parallel GET query from multiple users
+        /// Test for parallel GET query from multiple users
+        /// GET query on 100 same products performed in parallel by 100 threads (users)
+        /// 
         /// </summary>
-        /// <returns>Measured data of all users</returns>
+        /// <returns>Measures time it takes to for each query and number of items in cache for each thread execution</returns>
         private async Task<Scenario1Results> GetFromMoreUsers()
         {
-            var modifier = new ProductFilter();
+            var modifier = new ProductFilter
+            {
+                Take = 100
+            };
+
             var step = 1;
             var maxUsers = 100;
 
@@ -44,7 +50,6 @@ namespace Service.TestScenarios
             var cacheSizes = new List<CacheSizeComparison>();
 
             _databaseService.InvalidateCache();
-            modifier.Take = 100;
 
             List<Task> tasks = new List<Task>();
             for (var i = 0; i < maxUsers; i += step)
@@ -52,8 +57,10 @@ namespace Service.TestScenarios
 
                 Task task = Task.Run(async () =>
                 {
-                    var cacheSize = new CacheSizeComparison();
-                    cacheSize.BeforeQueryExecution = _databaseService.GetCacheItemsCount();
+                    var cacheSize = new CacheSizeComparison
+                    {
+                        BeforeQueryExecution = _databaseService.GetCacheItemsCount()
+                    };
 
                     var watch = Stopwatch.StartNew();
                     await _instance.GetAsync(modifier);
@@ -66,16 +73,17 @@ namespace Service.TestScenarios
                     lock (cacheSizes) 
                     cacheSizes.Add(cacheSize);
                 });
+
                 tasks.Add(task);
             }
+
             await Task.WhenAll(tasks.ToArray());
 
-
-            var result = new Scenario1Results()
+            var result = new Scenario1Results
             {
                 CachedQueriesTimes = cacheQTime,
                 CacheSizeComparison = cacheSizes,
-                XAxis = new List<double>() { step, maxUsers, step },
+                XAxis = new List<double> { step, maxUsers, step },
             };
 
             return result;

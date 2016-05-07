@@ -1,18 +1,17 @@
 ﻿@using System.Web.Optimization
-@model dynamic
 
 @{
-    ViewBag.Title = "ExampleScenario1";
+    ViewBag.Title = "Scenario 1";
     Layout = "~/Views/Shared/_AppLayout.cshtml";
 }
 <div>
     <h2>Scenario 1</h2>
 
-    <h4>Test Description:</h4>
     <p class="lead">Simple GET query executed by 100 users simultaneously:</p>
-    <ol>
-        <li> Parallel GET request on 100 same products by 100 users:</li>
-    </ol>
+    <ul>
+        <li> Parallel GET request performed by 100 users on same 100 products</li>
+        <li> Test measures response time for each user, as well as number of items that are stored in cache before and after each query execution</li>
+    </ul>
 
     <form id="options">
         <div class="form-group">
@@ -35,5 +34,5 @@
 
 
 @section scripts{
-    @Scripts.Render("~/Scripts/pages/testScenarios/scenario2.js")
+    @Scripts.Render("~/Scripts/pages/testScenarios/scenario1.js")
 }

@@ -14,7 +14,7 @@ namespace Service.TestScenarios
         private readonly Scenario2Service _service;
 
         /// <summary>
-        /// Executes TestScenario2 5 times computes average values and returns them
+        /// Executes TestScenario2 5 times, computes average values and returns them
         /// </summary>
         /// <param name="config"></param>
         public Scenario2AdjustedService(Scenario2Config config)
@@ -44,23 +44,12 @@ namespace Service.TestScenarios
 
             for (var i = 0; i < NumberOfExecutions; i++)
             {
-                var simpleResult = (Scenario2Results)await _service.ExecuteTest();
+                var simpleResult = (Scenario2Results) await _service.ExecuteTest();
 
                 simpleResults.Add(simpleResult);
             }
 
             return simpleResults;
         }
-
-        //private static List<double> GetZippedAverage(List<List<double>> listsOfValues)
-        //{
-        //    var minLength = listsOfValues.Min(list => list.Count());
-        //    var result = Enumerable
-        //       .Range(0, minLength)
-        //       .Select(i => listsOfValues.Average(values => values[i]))
-        //       .ToList();
-
-        //    return result;
-        //}
     }
 }

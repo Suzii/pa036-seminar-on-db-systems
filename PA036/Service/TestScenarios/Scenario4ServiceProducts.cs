@@ -38,8 +38,8 @@ namespace Service.TestScenarios
             await _instanceProducts.UpdateAsync(data[0]);
             return new Scenario3Results()
             {
-                beforeAction = cached,
-                afterAction = countInCache
+                BeforeAction = cached,
+                AfterAction = countInCache
             };
         }
     }

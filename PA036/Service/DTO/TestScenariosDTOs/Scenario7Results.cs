@@ -1,9 +1,9 @@
-
 namespace Service.DTO.TestScenariosDTOs
 {
     public class Scenario7Results : ITestResult
     {
-        public StoreDTO objectFromAzure { get; set; }
-        public StoreDTO objectFromLocal { get; set; }
+        public StoreDTO ObjectFromAzure { get; set; }
+
+        public StoreDTO ObjectFromLocal { get; set; }
     }
 }

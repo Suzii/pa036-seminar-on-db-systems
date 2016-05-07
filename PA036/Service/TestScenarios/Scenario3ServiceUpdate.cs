@@ -31,8 +31,8 @@ namespace Service.TestScenarios
             await _instance.UpdateAsync(data[0]);
             return new Scenario3Results()
             {
-                beforeAction = cached,
-                afterAction = countInCache
+                BeforeAction = cached,
+                AfterAction = countInCache
             };
         }
 

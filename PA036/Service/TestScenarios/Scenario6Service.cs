@@ -66,7 +66,7 @@ namespace Service.TestScenarios
 
             var result = new Scenario6Results()
             {
-                itemsInCache = cacheSize
+                ItemsInCache = cacheSize
             };
 
             return result;
