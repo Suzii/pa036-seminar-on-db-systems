@@ -31,6 +31,10 @@ namespace Service.TestScenarios
             ProductFilter.Take = 0;
         }
 
+        /// <summary>
+        /// Initialization of cache
+        /// </summary>
+        /// <returns>cached data</returns>
         protected async Task<IList<ProductDTO>> InitCache()
         {
             DatabaseService.InvalidateCache();

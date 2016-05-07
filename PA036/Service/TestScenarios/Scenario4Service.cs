@@ -42,6 +42,10 @@ namespace Service.TestScenarios
             StoreFilter.Take = 0;
         }
 
+        /// <summary>
+        /// Initialization of cache for Product table
+        /// </summary>
+        /// <returns>cached data</returns>
         protected async Task<IList<ProductDTO>> InitProductCache()
         {
             ProductFilter.Take = 100;
@@ -55,6 +59,10 @@ namespace Service.TestScenarios
             return data;
         }
 
+        /// <summary>
+        /// Initialization of cache for Store table
+        /// </summary>
+        /// <returns>cached data</returns>
         protected async Task<IList<StoreDTO>> InitStoreCache()
         {
             StoreFilter.Take = 100;
