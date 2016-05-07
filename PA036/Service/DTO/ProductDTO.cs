@@ -21,5 +21,9 @@ namespace Service.DTO
         public int StockCount { get; set; }
 
         public decimal UnitCost { get; set; }
+
+        public int StoreId { get; set; }
+
+        public StoreDTO Store { get; set; }
     }
 }

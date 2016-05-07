@@ -28,8 +28,7 @@ namespace Service.TestScenarios
             ProductFilter.OrderProperty = "id";
             var data = (await InitCache());
             var cached = DatabaseService.GetCacheItemsCount();
-            ProductDTO product = new ProductDTO() { Name = "test", StockCount = 666, UnitCost = 666 };
-
+            ProductDTO product = new ProductDTO() { Name = "test", StockCount = 666, UnitCost = 666, StoreId = 1 };
 
             await Instance.CreateAsync(product);
             var countInCache = DatabaseService.GetCacheItemsCount();

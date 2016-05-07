@@ -29,7 +29,8 @@ namespace Service.Data
                 Id = dto.Id,
                 Name = dto.Name,
                 StockCount = dto.StockCount,
-                UnitCost = dto.UnitCost
+                UnitCost = dto.UnitCost,
+                StoreId = dto.StoreId
             };
 
             return result;
@@ -47,7 +48,8 @@ namespace Service.Data
                 Id = entity.Id,
                 Name = entity.Name,
                 StockCount = entity.StockCount,
-                UnitCost = entity.UnitCost
+                UnitCost = entity.UnitCost,
+                StoreId = entity.StoreId
             };
 
             return result;
