@@ -1,0 +1,46 @@
+﻿@using System.Web.Optimization
+@model dynamic
+
+@{
+    ViewBag.Title = "ExampleScenario6";
+    Layout = "~/Views/Shared/_AppLayout.cshtml";
+}
+
+<h2>ExampleScenario5</h2>
+<div>
+    <h4>Test Description:</h4>
+    <p class="lead">Maximazing number of elements in cache:</p>
+    <ol>
+        <li> Simple <b>GET</b> queries over all data<li>
+        <li> Trying to cache all ranges of data</li>
+        <li> Return number of cached data, and exception message (if any)</li>
+    </ol>
+
+    <p>Blah, blah, blah.. some other shit...</p>
+
+    <form id="options">
+        <div class="form-group">
+            <input type="checkbox" id="useCloudDatabase" name="useCloudDatabase" value="true" />
+            <label for="useCloudDatabase">Use remote database located in USA (otherwise local database will be used)</label>
+        </div>
+
+        <button id="execute" class="btn btn-info pull-right" data-url="@Url.RouteUrl("DefaultApi", new {controller = "Scenario6", httproute = true})">
+            Run test
+        </button>
+    </form>
+
+</div>
+@section scripts{
+    @Scripts.Render("~/Scripts/pages/testScenarios/scenario6.js")
+}
+<div>
+    <div id="execution-times" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+</div>
+
+<div>
+    <div id="data" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+</div>
+
+<div>
+    <div id="cache" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+</div>

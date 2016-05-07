@@ -30,5 +30,13 @@ namespace RestApi.Controllers.Mvc
         {
             return View("Scenario5");
         }
+        public ActionResult Scenario6()
+        {
+            return View("Scenario6");
+        }
+        public ActionResult Scenario7()
+        {
+            return View("Scenario7");
+        }
     }
 }

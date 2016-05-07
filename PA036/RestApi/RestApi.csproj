@@ -148,6 +148,8 @@
     <Content Include="Scripts\pages\catalogue\main.js" />
     <Content Include="Scripts\pages\shared\footer.js" />
     <Content Include="Scripts\pages\testScenarios\scenario4.js" />
+    <Content Include="Scripts\pages\testScenarios\scenario7.js" />
+    <Content Include="Scripts\pages\testScenarios\scenario6.js" />
     <Content Include="Scripts\pages\testScenarios\scenario5.js" />
     <Content Include="Scripts\pages\testScenarios\scenario3.js" />
     <Content Include="Scripts\pages\testScenarios\scenario2.js" />
@@ -164,6 +166,8 @@
     <Compile Include="Controllers\Api\TestScenarios\Scenario2AdjustedController.cs" />
     <Compile Include="Controllers\Api\TestScenarios\Scenario2Controller.cs" />
     <Compile Include="Controllers\Api\TestScenarios\Scenario4Controller.cs" />
+    <Compile Include="Controllers\Api\TestScenarios\Scenario7Controller.cs" />
+    <Compile Include="Controllers\Api\TestScenarios\Scenario6Controller.cs" />
     <Compile Include="Controllers\Api\TestScenarios\Scenario5Controller.cs" />
     <Compile Include="Controllers\Api\TestScenarios\Scenario3Controller.cs" />
     <Compile Include="Controllers\Api\TestScenarios\Scenario1Controller.cs" />
@@ -189,6 +193,8 @@
     <Content Include="Views\TestScenarios\Scenario3.cshtml" />
     <Content Include="Views\TestScenarios\Scenario5.cshtml" />
     <Content Include="Views\TestScenarios\Scenario4.cshtml" />
+    <Content Include="Views\TestScenarios\Scenario6.cshtml" />
+    <Content Include="Views\TestScenarios\Scenario7.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

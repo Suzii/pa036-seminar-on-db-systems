@@ -101,6 +101,8 @@
     <Compile Include="DTO\TestScenariosDTOs\ITestResult.cs" />
     <Compile Include="DTO\TestScenariosConfigs\ITestScenarioConfig.cs" />
     <Compile Include="DTO\TestScenariosDTOs\Scenario1Results.cs" />
+    <Compile Include="DTO\TestScenariosDTOs\Scenario7Results.cs" />
+    <Compile Include="DTO\TestScenariosDTOs\Scenario6Results.cs" />
     <Compile Include="DTO\TestScenariosDTOs\Scenario5Results.cs" />
     <Compile Include="DTO\TestScenariosDTOs\Scenario3Results.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -113,6 +115,8 @@
     <Compile Include="TestScenarios\Scenario4ServiceProducts.cs" />
     <Compile Include="TestScenarios\Scenario4ServiceStores.cs" />
     <Compile Include="TestScenarios\Scenario4Service.cs" />
+    <Compile Include="TestScenarios\Scenario7Service.cs" />
+    <Compile Include="TestScenarios\Scenario6Service.cs" />
     <Compile Include="TestScenarios\Scenario5Service.cs" />
     <Compile Include="TestScenarios\Scenario3Service.cs" />
     <Compile Include="TestScenarios\Scenario3ServiceDelete.cs" />

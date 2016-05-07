@@ -1,0 +1,47 @@
+﻿@using System.Web.Optimization
+@model dynamic
+
+@{
+    ViewBag.Title = "ExampleScenario6";
+    Layout = "~/Views/Shared/_AppLayout.cshtml";
+}
+
+<h2>ExampleScenario7</h2>
+<div>
+    <h4>Test Description:</h4>
+    <p class="lead">Test for two databases with same name</p>
+        <ol>
+            <li> Azure and Local database have equal names</li>
+            <li> Objects in databases are different</li>
+            <li> One <b>GET</b> query from cache from Azure database</li>
+            <li> One <b>GET</b> query from cache from Local database</li>
+        </ol>
+
+
+    <form id="options">
+        <button id="execute" class="btn btn-info pull-right" data-url="@Url.RouteUrl("DefaultApi", new {controller = "Scenario7", httproute = true})">
+            Run test
+        </button>
+    </form>
+
+</div>
+@section scripts{
+    @Scripts.Render("~/Scripts/pages/testScenarios/scenario7.js")
+}
+<div id="objectDiff" class="container">
+    <h2>Objects returned from cache</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>From Azure</th>
+                <th>From local</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr id="placeholderDiff" class="placeholder-row">
+                <td class="azure"></td>
+                <td class="local"></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
