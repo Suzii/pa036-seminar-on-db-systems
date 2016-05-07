@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Diagnostics;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Service.Config;
 using Service.Data;
 using Service.DTO.TestScenariosConfigs;
@@ -15,16 +13,14 @@ namespace Service.TestScenarios
     {
         private readonly IProductService _instance;
         private readonly IDatabaseService _databaseService;
-        private readonly ScenarioConfig _config;
 
         public Scenario6Service(ScenarioConfig config)
         {
-            _config = config;
-            var dbSettings = new DbSettings() { AppContext = config.UseRemoteDb ? AppContexts.Azure : AppContexts.Local };
+            var dbSettings = new DbSettings { AppContext = config.UseRemoteDb ? AppContexts.Azure : AppContexts.Local };
             _instance = new ProductService(dbSettings);
             _databaseService = new DatabaseService();
-            var productFilter = new ProductFilter();
-            productFilter.Take = 1;
+
+            var productFilter = new ProductFilter {Take = 1};
             _instance.Get(productFilter);
             _instance.Get(productFilter);
             _databaseService.InvalidateCache();
@@ -32,24 +28,25 @@ namespace Service.TestScenarios
 
         public async Task<ITestResult> ExecuteTest()
         {
-            return  await getMaxCacheSize();
+            return  await GetMaxCacheSize();
         }
 
         /// <summary> 
         /// Maximazing number of elements in cache
         /// </summary>
         /// <returns>Number of elements in cache</returns>
-        private async Task<Scenario6Results> getMaxCacheSize()
+        private async Task<Scenario6Results> GetMaxCacheSize()
         {
-            var modifier = new ProductFilter();
-            modifier.OrderDesc = true;
-            modifier.OrderProperty = "id";
-            var totalCount = await _instance.TotalCountAsync();
-            var overlappedCache = new List<double>();
+            var modifier = new ProductFilter
+            {
+                OrderDesc = true,
+                OrderProperty = "id"
+            };
 
-            var cacheSize = 0;
+            var totalCount = await _instance.TotalCountAsync();
 
             _databaseService.InvalidateCache();
+            var cacheSize = 0;
 
             for (var i = 1; i < totalCount; i++)
             {
@@ -60,11 +57,10 @@ namespace Service.TestScenarios
                     modifier.Skip = j;
                     await _instance.GetAsync(modifier);
                     cacheSize = _databaseService.GetCacheItemsCount();
-
                 }
             }
 
-            var result = new Scenario6Results()
+            var result = new Scenario6Results
             {
                 ItemsInCache = cacheSize
             };
