@@ -11,6 +11,7 @@
         $.ajax({
             url: url,
             success: function (result) {
+                firstExecution = false;
                 var azureObject = JSON.stringify(result.objectFromAzure);
                 var localObject = JSON.stringify(result.objectFromLocal);
                 $('.azure:last').append(azureObject);
