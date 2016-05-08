@@ -23,6 +23,11 @@ namespace Service.TestScenarios
             var dbSettings = new DbSettings { AppContext = config.UseRemoteDb ? AppContexts.Azure : AppContexts.Local };
             _instance = new ProductService(dbSettings);
             _databaseService = new DatabaseService();
+
+            var productFilter = new ProductFilter { Take = 1 };
+            _instance.Get(productFilter);
+            _instance.Get(productFilter);
+            _databaseService.InvalidateCache();
         }
 
         public async Task<ITestResult> ExecuteTest()
