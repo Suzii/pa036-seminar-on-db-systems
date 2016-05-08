@@ -52,7 +52,7 @@ namespace Service.TestScenarios
             {
                 modifier.Take = i;
 
-                for (var j = 0; j < totalCount - i; j++)
+                for (var j = 0; j <= totalCount - i; j++)
                 {
                     modifier.Skip = j;
                     await _instance.GetAsync(modifier);
