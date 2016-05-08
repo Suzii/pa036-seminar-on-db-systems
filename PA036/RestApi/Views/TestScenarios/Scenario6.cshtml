@@ -12,10 +12,10 @@
     <ol>
         <li> Simple <b>GET</b> queries over all data<li>
         <li> Trying to cache all ranges of data</li>
-        <li> Return number of cached data, and exception message (if any)</li>
+        <li> Return an exception message (if any)</li>
     </ol>
 
-    <p></p>
+    <p>Server is returning Error message "OutOfMemory". Number of cached elements cant be returned, because after exception server is throwing data away.</p>
 
     <form id="options">
         <div class="form-group">
@@ -32,14 +32,18 @@
 @section scripts{
     @Scripts.Render("~/Scripts/pages/testScenarios/scenario6.js")
 }
-<div>
-    <div id="execution-times" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
-</div>
-
-<div>
-    <div id="data" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
-</div>
-
-<div>
-    <div id="cache" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+<div id="objectMsg" class="container">
+    <h2>Objects returned from cache</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Error Msg</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr id="placeholderMsg" class="placeholder-row">
+                <td class="msg"></td>
+            </tr>
+        </tbody>
+    </table>
 </div>
