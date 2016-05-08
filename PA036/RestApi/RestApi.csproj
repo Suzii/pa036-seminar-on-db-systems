@@ -142,8 +142,10 @@
     <None Include=".bin\git.cmd" />
     <None Include=".bin\node.cmd" />
     <None Include="Scripts\libs\jquery\jquery-1.10.2.intellisense.js" />
-    <Content Include="Scripts\libs\jquery\jquery-1.10.2.js" />
-    <Content Include="Scripts\libs\jquery\jquery-1.10.2.min.js" />
+    <Content Include="Scripts\libs\highcharts\exporting.js" />
+    <Content Include="Scripts\libs\highcharts\highcharts-more.js" />
+    <Content Include="Scripts\libs\highcharts\highcharts.js" />
+    <Content Include="Scripts\libs\jquery\jquery-1.12.0.min.js" />
     <Content Include="Scripts\libs\modernizr-2.6.2.js" />
     <Content Include="Scripts\pages\catalogue\main.js" />
     <Content Include="Scripts\pages\shared\footer.js" />
@@ -189,7 +191,6 @@
     <Content Include="Views\Shared\_AppLayout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\TestScenarios\Index.cshtml" />
-    <Content Include="Scripts\libs\jquery\jquery-1.10.2.min.map" />
     <Content Include="Views\TestScenarios\Scenario1.cshtml" />
     <Content Include="Views\TestScenarios\Scenario2.cshtml" />
     <Content Include="Views\TestScenarios\Scenario3.cshtml" />
