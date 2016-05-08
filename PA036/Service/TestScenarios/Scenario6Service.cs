@@ -6,6 +6,7 @@ using Service.DTO.TestScenariosDTOs;
 using Shared.Filters;
 using Shared.Settings;
 using Shared.Enums;
+using System.Collections.Generic;
 
 namespace Service.TestScenarios
 {
@@ -37,32 +38,28 @@ namespace Service.TestScenarios
         /// <returns>Number of elements in cache</returns>
         private async Task<Scenario6Results> GetMaxCacheSize()
         {
-            var modifier = new ProductFilter
-            {
-                OrderDesc = true,
-                OrderProperty = "id"
-            };
-
             var totalCount = await _instance.TotalCountAsync();
 
             _databaseService.InvalidateCache();
-            var cacheSize = 0;
 
+            var tasks = new List<Task>();
             for (var i = 1; i < totalCount; i++)
             {
-                modifier.Take = i;
-
                 for (var j = 0; j <= totalCount - i; j++)
                 {
-                    modifier.Skip = j;
-                    await _instance.GetAsync(modifier);
-                    cacheSize = _databaseService.GetCacheItemsCount();
+                    Task task = Task.Run(async () =>
+                    {
+                        var filter = new ProductFilter() { Take = i, Skip = j, OrderDesc = true };
+                        await _instance.GetAsync(filter);
+                    });
                 }
             }
 
+            await Task.WhenAll(tasks);
+
             var result = new Scenario6Results
             {
-                ItemsInCache = cacheSize
+                ItemsInCache = _databaseService.GetCacheItemsCount()
             };
 
             return result;
