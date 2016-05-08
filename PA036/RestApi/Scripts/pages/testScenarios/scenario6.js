@@ -9,7 +9,7 @@
             url: url,
             success: function (result) {
                 firstExecution = false;
-                $('.msg:last').append(result.msg);
+                $('.msg:last').append(result.message);
                 $("#execute").removeAttr('disabled');
             }
         });
