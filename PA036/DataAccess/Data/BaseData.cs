@@ -42,8 +42,12 @@ namespace DataAccess.Data
                 query = query.OrderByField(filter.OrderProperty, filter.OrderDesc);
 
             if (filter.Skip > 0)
+            {
+                if (!string.IsNullOrWhiteSpace(filter.OrderProperty))
+                    query = filter.OrderDesc ? query.OrderByDescending(x => x.Id) : query.OrderBy(x => x.Id);
                 query = query.Skip(filter.Skip.Value);
-
+            }
+                
             if (filter.Take > 0)
                 query = query.Take(filter.Take.Value);
 
