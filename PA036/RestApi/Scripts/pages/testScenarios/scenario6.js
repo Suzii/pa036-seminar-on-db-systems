@@ -4,7 +4,7 @@
         event.preventDefault();
         var url = $('button#execute').data('url');
         $("#execute").attr('disabled', 'disabled');
-        addNewEmptyRow(firstExecution, 'placeholderMsg', 'msg');
+        addNewEmptyRow(firstExecution, 'placeholderMsg', '.msg');
         $.ajax({
             url: url,
             success: function (result) {
