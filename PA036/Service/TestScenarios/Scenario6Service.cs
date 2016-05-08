@@ -6,6 +6,9 @@ using Service.DTO.TestScenariosDTOs;
 using Shared.Filters;
 using Shared.Settings;
 using Shared.Enums;
+using System.Collections.Generic;
+using System;
+using System.Threading;
 
 namespace Service.TestScenarios
 {
@@ -13,6 +16,7 @@ namespace Service.TestScenarios
     {
         private readonly IProductService _instance;
         private readonly IDatabaseService _databaseService;
+        private CancellationTokenSource cancelationToken = new CancellationTokenSource();
 
         public Scenario6Service(ScenarioConfig config)
         {
@@ -37,32 +41,37 @@ namespace Service.TestScenarios
         /// <returns>Number of elements in cache</returns>
         private async Task<Scenario6Results> GetMaxCacheSize()
         {
-            var modifier = new ProductFilter
-            {
-                OrderDesc = true,
-                OrderProperty = "id"
-            };
-
             var totalCount = await _instance.TotalCountAsync();
 
             _databaseService.InvalidateCache();
-            var cacheSize = 0;
-
-            for (var i = 1; i < totalCount; i++)
+            var message = "OK";
+            try
             {
-                modifier.Take = i;
-
-                for (var j = 0; j <= totalCount - i; j++)
+                var tasks = new List<Task>();
+                for (var i = 1; i < totalCount; i++)
                 {
-                    modifier.Skip = j;
-                    await _instance.GetAsync(modifier);
-                    cacheSize = _databaseService.GetCacheItemsCount();
+                    for (var j = 0; j <= totalCount - i; j++)
+                    {
+                        Task task = Task.Run(async () =>
+                        {
+                            var filter = new ProductFilter() { Take = i, Skip = j, OrderDesc = true };
+                            await _instance.GetAsync(filter);
+                        }, cancelationToken.Token);
+                    }
                 }
+
+                await Task.WhenAll(tasks);
+            }
+            catch (Exception e)
+            {
+                _databaseService.InvalidateCache();
+                message = e.Message;
+                cancelationToken.Cancel();
             }
 
             var result = new Scenario6Results
             {
-                ItemsInCache = cacheSize
+                Message = message
             };
 
             return result;
