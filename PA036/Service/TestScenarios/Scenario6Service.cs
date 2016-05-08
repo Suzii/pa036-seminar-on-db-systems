@@ -7,6 +7,8 @@ using Shared.Filters;
 using Shared.Settings;
 using Shared.Enums;
 using System.Collections.Generic;
+using System;
+using System.Threading;
 
 namespace Service.TestScenarios
 {
@@ -14,6 +16,7 @@ namespace Service.TestScenarios
     {
         private readonly IProductService _instance;
         private readonly IDatabaseService _databaseService;
+        private CancellationTokenSource cancelationToken = new CancellationTokenSource();
 
         public Scenario6Service(ScenarioConfig config)
         {
@@ -41,25 +44,34 @@ namespace Service.TestScenarios
             var totalCount = await _instance.TotalCountAsync();
 
             _databaseService.InvalidateCache();
-
-            var tasks = new List<Task>();
-            for (var i = 1; i < totalCount; i++)
+            var message = "OK";
+            try
             {
-                for (var j = 0; j <= totalCount - i; j++)
+                var tasks = new List<Task>();
+                for (var i = 1; i < totalCount; i++)
                 {
-                    Task task = Task.Run(async () =>
+                    for (var j = 0; j <= totalCount - i; j++)
                     {
-                        var filter = new ProductFilter() { Take = i, Skip = j, OrderDesc = true };
-                        await _instance.GetAsync(filter);
-                    });
+                        Task task = Task.Run(async () =>
+                        {
+                            var filter = new ProductFilter() { Take = i, Skip = j, OrderDesc = true };
+                            await _instance.GetAsync(filter);
+                        }, cancelationToken.Token);
+                    }
                 }
-            }
 
-            await Task.WhenAll(tasks);
+                await Task.WhenAll(tasks);
+            }
+            catch (Exception e)
+            {
+                _databaseService.InvalidateCache();
+                message = e.Message;
+                cancelationToken.Cancel();
+            }
 
             var result = new Scenario6Results
             {
-                ItemsInCache = _databaseService.GetCacheItemsCount()
+                Message = message
             };
 
             return result;
