@@ -58,10 +58,11 @@ function renderExecutionTimesGraph(result) {
     var data = [];
     data.push({ name: 'First query', data: result.notCachedQueriesTimes });
     data.push({ name: 'Second query', data: result.cachedQueriesTimes });
-    var xAxis = [];
-    for (var i = result.xAxis[0]; i < result.xAxis[1]; i += result.xAxis[2]) {
-        xAxis.push(i);
-    }
+    var xAxis = result.cacheSizeComparison.map(function (item) { return item.noOfObjectsReturnedInQuery; });
+    console.log('result.cacheSizeComparison.noOfObjectsReturnedInQuery', result.cacheSizeComparison.map(function (item) { return item.noOfObjectsReturnedInQuery; }));
+    //for (var i = result.xAxis[0]; i < result.xAxis[1]; i += result.xAxis[2]) {
+    //    xAxis.push(i);
+    //}
 
     executionTimesGraph(data, xAxis);
 }
